@@ -43,7 +43,7 @@
                             <div class="form-group">
                                 <label>عنوان الشركة</label>
                                 <input name="address" id="address" class="form-control" value="{{ $data['address'] }}"
-                                    placeholder="ادخل اسم الشركة" oninvalid="setCustomValidity('من فضلك ادخل هذا الحقل')"
+                                    placeholder="ادخل عنوان الشركة" oninvalid="setCustomValidity('من فضلك ادخل هذا الحقل')"
                                     onchange="try{setCustomValidity('')}catch(e){}">
                                 @error('address')
                                     <span class="text-danger">{{ $message }}</span>
@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <label>هاتف الشركة</label>
                                 <input name="phone" id="phone" class="form-control" value="{{ $data['phone'] }}"
-                                    placeholder="ادخل اسم الشركة" oninvalid="setCustomValidity('من فضلك ادخل هذا الحقل')"
+                                    placeholder="ادخل هاتف الشركة" oninvalid="setCustomValidity('من فضلك ادخل هذا الحقل')"
                                     onchange="try{setCustomValidity('')}catch(e){}">
                                 @error('phone')
                                     <span class="text-danger">{{ $message }}</span>
@@ -84,8 +84,7 @@
                                     <option value="">اختر الحساب </option>
                                     @if (@isset($parent_accounts) && !@empty($parent_accounts))
                                         @foreach ($parent_accounts as $info)
-                                            <option @if (old('suppliers_parent_account_number') == $info->account_number) selected="selected" @endif
-                                                value="{{ $info->account_number }}"> {{ $info->name }} </option>
+                                            <option @if (old('suppliers_parent_account_number') == $info->account_number) selected="selected" @endif value="{{ $info->account_number }}"> {{ $info->name }} </option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -97,7 +96,7 @@
                             <div class="form-group">
                                 <label>رسالة تنبية اعلي الشاشة </label>
                                 <input name="general_alert" id="general_alert" class="form-control"
-                                    value="{{ $data['general_alert'] }}" placeholder="ادخل اسم الشركة"
+                                    value="{{ $data['general_alert'] }}" placeholder="ادخل رسالة تنبية"
                                     oninvalid="setCustomValidity('من فضلك ادخل هذا الحقل')"
                                     onchange="try{setCustomValidity('')}catch(e){}">
                             </div>
