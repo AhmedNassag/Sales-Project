@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+
 @section('title')
     تعديل الضبط العام
 @endsection
@@ -14,6 +15,7 @@
 @section('contentheaderactive')
     تعديل
 @endsection
+
 
 
 @section('content')
@@ -39,7 +41,6 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <div class="form-group">
                                 <label>عنوان الشركة</label>
                                 <input name="address" id="address" class="form-control" value="{{ $data['address'] }}"
@@ -49,7 +50,6 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <div class="form-group">
                                 <label>هاتف الشركة</label>
                                 <input name="phone" id="phone" class="form-control" value="{{ $data['phone'] }}"
@@ -59,16 +59,13 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <div class="form-group">
                                 <label> الحساب الاب للعملاء بالشجرة المحاسبية</label>
-                                <select name="customer_parent_account_number" id="customer_parent_account_number"
-                                    class="form-control ">
+                                <select name="customer_parent_account_number" id="customer_parent_account_number" class="form-control ">
                                     <option value="">اختر الحساب </option>
                                     @if (@isset($parent_accounts) && !@empty($parent_accounts))
                                         @foreach ($parent_accounts as $info)
-                                            <option @if (old('customer_parent_account_number', $data['customer_parent_account_number']) == $info->account_number) selected="selected" @endif
-                                                value="{{ $info->account_number }}"> {{ $info->name }} </option>
+                                            <option @if (old('customer_parent_account_number', $data['customer_parent_account_number']) == $info->account_number) selected="selected" @endif value="{{ $info->account_number }}"> {{ $info->name }} </option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -76,11 +73,9 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <div class="form-group">
                                 <label> الحساب الاب للموردين بالشجرة المحاسبية</label>
-                                <select name="suppliers_parent_account_number" id="suppliers_parent_account_number"
-                                    class="form-control ">
+                                <select name="suppliers_parent_account_number" id="suppliers_parent_account_number" class="form-control ">
                                     <option value="">اختر الحساب </option>
                                     @if (@isset($parent_accounts) && !@empty($parent_accounts))
                                         @foreach ($parent_accounts as $info)
@@ -92,7 +87,6 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <div class="form-group">
                                 <label>رسالة تنبية اعلي الشاشة </label>
                                 <input name="general_alert" id="general_alert" class="form-control"
@@ -100,36 +94,29 @@
                                     oninvalid="setCustomValidity('من فضلك ادخل هذا الحقل')"
                                     onchange="try{setCustomValidity('')}catch(e){}">
                             </div>
-
                             <div class="form-group">
                                 <label>شعار الشركة</label>
                                 <div class="image">
-                                    <img class="custom_img" src="{{ asset('admin/uploads') . '/' . $data['photo'] }}"
-                                        alt="لوجو الشركة">
-                                    <button type="button" class="btn btn-sm btn-danger" id="update_image">تغير
-                                        الصورة</button>
+                                    <img class="custom_img" src="{{ asset('admin/uploads') . '/' . $data['photo'] }}" alt="لوجو الشركة">
+                                    <button type="button" class="btn btn-sm btn-danger" id="update_image">تغير الصورة</button>
                                     <button type="button" class="btn btn-sm btn-danger" style="display: none;" id="cancel_update_image"> الغاء</button>
                                 </div>
                                 <div id="oldimage">
 
                                 </div>
                             </div>
-
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-primary btn-sm">حفظ التعديلات</button>
                             </div>
-
                         </form>
                     @else
                         <div class="alert alert-danger">
                             عفوا لاتوجد بيانات لعرضها !!
                         </div>
                     @endif
-
                 </div>
             </div>
         </div>
     </div>
-
 
 @endsection

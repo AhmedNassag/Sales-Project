@@ -27,7 +27,7 @@ class Admin_panel_settings_Request extends FormRequest
          'system_name'=>'required',
          'address'=>'required',
          'phone'=>'required',
-        //  'customer_parent_account_number'=>'required',
+         'customer_parent_account_number'=>'required',
         //  'suppliers_parent_account_number'=>'required',
 
 

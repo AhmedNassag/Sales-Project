@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-        <img src="{{ asset('admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
+        <img src="{{ asset('admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
 
@@ -25,82 +25,359 @@
                 <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
 
-                <!-- Start adminPanelSetting -->
-                <li class="nav-item">
-                    <a href="{{ route('admin.adminPanelSetting.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+
+                <!-- Start الضبط العام -->
+                <li
+                    class="nav-item has-treeview {{ request()->is('admin/adminpanelsetting*') || request()->is('admin/treasuries*') ? 'menu-open' : '' }}">
+                    <a href="#"
+                        class="nav-link {{ request()->is('admin/adminpanelsetting*') || request()->is('admin/treasuries*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             الضبط العام
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                </li>
-                <!-- End adminPanelSetting -->
+                    <ul class="nav nav-treeview">
+                        <!-- Start adminPanelSetting -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.adminPanelSetting.index') }}"
+                                class="nav-link {{ request()->is('admin/adminpanelsetting*') ? 'active' : '' }}">
+                                <p>الضبط العام</p>
+                            </a>
+                        </li>
+                        <!-- End adminPanelSetting -->
 
-                <!-- Start treasuries -->
-                <li class="nav-item">
-                    <a href="{{ route('admin.treasuries.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            بيانات الخزن
-                        </p>
-                    </a>
+                        <!-- Start treasuries -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.treasuries.index') }}"
+                                class="nav-link {{ request()->is('admin/treasuries*') ? 'active' : '' }}">
+                                <p>بيانات الخزن</p>
+                            </a>
+                        </li>
+                        <!-- End treasuries -->
+                    </ul>
                 </li>
-                <!-- End treasuries -->
+                <!-- End الضبط العام -->
 
-                <!-- Start sales_matrial_types -->
-                <li class="nav-item">
-                    <a href="{{ route('admin.sales_matrial_types.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            بيانات فئات الفواتير
-                        </p>
-                    </a>
-                </li>
-                <!-- End sales_matrial_types -->
 
-                <!-- Start stores -->
-                <li class="nav-item">
-                    <a href="{{ route('admin.stores.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                <!-- Start ضبط المخازن -->
+                <li
+                    class="nav-item has-treeview {{ request()->is('admin/sales_matrial_types*') || request()->is('admin/stores*') || request()->is('admin/uoms*') || request()->is('admin/inv_itemcard_categories*') || request()->is('admin/itemcard*') ? 'menu-open' : '' }}">
+                    <a href="#"
+                        class="nav-link {{ request()->is('admin/sales_matrial_types*') || request()->is('admin/stores*') || request()->is('admin/uoms*') || request()->is('admin/inv_itemcard_categories*') || request()->is('admin/itemcard*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            بيانات المخازن
+                            ضبط المخازن
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                </li>
-                <!-- End stores -->
+                    <ul class="nav nav-treeview">
 
-                <!-- Start uoms -->
-                <li class="nav-item">
-                    <a href="{{ route('admin.uoms.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            بيانات الوحدات
-                        </p>
-                    </a>
-                </li>
-                <!-- End uoms -->
+                        <!-- Start sales_matrial_types -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.sales_matrial_types.index') }}"
+                                class="nav-link {{ request()->is('admin/sales_matrial_types*') ? 'active' : '' }}">
+                                <p>
+                                    بيانات فئات الفواتير
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End sales_matrial_types -->
 
-                <!-- Start inv_itemcard_categories -->
-                <li class="nav-item">
-                    <a href="{{ route('inv_itemcard_categories.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            بيانات فئات الأصناف
-                        </p>
-                    </a>
-                </li>
-                <!-- End inv_itemcard_categories -->
+                        <!-- Start stores -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.stores.index') }}"
+                                class="nav-link {{ request()->is('admin/stores*') ? 'active' : '' }}">
+                                <p>
+                                    بيانات المخازن
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End stores -->
 
-                <!-- Start itemcard -->
-                <li class="nav-item">
-                    <a href="{{ route('admin.itemcard.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <!-- Start uoms -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.uoms.index') }}"
+                                class="nav-link {{ request()->is('admin/uoms*') ? 'active' : '' }}">
+                                <p>
+                                    بيانات الوحدات
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End uoms -->
+
+                        <!-- Start inv_itemcard_categories -->
+                        <li class="nav-item">
+                            <a href="{{ route('inv_itemcard_categories.index') }}"
+                                class="nav-link {{ request()->is('admin/inv_itemcard_categories*') ? 'active' : '' }}">
+                                <p>
+                                    بيانات فئات الأصناف
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End inv_itemcard_categories -->
+
+                        <!-- Start itemcard -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.itemcard.index') }}"
+                                class="nav-link {{ request()->is('admin/itemcard*') ? 'active' : '' }}">
+                                <p>
+                                    بيانات الأصناف
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End itemcard -->
+
+                    </ul>
+                </li>
+                <!-- End ضبط المخازن -->
+
+
+
+
+
+                <!-- Start الحسابات -->
+                <li class="nav-item has-treeview {{ ((request()->is('admin/accountTypes*') || request()->is('admin/accounts*') || request()->is('admin/customer*') || request()->is('admin/suppliers_categories*') || request()->is('admin/supplier*') || (request()->is('admin/collect_transaction*') || request()->is('admin/exchange_transaction*'))) && !request()->is('admin/suppliers_orders*')) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ ((request()->is('admin/accountTypes*') || request()->is('admin/accounts*') || request()->is('admin/customer*') || request()->is('admin/suppliers_categories*') || request()->is('admin/supplier*') || (request()->is('admin/collect_transaction*') || request()->is('admin/exchange_transaction*'))) && !request()->is('admin/suppliers_orders*')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            بيانات الأصناف
+                            الحسابات
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+
+                        <!-- Start accountTypes -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.accountTypes.index') }}" class="nav-link {{ request()->is('admin/accountTypes*') ? 'active' : '' }}">
+                                <p>
+                                    انواع الحسابات المالية
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End accountTypes -->
+
+                        <!-- Start accounts -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.accounts.index') }}" class="nav-link {{ request()->is('admin/accounts*') ? 'active' : '' }}">
+                                <p>
+                                    كل الحسابات المالية
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End accounts -->
+
+                        <!-- Start customer -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.customer.index') }}" class="nav-link {{ (request()->is('admin/customer*') )?'active':'' }}">
+                                <p>
+                                    حسابات العملاء
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End customer -->
+
+                        <!-- Start suppliers_categories -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.suppliers_categories.index') }}" class="nav-link {{ (request()->is('admin/suppliers_categories*') )?'active':'' }}">
+                                <p>
+                                    فئات الموردين
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End suppliers_categories -->
+
+                        <!-- Start supplier -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.supplier.index') }}" class="nav-link {{ (request()->is('admin/supplier*') and !request()->is('admin/suppliers_categories*') )?'active':'' }}">
+                                <p>
+                                    حسابات الموردين
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End supplier -->
+
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <p>
+                                    حسابات الموردين
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <p>
+                                    شاشة تحصيل النقدية
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <p>
+                                    شاشة صرف النقدية
+                                </p>
+                            </a>
+                        </li>
+
+                    </ul>
                 </li>
-                <!-- End itemcard -->
+                <!-- End الحسابات -->
+
+
+
+                <!-- Start حركات مخزنية -->
+                <li class="nav-item has-treeview {{ (request()->is('admin/suppliers_orders*'))?'menu-open':'' }}">
+                    <a href="#" class="nav-link {{ (request()->is('admin/suppliers_orders*') )?'active':'' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            حركات مخزنية
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.suppliers_orders.index') }}" class="nav-link {{ (request()->is('admin/suppliers_orders*') )?'active':'' }}">
+                                <p>
+                                    فواتير المشتريات
+                                </p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- End حركات مخزنية -->
+
+
+
+                <!-- Start المبيعات -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            المبيعات
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <p>
+                                    فواتير المبيعات
+                                </p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- End المبيعات -->
+
+
+
+                <!-- Start خدمات داخلية وخارجية -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            خدمات داخلية وخارجية
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+
+                    </ul>
+                </li>
+                <!-- End خدمات داخلية وخارجية -->
+
+
+
+                <!-- Start حركة شفت الخزينة -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            حركة شفت الخزينة
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <p>
+                                    شفتات الخزن
+                                </p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- End حركة شفت الخزينة -->
+
+
+                <!-- Start الصلاحيات -->
+                <li class="nav-item has-treeview {{ (request()->is('admin/admins_accounts*'))?'menu-open':'' }} ">
+                    <a href="#" class="nav-link {{ (request()->is('admin/admins_accounts*') )?'active':'' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            الصلاحيات
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.admins_accounts.index') }}" class="nav-link {{ (request()->is('admin/admins_accounts*') )?'active':'' }}">
+                                <p>
+                                    المستخدمين
+                                </p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- End الصلاحيات -->
+
+
+
+                <!-- Start التقارير -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            التقارير
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+
+                    </ul>
+                </li>
+                <!-- End التقارير -->
+
+
+                <!-- Start المراقبة والدعم الفني -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            المراقبة والدعم الفني
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+
+                    </ul>
+                </li>
+                <!-- End المراقبة والدعم الفني -->
+
+
 
             </ul>
         </nav>

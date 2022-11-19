@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Inv_uom extends Model
 {
     use HasFactory;
+    
     protected $table = 'inv_uoms';
     protected $guarded = [];
 }
