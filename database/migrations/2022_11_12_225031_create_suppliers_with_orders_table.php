@@ -42,9 +42,7 @@ class CreateSuppliersWithOrdersTable extends Migration
             $table->integer('updated_by')->nullable();
             $table->decimal('total_cost_items', 10, 2)->nullable();
             $table->integer('store_id')->nullable();
-            //
             $table->date('date')->nullable();
-            //
             $table->timestamps();
         });
     }

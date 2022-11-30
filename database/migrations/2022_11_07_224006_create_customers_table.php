@@ -17,7 +17,7 @@ class CreateCustomersTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->bigInteger('customer_code')->nullable();
-            $table->foreignId('city_id')->nullable()/*->constrained('cities')->cascadeOnDelete()*/;
+            $table->integer('city_id')->nullable();
             $table->string('address')->nullable();
             $table->bigInteger('account_number')->nullable();
             $table->decimal('start_balance', 10, 2)->default(0)->nullable();

@@ -16,7 +16,7 @@ class CreateTreasuriesTable extends Migration
         Schema::create('treasuries', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->bigInteger('last_isal_exchange')->nullable();
+            $table->bigInteger('last_isal_exhcange')->nullable();
             $table->bigInteger('last_isal_collect')->nullable();
             $table->tinyInteger('is_master')->default(0)->nullable();
             $table->tinyInteger('active')->default(1)->nullable();

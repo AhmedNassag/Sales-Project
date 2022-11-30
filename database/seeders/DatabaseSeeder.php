@@ -15,5 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(AdminSeeder::class);
         $this->call(AccountTypesSeeder::class);
+        $this->call(MovTypeSeeder::class);
+        $this->call(InvItemcardMovementsCategoriesSeeder::class);
+        $this->call(InvItemcardMovementsTypesSeeder::class);
     }
 }

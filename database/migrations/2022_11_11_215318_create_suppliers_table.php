@@ -17,8 +17,8 @@ class CreateSuppliersTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->bigInteger('suuplier_code')->nullable();
-            $table->foreignId('suppliers_categories_id')->nullable()->constrained('supplier_categories')->cascadeOnDelete();
-            $table->foreignId('city_id')->nullable()/*->constrained('cities')->cascadeOnDelete()*/;
+            $table->integer('suppliers_categories_id');
+            $table->integer('city_id')->nullable();
             $table->string('address')->nullable();
             $table->bigInteger('account_number')->nullable();
             $table->decimal('start_balance', 10, 2)->default(0)->nullable();

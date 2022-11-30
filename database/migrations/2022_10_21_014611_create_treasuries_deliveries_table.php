@@ -15,7 +15,7 @@ class CreateTreasuriesDeliveriesTable extends Migration
     {
         Schema::create('treasuries_deliveries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('treasuries_id')->constrained('treasuries')->cascadeOnDelete();
+            $table->integer('treasuries_id');
             $table->integer('treasuries_can_delivery_id');
             $table->integer('added_by')->nullable();
             $table->integer('updated_by')->nullable();

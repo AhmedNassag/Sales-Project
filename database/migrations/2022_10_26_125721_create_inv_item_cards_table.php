@@ -18,11 +18,11 @@ class CreateInvItemCardsTable extends Migration
             $table->integer('item_code')->nullable();
             $table->string('name')->nullable();
             $table->tinyInteger('item_type')->default(1)->nullable();
-            $table->foreignId('inv_itemcard_categories_id')->nullable()->constrained('inv_item_card_categories')->cascadeOnDelete();
-            $table->foreignId('parent_inv_itemcard_id')->nullable()->constrained('inv_item_card_categories')->cascadeOnDelete();
+            $table->integer('inv_itemcard_categories_id')->nullable();
+            $table->integer('parent_inv_itemcard_id')->nullable();
             $table->tinyInteger('does_has_retailunit')->default(1)->nullable();
-            $table->foreignId('uom_id')->nullable()->constrained('inv_uoms')->cascadeOnDelete();
-            $table->foreignId('retail_uom_id')->nullable()->constrained('inv_uoms')->cascadeOnDelete();
+            $table->integer('uom_id')->nullable();
+            $table->integer('retail_uom_id')->nullable();
             $table->decimal('retail_uom_qunToParent', 10, 2)->default(1)->nullable();
             $table->tinyInteger('active')->default(1)->nullable();
             $table->integer('added_by')->nullable();
@@ -42,8 +42,12 @@ class CreateInvItemCardsTable extends Migration
             $table->decimal('QUENTITY', 10, 3)->default(0)->nullable();
             $table->decimal('QUENTITY_Retail', 10, 3)->default(0)->nullable();
             $table->decimal('QUENTITY_all_Retails', 10, 3)->default(0)->nullable();
+            $table->decimal('All_QUENTITY', 10, 3)->default(0)->nullable();
             $table->string('photo')->nullable();
             $table->timestamps();
+            /*'retail_uom'
+            'retail_uom_quntToParent'
+            */
         });
     }
 

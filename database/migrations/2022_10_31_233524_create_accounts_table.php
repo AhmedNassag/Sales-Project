@@ -16,7 +16,7 @@ class CreateAccountsTable extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->foreignId('account_type')->constrained('account_types')->cascadeOnDelete();
+            $table->integer('account_type');
             $table->bigInteger('parent_account_number')->default(0)->nullable();
             $table->bigInteger('account_number')->nullable();
             $table->decimal('start_balance', 10, 2)->default(0)->nullable();

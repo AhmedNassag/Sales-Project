@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminPanelSettingController;
+use App\Http\Controllers\Admin\Admins_ShiftsContoller;
+use App\Http\Controllers\Admin\CollectController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\ExchangeController;
 use App\Http\Controllers\Admin\Inv_item_card_categoriesController;
 use App\Http\Controllers\Admin\TreasuriesController;
 use App\Http\Controllers\Admin\SalesMatrialTypesController;
@@ -186,7 +189,7 @@ Route::group([/*'namespace' => 'Admin',*/ 'prefix' => 'admin', 'middleware' => '
     Route::post('/suppliers_orders/load_usershiftDiv', [Suppliers_with_ordersController::class, 'load_usershiftDiv'])->name('admin.suppliers_orders.load_usershiftDiv');
     /********************************* End suppliers_orders *********************************/
 
-    
+
     /********************************* Start admins_accounts *********************************/
     Route::get('/admins_accounts/index', [AdminController::class, 'index'])->name('admin.admins_accounts.index');
     Route::get('/admins_accounts/create', [AdminController::class, 'create'])->name('admin.admins_accounts.create');
@@ -199,6 +202,27 @@ Route::group([/*'namespace' => 'Admin',*/ 'prefix' => 'admin', 'middleware' => '
     Route::post('/admins_accounts/Add_treasuries_To_Admin/{id}', [AdminController::class, 'Add_treasuries_To_Admin'])->name('admin.admins_accounts.Add_treasuries_To_Admin');
     Route::get('/admins_accounts/delete_treasuries_delivery/{id}', [AdminController::class, 'delete_treasuries_delivery'])->name('admin.admins_accounts.delete_treasuries_delivery');
     /********************************* End admins_accounts *********************************/
+
+
+    /********************************* Start admin_shift *********************************/
+    Route::get('/admin_shift/index', [Admins_ShiftsContoller::class, 'index'])->name('admin.admin_shift.index');
+    Route::get('/admin_shift/create', [Admins_ShiftsContoller::class, 'create'])->name('admin.admin_shift.create');
+    Route::post('/admin_shift/store', [Admins_ShiftsContoller::class, 'store'])->name('admin.admin_shift.store');
+    /********************************* End admin_shift *********************************/
+
+
+    /********************************* Start collect_transaction *********************************/
+    Route::get('/collect_transaction/index', [CollectController::class, 'index'])->name('admin.collect_transaction.index');
+    Route::get('/collect_transaction/create', [CollectController::class, 'create'])->name('admin.collect_transaction.create');
+    Route::post('/collect_transaction/store', [CollectController::class, 'store'])->name('admin.collect_transaction.store');
+    /********************************* End collect_transaction *********************************/
+
+
+    /********************************* Start exchange_transaction *********************************/
+    Route::get('/exchange_transaction/index', [ExchangeController::class, 'index'])->name('admin.exchange_transaction.index');
+    Route::get('/exchange_transaction/create', [ExchangeController::class, 'create'])->name('admin.exchange_transaction.create');
+    Route::post('/exchange_transaction/store', [ExchangeController::class, 'store'])->name('admin.exchange_transaction.store');
+    /********************************* End exchange_transaction *********************************/
 
 });
 

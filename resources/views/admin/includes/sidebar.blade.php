@@ -206,7 +206,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('admin.collect_transaction.index') }}" class="nav-link {{ (request()->is('admin/collect_transaction*') )?'active':'' }}">
                                 <p>
                                     شاشة تحصيل النقدية
                                 </p>
@@ -214,7 +214,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('admin.exchange_transaction.index') }}" class="nav-link {{ (request()->is('admin/exchange_transaction*') )?'active':'' }}">
                                 <p>
                                     شاشة صرف النقدية
                                 </p>
@@ -296,8 +296,8 @@
 
 
                 <!-- Start حركة شفت الخزينة -->
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ (request()->is('admin/admin_shift*'))?'menu-open':'' }}     ">
+                    <a href="#" class="nav-link {{ (request()->is('admin/admin_shift*') )?'active':'' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             حركة شفت الخزينة
@@ -307,7 +307,7 @@
                     <ul class="nav nav-treeview">
 
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('admin.admin_shift.index') }}" class="nav-link {{ (request()->is('admin/admin_shift*') )?'active':'' }}">
                                 <p>
                                     شفتات الخزن
                                 </p>
