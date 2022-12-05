@@ -26,7 +26,7 @@ class TreasuriesRequest extends FormRequest
         return [
             'name'=>'required',
             'is_master'=>'required',
-            'last_isal_exchange'=>'required|integer|min:0',
+            'last_isal_exhcange'=>'required|integer|min:0',
             'last_isal_collect'=>'required|integer|min:0',
             'active'=>'required',
         ];
@@ -38,8 +38,8 @@ class TreasuriesRequest extends FormRequest
             'name.required'=>'اسم الخزنة مطلوب',
             'is_master.required'=>'نوع الخزنة مطلوب',
             'active.required'=>'حالة تفعيل الخزنة مطلوب',
-            'last_isal_exchange.required'=>'اخر رقم ايصال صرف نقدية لهذة الخزنة',
-            'last_isal_exchange.integer'=>'قيمة رقم الايصال تكون قيمة صحيحه',
+            'last_isal_exhcange.required'=>'اخر رقم ايصال صرف نقدية لهذة الخزنة',
+            'last_isal_exhcange.integer'=>'قيمة رقم الايصال تكون قيمة صحيحه',
             'last_isal_collect.required'=>'اخر رقم ايصال صرف نقدية لهذة الخزنة',
             'last_isal_collect.integer'=>'قيمة رقم الايصال تكون قيمة صحيحه'
         ];

@@ -61,10 +61,10 @@ class TreasuriesController extends Controller
 
                 $data['name']=$request->name;
                 $data['is_master']=$request->is_master;
-                $data['last_isal_exchange']=$request->last_isal_exchange;
+                $data['last_isal_exhcange']=$request->last_isal_exhcange;
                 $data['last_isal_collect']=$request->last_isal_collect;
                 $data['active']=$request->active;
-                $data['created_at']=date("Y-m-d H:i:s");
+                // $data['created_at']=date("Y-m-d H:i:s");
                 $data['added_by']=auth()->user()->id;
                 $data['com_code']=$com_code;
                 $data['date']=date("Y-m-d");
@@ -130,10 +130,10 @@ class TreasuriesController extends Controller
             $data_to_update['name']=$request->name;
             $data_to_update['active']=$request->active;
             $data_to_update['is_master']=$request->is_master;
-            $data_to_update['last_isal_exchange']=$request->last_isal_exchange;
+            $data_to_update['last_isal_exhcange']=$request->last_isal_exhcange;
             $data_to_update['last_isal_collect']=$request->last_isal_collect;
             $data_to_update['updated_by']=auth()->user()->id;
-            $data_to_update['updated_at']=date("Y-m-d H:i:s");
+            // $data_to_update['updated_at']=date("Y-m-d H:i:s");
 
             Treasuries::where(['id'=>$id,'com_code'=>$com_code])->update($data_to_update);
             return redirect()->route('admin.treasuries.index')->with(['success'=>'لقد تم تحديث البيانات بنجاح']);
@@ -245,7 +245,7 @@ class TreasuriesController extends Controller
 
             $data_insert_details['treasuries_id']=$id;
             $data_insert_details['treasuries_can_delivery_id']=$request->treasuries_can_delivery_id;
-            $data_insert_details['created_at']=date("Y-m-d H:i:s");
+            // $data_insert_details['created_at']=date("Y-m-d H:i:s");
             $data_insert_details['added_by']=auth()->user()->id;
             $data_insert_details['com_code']=$com_code;
 

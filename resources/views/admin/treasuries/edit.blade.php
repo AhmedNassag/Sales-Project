@@ -62,12 +62,12 @@
 
                             <div class="form-group">
                                 <label> اخر رقم ايصال صرف نقدية لهذة الخزنة</label>
-                                <input oninput="this.value=this.value.replace(/[^0-9]/g,'');" name="last_isal_exchange"
-                                    id="last_isal_exchange" class="form-control"
-                                    value="{{ old('last_isal_exchange', $data['last_isal_exchange']) }}"
+                                <input oninput="this.value=this.value.replace(/[^0-9]/g,'');" name="last_isal_exhcange"
+                                    id="last_isal_exhcange" class="form-control"
+                                    value="{{ old('last_isal_exhcange', $data['last_isal_exhcange']) }}"
                                     placeholder="ادخل اسم الشركة" oninvalid="setCustomValidity('من فضلك ادخل هذا الحقل')"
                                     onchange="try{setCustomValidity('')}catch(e){}">
-                                @error('last_isal_exchange')
+                                @error('last_isal_exhcange')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

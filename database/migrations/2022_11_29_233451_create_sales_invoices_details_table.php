@@ -16,6 +16,7 @@ class CreateSalesInvoicesDetailsTable extends Migration
         Schema::create('sales_invoices_details', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('sales_invoices_auto_serial')->nullable();
+            $table->integer('store_id')->nullable();
             $table->integer('com_code')->nullable();
             $table->decimal('quantity', 10, 2)->default(0)->nullable();
             $table->integer('uom_id')->nullable();
@@ -26,12 +27,13 @@ class CreateSalesInvoicesDetailsTable extends Migration
             $table->integer('added_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->bigInteger('item_code')->nullable();
-            $table->bigInteger('sales_item_type')->nullable();
-            $table->integer('batch_id')->nullable();
+            $table->tinyInteger('sales_item_type')->nullable();
+            $table->integer('batch_auto_serial')->nullable();
             $table->date('production_date')->nullable();
             $table->date('expire_date')->nullable();
             $table->tinyInteger('item_card_type')->nullable();
             $table->tinyInteger('is_normal_orOther')->nullable();
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }

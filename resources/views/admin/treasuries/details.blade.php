@@ -29,70 +29,70 @@
         <div class="card-body">
         @if (@isset($data) && !@empty($data))
         <table id="example2" class="table table-bordered table-hover">
-         
+
             <tr>
-                <td class="width30">اسم الخزنة</td> 
+                <td class="width30">اسم الخزنة</td>
                 <td > {{ $data['name'] }}</td>
             </tr>
             <tr>
-                <td class="width30"> اخر ايصال صرف</td> 
+                <td class="width30"> اخر ايصال صرف</td>
                 <td > {{ $data['last_isal_exhcange'] }}</td>
             </tr>
 
             <tr>
-                <td class="width30">اخر ايصال تحصيل </td> 
+                <td class="width30">اخر ايصال تحصيل </td>
                 <td > {{ $data['last_isal_collect'] }}</td>
             </tr>
             <tr>
-                <td class="width30">هل رئيسية</td> 
+                <td class="width30">هل رئيسية</td>
                 <td > @if($data['is_master']==1) نعم  @else لا @endif</td>
             </tr>
 
             <tr>
-                <td class="width30">حالة تفعيل الخزنة</td> 
+                <td class="width30">حالة تفعيل الخزنة</td>
                 <td > @if($data['active']==1) مفعل  @else معطل @endif</td>
             </tr>
 
-           
+
             <tr>
-                <td class="width30">  تاريخ  الاضافة</td> 
-                <td > 
-     
+                <td class="width30">  تاريخ  الاضافة</td>
+                <td >
+
     @php
    $dt=new DateTime($data['created_at']);
    $date=$dt->format("Y-m-d");
    $time=$dt->format("h:i");
    $newDateTime=date("A",strtotime($time));
-   $newDateTimeType= (($newDateTime=='AM')?'صباحا ':'مساء'); 
+   $newDateTimeType= (($newDateTime=='AM')?'صباحا ':'مساء');
     @endphp
 {{ $date }}
 {{ $time }}
 {{ $newDateTimeType }}
-بواسطة 
+بواسطة
 {{ $data['added_by_admin'] }}
 
 
                 </td>
-            </tr> 
+            </tr>
 
 
 
-  
+
             <tr>
-                <td class="width30">  تاريخ اخر تحديث</td> 
-                <td > 
+                <td class="width30">  تاريخ اخر تحديث</td>
+                <td >
        @if($data['updated_by']>0 and $data['updated_by']!=null )
     @php
    $dt=new DateTime($data['updated_at']);
    $date=$dt->format("Y-m-d");
    $time=$dt->format("h:i");
    $newDateTime=date("A",strtotime($time));
-   $newDateTimeType= (($newDateTime=='AM')?'صباحا ':'مساء'); 
+   $newDateTimeType= (($newDateTime=='AM')?'صباحا ':'مساء');
     @endphp
 {{ $date }}
 {{ $time }}
 {{ $newDateTimeType }}
-بواسطة 
+بواسطة
 {{ $data['updated_by_admin'] }}
 
 
@@ -107,23 +107,23 @@
 
 
                 </td>
-            </tr> 
-           
+            </tr>
+
           </table>
      <!--  treasuries_delivery   -->
      <div class="card-header">
-        <h3 class="card-title card_title_center">الخزن الفرعية التي سوف تسلم عهدتها الي الخزنة ( {{ $data['name'] }} )  
-        
+        <h3 class="card-title card_title_center">الخزن الفرعية التي سوف تسلم عهدتها الي الخزنة ( {{ $data['name'] }} )
+
             <a href="{{ route('admin.treasuries.Add_treasuries_delivery',$data['id']) }}" class="btn btn-sm btn-primary">اضافة جديد</a>
 
         </h3>
-    
+
     </div>
      <div id="ajax_responce_serarchDiv">
-          
+
         @if (@isset($treasuries_delivery) && !@empty($treasuries_delivery))
         @php
-         $i=1;   
+         $i=1;
         @endphp
         <table id="example2" class="table table-bordered table-hover">
           <thead class="custom_thead">
@@ -135,25 +135,25 @@
           <tbody>
        @foreach ($treasuries_delivery as $info )
           <tr>
-           <td>{{ $i }}</td>  
+           <td>{{ $i }}</td>
          <td>{{ $info->name }}</td>
-      
-         <td > 
-     
+
+         <td >
+
             @php
            $dt=new DateTime($info->created_at);
            $date=$dt->format("Y-m-d");
            $time=$dt->format("h:i");
            $newDateTime=date("A",strtotime($time));
-           $newDateTimeType= (($newDateTime=='AM')?'صباحا ':'مساء'); 
+           $newDateTimeType= (($newDateTime=='AM')?'صباحا ':'مساء');
             @endphp
         {{ $date }}
         {{ $time }}
         {{ $newDateTimeType }}
-        بواسطة 
+        بواسطة
         {{ $info->added_by_admin}}
-        
-        
+
+
                         </td>
 
 
@@ -161,20 +161,20 @@
        <td>
   <a href="{{ route('admin.treasuries.delete_treasuries_delivery',$info->id) }}" class="btn btn-sm btn-danger are_you_shue">حذف</a>
        </td>
-         
- 
-         </tr> 
+
+
+         </tr>
     @php
-       $i++; 
+       $i++;
     @endphp
        @endforeach
- 
- 
- 
+
+
+
           </tbody>
            </table>
-   
-     
+
+
          @else
          <div class="alert alert-danger">
            عفوا لاتوجد بيانات لعرضها !!
@@ -182,7 +182,7 @@
                @endif
 
       </div>
-    
+
 
 
 
@@ -195,7 +195,7 @@
     عفوا لاتوجد بيانات لعرضها !!
   </div>
         @endif
-      
+
 
 
         </div>

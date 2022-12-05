@@ -43,11 +43,9 @@ class CreateInvItemCardsTable extends Migration
             $table->decimal('QUENTITY_Retail', 10, 3)->default(0)->nullable();
             $table->decimal('QUENTITY_all_Retails', 10, 3)->default(0)->nullable();
             $table->decimal('All_QUENTITY', 10, 3)->default(0)->nullable();
+            $table->decimal('retail_uom_quntToParent', 10, 3)->nullable();
             $table->string('photo')->nullable();
             $table->timestamps();
-            /*'retail_uom'
-            'retail_uom_quntToParent'
-            */
         });
     }
 

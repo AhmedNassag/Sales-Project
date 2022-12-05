@@ -65,7 +65,7 @@
                                                     فرعية
                                                 @endif
                                             </td>
-                                            <td class="text-center">{{ $info->last_isal_exchange }}</td>
+                                            <td class="text-center">{{ $info->last_isal_exhcange }}</td>
                                             <td class="text-center">{{ $info->last_isal_collect }}</td>
                                             <td class="text-center">
                                                 @if ($info->active == 1)

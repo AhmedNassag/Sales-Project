@@ -1,9 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-        <img src="{{ asset('admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-            class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <img src="{{ asset('admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">Ahmed El.Nassag</span>
     </a>
 
     <!-- Sidebar -->
@@ -20,17 +19,14 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
 
 
                 <!-- Start الضبط العام -->
-                <li
-                    class="nav-item has-treeview {{ request()->is('admin/adminpanelsetting*') || request()->is('admin/treasuries*') ? 'menu-open' : '' }}">
-                    <a href="#"
-                        class="nav-link {{ request()->is('admin/adminpanelsetting*') || request()->is('admin/treasuries*') ? 'active' : '' }}">
+                <li class="nav-item has-treeview {{ request()->is('admin/adminpanelsetting*') || request()->is('admin/treasuries*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('admin/adminpanelsetting*') || request()->is('admin/treasuries*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             الضبط العام
@@ -40,8 +36,7 @@
                     <ul class="nav nav-treeview">
                         <!-- Start adminPanelSetting -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.adminPanelSetting.index') }}"
-                                class="nav-link {{ request()->is('admin/adminpanelsetting*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.adminPanelSetting.index') }}" class="nav-link {{ request()->is('admin/adminpanelsetting*') ? 'active' : '' }}">
                                 <p>الضبط العام</p>
                             </a>
                         </li>
@@ -49,8 +44,7 @@
 
                         <!-- Start treasuries -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.treasuries.index') }}"
-                                class="nav-link {{ request()->is('admin/treasuries*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.treasuries.index') }}" class="nav-link {{ request()->is('admin/treasuries*') ? 'active' : '' }}">
                                 <p>بيانات الخزن</p>
                             </a>
                         </li>
@@ -60,11 +54,10 @@
                 <!-- End الضبط العام -->
 
 
+
                 <!-- Start ضبط المخازن -->
-                <li
-                    class="nav-item has-treeview {{ request()->is('admin/sales_matrial_types*') || request()->is('admin/stores*') || request()->is('admin/uoms*') || request()->is('admin/inv_itemcard_categories*') || request()->is('admin/itemcard*') ? 'menu-open' : '' }}">
-                    <a href="#"
-                        class="nav-link {{ request()->is('admin/sales_matrial_types*') || request()->is('admin/stores*') || request()->is('admin/uoms*') || request()->is('admin/inv_itemcard_categories*') || request()->is('admin/itemcard*') ? 'active' : '' }}">
+                <li class="nav-item has-treeview {{ request()->is('admin/sales_matrial_types*') || request()->is('admin/stores*') || request()->is('admin/uoms*') || request()->is('admin/inv_itemcard_categories*') || request()->is('admin/itemcard*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('admin/sales_matrial_types*') || request()->is('admin/stores*') || request()->is('admin/uoms*') || request()->is('admin/inv_itemcard_categories*') || request()->is('admin/itemcard*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             ضبط المخازن
@@ -72,11 +65,9 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-
                         <!-- Start sales_matrial_types -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.sales_matrial_types.index') }}"
-                                class="nav-link {{ request()->is('admin/sales_matrial_types*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.sales_matrial_types.index') }}" class="nav-link {{ request()->is('admin/sales_matrial_types*') ? 'active' : '' }}">
                                 <p>
                                     بيانات فئات الفواتير
                                 </p>
@@ -86,8 +77,7 @@
 
                         <!-- Start stores -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.stores.index') }}"
-                                class="nav-link {{ request()->is('admin/stores*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.stores.index') }}" class="nav-link {{ request()->is('admin/stores*') ? 'active' : '' }}">
                                 <p>
                                     بيانات المخازن
                                 </p>
@@ -97,8 +87,7 @@
 
                         <!-- Start uoms -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.uoms.index') }}"
-                                class="nav-link {{ request()->is('admin/uoms*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.uoms.index') }}" class="nav-link {{ request()->is('admin/uoms*') ? 'active' : '' }}">
                                 <p>
                                     بيانات الوحدات
                                 </p>
@@ -108,8 +97,7 @@
 
                         <!-- Start inv_itemcard_categories -->
                         <li class="nav-item">
-                            <a href="{{ route('inv_itemcard_categories.index') }}"
-                                class="nav-link {{ request()->is('admin/inv_itemcard_categories*') ? 'active' : '' }}">
+                            <a href="{{ route('inv_itemcard_categories.index') }}" class="nav-link {{ request()->is('admin/inv_itemcard_categories*') ? 'active' : '' }}">
                                 <p>
                                     بيانات فئات الأصناف
                                 </p>
@@ -119,20 +107,16 @@
 
                         <!-- Start itemcard -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.itemcard.index') }}"
-                                class="nav-link {{ request()->is('admin/itemcard*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.itemcard.index') }}" class="nav-link {{ request()->is('admin/itemcard*') ? 'active' : '' }}">
                                 <p>
                                     بيانات الأصناف
                                 </p>
                             </a>
                         </li>
                         <!-- End itemcard -->
-
                     </ul>
                 </li>
                 <!-- End ضبط المخازن -->
-
-
 
 
 
@@ -146,7 +130,6 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-
                         <!-- Start accountTypes -->
                         <li class="nav-item">
                             <a href="{{ route('admin.accountTypes.index') }}" class="nav-link {{ request()->is('admin/accountTypes*') ? 'active' : '' }}">
@@ -197,6 +180,7 @@
                         </li>
                         <!-- End supplier -->
 
+                        <!-- Start -->
                         <li class="nav-item">
                             <a href="" class="nav-link">
                                 <p>
@@ -204,7 +188,9 @@
                                 </p>
                             </a>
                         </li>
+                        <!-- End -->
 
+                        <!-- Start collect_transaction -->
                         <li class="nav-item">
                             <a href="{{ route('admin.collect_transaction.index') }}" class="nav-link {{ (request()->is('admin/collect_transaction*') )?'active':'' }}">
                                 <p>
@@ -212,7 +198,9 @@
                                 </p>
                             </a>
                         </li>
+                        <!-- End collect_transaction -->
 
+                        <!-- Start exchange_transaction -->
                         <li class="nav-item">
                             <a href="{{ route('admin.exchange_transaction.index') }}" class="nav-link {{ (request()->is('admin/exchange_transaction*') )?'active':'' }}">
                                 <p>
@@ -220,7 +208,7 @@
                                 </p>
                             </a>
                         </li>
-
+                        <!-- End exchange_transaction -->
                     </ul>
                 </li>
                 <!-- End الحسابات -->
@@ -237,7 +225,7 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-
+                        <!-- Start suppliers_orders -->
                         <li class="nav-item">
                             <a href="{{ route('admin.suppliers_orders.index') }}" class="nav-link {{ (request()->is('admin/suppliers_orders*') )?'active':'' }}">
                                 <p>
@@ -245,7 +233,7 @@
                                 </p>
                             </a>
                         </li>
-
+                        <!-- Start suppliers_orders -->
                     </ul>
                 </li>
                 <!-- End حركات مخزنية -->
@@ -253,8 +241,8 @@
 
 
                 <!-- Start المبيعات -->
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview {{ (request()->is('admin/SalesInvoices*'))?'menu-open':'' }}     ">
+                    <a href="#" class="nav-link {{ (request()->is('admin/SalesInvoices*') )?'active':'' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             المبيعات
@@ -262,15 +250,15 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-
+                        <!-- Start SalesInvoices -->
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('admin.SalesInvoices.index') }}" class="nav-link {{ (request()->is('admin/SalesInvoices*') )?'active':'' }}">
                                 <p>
                                     فواتير المبيعات
                                 </p>
                             </a>
                         </li>
-
+                        <!-- End SalesInvoices -->
                     </ul>
                 </li>
                 <!-- End المبيعات -->
@@ -305,7 +293,7 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-
+                        <!-- Start admin_shift -->
                         <li class="nav-item">
                             <a href="{{ route('admin.admin_shift.index') }}" class="nav-link {{ (request()->is('admin/admin_shift*') )?'active':'' }}">
                                 <p>
@@ -313,7 +301,7 @@
                                 </p>
                             </a>
                         </li>
-
+                        <!-- End admin_shift -->
                     </ul>
                 </li>
                 <!-- End حركة شفت الخزينة -->
@@ -329,7 +317,7 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-
+                        <!-- Start admins_accounts -->
                         <li class="nav-item">
                             <a href="{{ route('admin.admins_accounts.index') }}" class="nav-link {{ (request()->is('admin/admins_accounts*') )?'active':'' }}">
                                 <p>
@@ -337,7 +325,7 @@
                                 </p>
                             </a>
                         </li>
-
+                        <!-- End admins_accounts -->
                     </ul>
                 </li>
                 <!-- End الصلاحيات -->
@@ -361,6 +349,7 @@
                 <!-- End التقارير -->
 
 
+
                 <!-- Start المراقبة والدعم الفني -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link ">
@@ -376,7 +365,6 @@
                     </ul>
                 </li>
                 <!-- End المراقبة والدعم الفني -->
-
 
 
             </ul>
