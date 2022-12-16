@@ -18,9 +18,11 @@ class AdminPanelSettingController extends Controller
         {
             if ($data['updated_by'] > 0 && $data['updated_by'] != null)
             {
-                $data['updated_by_admin'] = Admin::where('id', $data['updated_by'])->value('name');
-                $data['customer_parent_account_name'] = Account::where('account_number', $data['customer_parent_account_number'])->value('name');
-                $data['supplier_parent_account_name'] = Account::where('account_number', $data['suppliers_parent_account_number'])->value('name');
+                $data['updated_by_admin']              = Admin::where('id', $data['updated_by'])->value('name');
+                $data['customer_parent_account_name']  = Account::where('account_number', $data['customer_parent_account_number'])->value('name');
+                $data['supplier_parent_account_name']  = Account::where('account_number', $data['suppliers_parent_account_number'])->value('name');
+                $data['delegates_parent_account_name'] = Account::where('account_number', $data['delegate_parent_account_number'])->value('name');
+                $data['employees_parent_account_name'] = Account::where('account_number', $data['employees_parent_account_number'])->value('name');
             }
         }
         return view('admin.admin_panel_settings.index', ['data' => $data]);
@@ -42,15 +44,17 @@ class AdminPanelSettingController extends Controller
         try
         {
             $admin_panel_setting=AdminPanelSetting::where('com_code',auth()->user()->com_code)->first();
-            $admin_panel_setting->system_name=$request->system_name;
-            $admin_panel_setting->address=$request->address;
-            $admin_panel_setting->phone=$request->phone;
-            $admin_panel_setting->general_alert=$request->general_alert;
-            $admin_panel_setting->customer_parent_account_number=$request->customer_parent_account_number;
-            $admin_panel_setting->suppliers_parent_account_number=$request->suppliers_parent_account_number;
-            $admin_panel_setting->updated_by=auth()->user()->id;
-            $admin_panel_setting->updated_at=date("Y-m-d H:i:s");
-            $oldphotoPath=$admin_panel_setting->photo;
+            $admin_panel_setting->system_name                     = $request->system_name;
+            $admin_panel_setting->address                         = $request->address;
+            $admin_panel_setting->phone                           = $request->phone;
+            $admin_panel_setting->general_alert                   = $request->general_alert;
+            $admin_panel_setting->customer_parent_account_number  = $request->customer_parent_account_number;
+            $admin_panel_setting->suppliers_parent_account_number = $request->suppliers_parent_account_number;
+            $admin_panel_setting->delegate_parent_account_number  = $request->delegate_parent_account_number;
+            $admin_panel_setting->employees_parent_account_number = $request->employees_parent_account_number;
+            $admin_panel_setting->updated_by                      = auth()->user()->id;
+            $admin_panel_setting->updated_at                      = date("Y-m-d H:i:s");
+            $oldphotoPath                                         = $admin_panel_setting->photo;
             if($request->has('photo'))
             {
                 $request->validate

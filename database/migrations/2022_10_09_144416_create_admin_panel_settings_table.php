@@ -23,6 +23,8 @@ class CreateAdminPanelSettingsTable extends Migration
             $table->string('phone')->nullable();
             $table->bigInteger('customer_parent_account_number')->nullable();
             $table->bigInteger('suppliers_parent_account_number')->nullable();
+            $table->bigInteger('delegate_parent_account_number')->nullable();
+            $table->bigInteger('employees_parent_account_number')->nullable();
             $table->integer('added_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->integer('com_code')->nullable();

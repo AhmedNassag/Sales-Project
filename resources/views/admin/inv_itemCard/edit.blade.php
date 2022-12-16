@@ -52,7 +52,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> نوع الصنف</label>
-                            <select name="item_type" id="item_type" class="form-control">
+                            <select @if($counterUsedBefore>0) disabled  @endif name="item_type" id="item_type" class="form-control">
                                 <option value="">اختر النوع</option>
                                 <option {{ old('item_type', $data['item_type']) == 1 ? 'selected' : '' }} value="1"> مخزني
                                 </option>
@@ -105,7 +105,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> وحدة القياس الاب</label>
-                            <select name="uom_id" id="uom_id" class="form-control ">
+                            <select @if($counterUsedBefore>0) disabled  @endif name="uom_id" id="uom_id" class="form-control ">
                                 <option value="">اختر الوحدة الاب</option>
                                 @if (@isset($inv_uoms_parent) && !@empty($inv_uoms_parent))
                                     @foreach ($inv_uoms_parent as $info)
@@ -122,7 +122,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> هل للصنف وحدة تجزئة ابن</label>
-                            <select name="does_has_retailunit" id="does_has_retailunit" class="form-control">
+                            <select @if($counterUsedBefore>0) disabled  @endif name="does_has_retailunit" id="does_has_retailunit" class="form-control">
                                 <option value="">اختر الحالة</option>
                                 <option {{ old('does_has_retailunit', $data['does_has_retailunit']) == 1 ? 'selected' : '' }}
                                     value="1"> نعم </option>
@@ -134,11 +134,11 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-6  " @if (old('does_has_retailunit', $data['does_has_retailunit']) != 1) style="display: none;" @endif
+                    <div class="col-md-6" @if (old('does_has_retailunit', $data['does_has_retailunit']) != 1) style="display: none;" @endif
                         id="retail_uom_idDiv">
                         <div class="form-group">
                             <label> وحدة القياس التجزئة الابن بالنسبة للأب(<span class="parentuomname"></span>)</label>
-                            <select name="retail_uom_id" id="retail_uom_id" class="form-control ">
+                            <select @if($counterUsedBefore>0) disabled  @endif name="retail_uom_id" id="retail_uom_id" class="form-control ">
                                 <option value="">اختر الوحدة الاب</option>
                                 @if (@isset($inv_uoms_child) && !@empty($inv_uoms_child))
                                     @foreach ($inv_uoms_child as $info)
@@ -156,9 +156,8 @@
                     <div class="col-md-6 relatied_retial_counter "
                         @if (old('does_has_retailunit', $data['does_has_retailunit']) != 1) style="display: none;" @endif>
                         <div class="form-group">
-                            <label>عدد وحدات التجزئة (<span class="childuomname"></span>) بالنسبة للأب (<span
-                                    class="parentuomname"></span>) </label>
-                            <input oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="retail_uom_quntToParent"
+                            <label>عدد وحدات التجزئة (<span class="childuomname"></span>) بالنسبة للأب (<span class="parentuomname"></span>) </label>
+                            <input @if($counterUsedBefore>0) disabled  @endif oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="retail_uom_quntToParent"
                                 id="retail_uom_quntToParent" class="form-control"
                                 value="{{ old('retail_uom_quntToParent', $data['retail_uom_quntToParent'] * 1) }}"
                                 placeholder="ادخل  عدد وحدات التجزئة">

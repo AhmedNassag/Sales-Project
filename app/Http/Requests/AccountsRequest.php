@@ -30,7 +30,7 @@ class AccountsRequest extends FormRequest
             'parent_account_number' => 'required_if:is_parent,0',
             'start_balance_status' => 'required',
             'start_balance' => 'required|min:0',
-            'is_archived' => 'required',
+            'active' => 'required',
 
         ];
     }
@@ -44,7 +44,7 @@ class AccountsRequest extends FormRequest
             'parent_account_number.required_if' => '  الحساب الاب مطلوب',
             'start_balance_status.required' => '   حالة الحساب اول المدة مطلوب',
             'start_balance.required' => '    رصيد اول المدة مطلوب',
-            'is_archived.required' => '   حالة تفعيل الصنف مطلوب',
+            'active.required' => '   حالة تفعيل الصنف مطلوب',
 
 
         ];

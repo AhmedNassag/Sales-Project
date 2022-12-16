@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
             'name'     => 'Ahmed Nabil',
             'username' => 'ahmednassag',
             'email'    => 'ahmednassag@gmail.com',
-            'password' => bcrypt('0101685643320111993'),
+            'password' => bcrypt('12345678'),
             'com_code' => 1,
         ]);
     }

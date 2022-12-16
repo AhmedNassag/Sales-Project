@@ -39,9 +39,17 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> العنوان</label>
-                            <input name="address" id="address" class="form-control"
-                                value="{{ old('notes', $data['address']) }}">
+                            <input name="address" id="address" class="form-control" value="{{ old('notes', $data['address']) }}">
                             @error('address')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label> الهاتف</label>
+                            <input name="phones" id="phones" class="form-control" value="{{ old('phones', $data['phones']) }}">
+                            @error('phones')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

@@ -91,7 +91,6 @@
                                             </td>
                                             <td class="text-center">
                                                 <a href="{{ route('admin.sales_matrial_types.edit', $info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>
-                                                <a href="{{ route('admin.sales_matrial_types.delete', $info->id) }}" class="btn btn-sm are_you_shue  btn-danger">حذف</a>
                                             </td>
                                         </tr>
                                         @php

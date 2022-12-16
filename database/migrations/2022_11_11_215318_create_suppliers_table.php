@@ -18,7 +18,7 @@ class CreateSuppliersTable extends Migration
             $table->string('name')->nullable();
             $table->bigInteger('suuplier_code')->nullable();
             $table->integer('suppliers_categories_id');
-            $table->integer('city_id')->nullable();
+            $table->string('phones')->nullable();
             $table->string('address')->nullable();
             $table->bigInteger('account_number')->nullable();
             $table->decimal('start_balance', 10, 2)->default(0)->nullable();

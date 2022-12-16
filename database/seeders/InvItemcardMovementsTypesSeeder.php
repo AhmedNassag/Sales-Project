@@ -84,5 +84,10 @@ class InvItemcardMovementsTypesSeeder extends Seeder
             'type' => 'رد إنتاج تام لخط التصنيع',
         ]);
 
+
+        $inv_itemcard_movements_categories14 = Inv_itemcard_movements_types::create([
+            'type' => 'حذف الصنف من تفاصيل فاتورة مبيعات مفتوحة',
+        ]);
+
     }
 }

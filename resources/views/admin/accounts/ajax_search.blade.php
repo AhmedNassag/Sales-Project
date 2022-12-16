@@ -2,57 +2,58 @@
 
     <table id="example2" class="table table-bordered table-hover">
         <thead class="custom_thead">
-
-            <th>الاسم </th>
-            <th> رقم الحساب </th>
-            <th> النوع </th>
-            <th> هل أب </th>
-            <th> الحساب الاب </th>
-            <th> الرصيد </th>
-            <th>حالة التفعيل</th>
-            <th>الإجراءات</th>
-
+            <th class="text-center">الاسم </th>
+            <th class="text-center"> رقم الحساب</th>
+            <th class="text-center"> النوع</th>
+            <th class="text-center"> هل أب</th>
+            <th class="text-center"> الحساب الاب</th>
+            <th class="text-center"> الرصيد</th>
+            <th class="text-center">حالة التفعيل</th>
+            <th class="text-center">الإجراءات</th>
         </thead>
         <tbody>
             @foreach ($data as $info)
                 <tr>
-
-                    <td>{{ $info->name }}</td>
-                    <td>{{ $info->account_number }}</td>
-                    <td>{{ $info->account_types_name }}</td>
-                    <td>
+                    <td class="text-center">{{ $info->name }}</td>
+                    <td class="text-center">{{ $info->account_number }}</td>
+                    <td class="text-center">{{ $info->account_types_name }}</td>
+                    <td class="text-center">
                         @if ($info->is_parent == 1)
                             نعم
                         @else
                             لا
                         @endif
                     </td>
-                    <td>{{ $info->parent_account_name }}</td>
-                    <td></td>
-
-                    <td>
-                        @if ($info->is_archived == 0)
+                    <td class="text-center">{{ $info->parent_account_name }}</td>
+                    <td class="text-center">
+                        @if($info->is_parent == 0)
+                            @if ($info->current_balance > 0)
+                                مدين ب ( {{ $info->current_balance * 1 }} ) جنيه
+                            @elseif ($info->current_balance < 0)
+                                دائن ب ( {{ $info->current_balance * 1 * (-1) }} )جنيه
+                            @else
+                                متزن
+                            @endif
+                        @else
+                            راجع ميزان المراجعة
+                        @endif
+                    </td>
+                    <td class="text-center">
+                        @if ($info->active == 1)
                             مفعل
                         @else
                             معطل
                         @endif
                     </td>
-
-                    <td>
-
-                        <a href="{{ route('admin.accounts.edit', $info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>
-                        <a href="{{ route('admin.accounts.delete', $info->id) }}"
-                            class="btn btn-sm are_you_shue  btn-danger">حذف</a>
-                        <a href="{{ route('admin.accounts.show', $info->id) }}" class="btn btn-sm   btn-info">عرض</a>
-
+                    <td class="text-center">
+                        @if ($info->relatediternalaccounts == 0)
+                            <a href="{{ route('admin.accounts.edit', $info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>
+                        @else
+                            يتم تعديله من شاشته
+                        @endif
                     </td>
-
-
                 </tr>
             @endforeach
-
-
-
         </tbody>
     </table>
     <br>

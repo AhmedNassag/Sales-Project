@@ -264,8 +264,7 @@ $(document).ready(function () {
                 sales_item_type: sales_item_type,
                 item_code: item_code,
                 uom_id: uom_id,
-                inv_itemcard_batches_autoserial:
-                    inv_itemcard_batches_autoserial,
+                inv_itemcard_batches_autoserial: inv_itemcard_batches_autoserial,
                 item_quantity: item_quantity,
                 item_price: item_price,
                 is_normal_orOther: is_normal_orOther,
@@ -426,7 +425,6 @@ $(document).ready(function () {
     });
     $(document).on("click", "#Do_Add_new_active_invoice", function (e) {
         var invoice_date = $("#invoice_date_activeAdd").val();
-
         if (invoice_date == "") {
             alert("من فضلك ادخل تاريخ الفاتورة");
             $("#invoice_date_activeAdd").focus();
@@ -434,16 +432,13 @@ $(document).ready(function () {
         }
 
         var sales_item_type_main = $("#sales_item_type_main").val();
-
         if (sales_item_type_main == "") {
             alert("من فضلك  اختر نوع بيع الفاتورة");
             $("#sales_item_type_main").focus();
             return false;
         }
 
-        var Sales_matrial_types_id = $(
-            "#Sales_matrial_types_id_activeAdd"
-        ).val();
+        var Sales_matrial_types_id = $("#Sales_matrial_types_id_activeAdd").val();
         if (Sales_matrial_types_id == "") {
             alert("من فضلك اختر فئة الفاتورة");
             $("#Sales_matrial_types_id_activeAdd").focus();
@@ -451,7 +446,6 @@ $(document).ready(function () {
         }
 
         var customer_code = $("#customer_code").val();
-
         var is_has_customer = $("#is_has_customer").val();
         if (is_has_customer == 1) {
             if (customer_code == "") {
@@ -460,14 +454,15 @@ $(document).ready(function () {
                 return false;
             }
         }
+
         var delegate_code = $("#delegate_code_activeAdd").val();
         if (delegate_code == "") {
             alert("من فضلك  اختر المندوب ");
             $("#delegate_code_activeAdd").focus();
             return false;
         }
+        
         var pill_type = $("#pill_type_activeAdd").val();
-
         var token = $("#token_search").val();
         var url = $("#ajax_get_store").val();
         jQuery.ajax({

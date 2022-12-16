@@ -25,7 +25,6 @@ class CreateAccountsTable extends Migration
             $table->bigInteger('other_table_FK')->default(0)->nullable();
             $table->text('notes')->nullable();
             $table->tinyInteger('is_parent')->default(0)->nullable();
-            $table->tinyInteger('is_archived')->default(0)->nullable();
             $table->tinyInteger('active')->default(1)->nullable();
             $table->integer('added_by')->nullable();
             $table->integer('updated_by')->nullable();

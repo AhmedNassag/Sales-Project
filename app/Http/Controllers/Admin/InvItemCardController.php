@@ -8,8 +8,14 @@ use App\Models\Inv_itemCard;
 use App\Models\Admin;
 use App\Models\Inv_uom;
 use App\Http\Requests\ItemcardRequest;
+use App\Http\Requests\ItemcardRequestUpdate;
 use App\Models\Inv_itemCard_categories;
-
+use App\Models\Inv_itemcard_movements;
+use App\Models\Inv_itemcard_movements_categories;
+use App\Models\Inv_itemcard_movements_types;
+use App\Models\Sales_invoices_details;
+use App\Models\Store;
+use App\Models\Suppliers_with_orders_details;
 
 class InvItemCardController extends Controller
 {
@@ -24,7 +30,6 @@ class InvItemCardController extends Controller
             {
                 $info->added_by_admin =get_field_value(new Admin(),'name',array('id'=>$info->added_by));
                 $info->inv_itemcard_categories_name =get_field_value(new Inv_itemCard_categories(),'name',array('id'=>$info->inv_itemcard_categories_id));
-                $info->parent_item_name =get_field_value(new Inv_itemCard(),'name',array('id'=>$info->parent_inv_itemcard_id));
                 $info->Uom_name =get_field_value(new Inv_uom(),'name',array('id'=>$info->uom_id));
                 $info->retail_uom_name =get_field_value(new Inv_uom(),'name',array('id'=>$info->retail_uom_id));
                 if ($info->updated_by > 0 and $info->updated_by != null)
@@ -151,12 +156,15 @@ class InvItemCardController extends Controller
         $inv_uoms_parent=get_cols_where(new Inv_uom(),array('id','name'),array('com_code'=>$com_code,'active'=>1,'is_master'=>1),'id','DESC');
         $inv_uoms_child=get_cols_where(new Inv_uom(),array('id','name'),array('com_code'=>$com_code,'active'=>1,'is_master'=>0),'id','DESC');
         $item_card_data=get_cols_where(new Inv_itemCard(),array('id','name'),array('com_code'=>$com_code,'active'=>1),'id','DESC');
-        return view('admin.inv_itemCard.edit',['data'=>$data,'inv_itemcard_categories'=>$inv_itemcard_categories,'inv_uoms_parent'=>$inv_uoms_parent,'inv_uoms_child'=>$inv_uoms_child,'item_card_data'=>$item_card_data]);
+        $counterUsedin_with_suppliers = get_count_where(new Suppliers_with_orders_details(), array("com_code" => $com_code, "item_code" => $data['item_code']));
+        $counterUsedin_with_sales = get_count_where(new Sales_invoices_details(), array("com_code" => $com_code, "item_code" => $data['item_code']));
+        $counterUsedBefore = $counterUsedin_with_suppliers + $counterUsedin_with_sales;
+        return view('admin.inv_itemCard.edit', ['data' => $data, 'inv_itemcard_categories' => $inv_itemcard_categories, 'inv_uoms_parent' => $inv_uoms_parent, 'inv_uoms_child' => $inv_uoms_child, 'item_card_data' => $item_card_data, 'counterUsedBefore' => $counterUsedBefore]);
     }
 
 
 
-    public function update($id, ItemcardRequest $request)
+    public function update($id, ItemcardRequestUpdate $request)
     {
         try
         {
@@ -166,7 +174,47 @@ class InvItemCardController extends Controller
             {
                 return redirect()->route('admin.itemcard.index')->with(['error' => 'عفوا غير قادر علي الوصول الي البيانات المطلوبة !!']);
             }
-
+            if ($request->has('item_type')) {
+                if ($request->item_type == "")
+                {
+                    return redirect()->back()
+                    ->with(['error' => 'من فضلك اختر نوع الصنف'])
+                    ->withInput();
+                }
+                if ($request->item_type == "")
+                {
+                    return redirect()->back()
+                    ->with(['error' => 'من فضلك اختر نوع الصنف'])
+                    ->withInput();
+                }
+                if ($request->uom_id == "")
+                {
+                    return redirect()->back()
+                    ->with(['error' => 'من فضلك اختر  وحدة القياس الاب'])
+                    ->withInput();
+                }
+                if ($request->does_has_retailunit == "")
+                {
+                    return redirect()->back()
+                    ->with(['error' => 'من فضلك اختر  هل للصنف وحدة تجزئة'])
+                    ->withInput();
+                }
+                if ($request->does_has_retailunit == 1)
+                {
+                    if ($request->retail_uom_id == "")
+                    {
+                        return redirect()->back()
+                        ->with(['error' => 'من فضلك اختر  وحدة القياس التجزئة'])
+                        ->withInput();
+                    }
+                    if ($request->retail_uom_quntToParent == "" || $request->retail_uom_quntToParent == 0)
+                    {
+                        return redirect()->back()
+                        ->with(['error' => 'من فضلك ادخل النسبة مابين وحدة قياس الاب  والابن'])
+                        ->withInput();
+                    }
+                }
+            }
             //check if not exsits for barcode
             if($request->barcode!='')
             {
@@ -190,30 +238,39 @@ class InvItemCardController extends Controller
                 ->with(['error' => 'عفوا اسم الصنف مسجل من قبل'])
                 ->withInput();
             }
-            $data_to_update['name']=$request->name;
-            $data_to_update['item_type']=$request->item_type;
-            $data_to_update['inv_itemcard_categories_id']=$request->inv_itemcard_categories_id;
-            $data_to_update['uom_id']=$request->uom_id;
-            $data_to_update['price']=$request->price;
-            $data_to_update['nos_gomla_price']=$request->nos_gomla_price;
-            $data_to_update['gomla_price']=$request->gomla_price;
-            $data_to_update['cost_price']=$request->cost_price;
-            $data_to_update['does_has_retailunit']=$request->does_has_retailunit;
-            $data_to_update['parent_inv_itemcard_id']=$request->parent_inv_itemcard_id;
-            if($data_to_update['parent_inv_itemcard_id']=="")
+            $data_to_update['name'] = $request->name;
+            $data_to_update['inv_itemcard_categories_id'] = $request->inv_itemcard_categories_id;
+            $data_to_update['price'] = $request->price;
+            $data_to_update['nos_gomla_price'] = $request->nos_gomla_price;
+            $data_to_update['gomla_price'] = $request->gomla_price;
+            $data_to_update['cost_price'] = $request->cost_price;
+            $data_to_update['parent_inv_itemcard_id'] = $request->parent_inv_itemcard_id;
+            if ($data_to_update['parent_inv_itemcard_id'] == "")
             {
-                $data_to_update['parent_inv_itemcard_id']=0;
+                $data_to_update['parent_inv_itemcard_id'] = 0;
             }
-            if($data_to_update['does_has_retailunit']==1)
+            if ($request->has('item_type'))
             {
-                $data_to_update['retail_uom_quntToParent']=$request->retail_uom_quntToParent;
-                $data_to_update['retail_uom_id']=$request->retail_uom_id;
-                $data_to_update['price_retail']=$request->price_retail;
-                $data_to_update['nos_gomla_price_retail']=$request->nos_gomla_price_retail;
-                $data_to_update['gomla_price_retail']=$request->gomla_price_retail;
-                $data_to_update['cost_price_retail']=$request->cost_price_retail;
+                $data_to_update['item_type'] = $request->item_type;
+                $data_to_update['uom_id'] = $request->uom_id;
+                $data_to_update['does_has_retailunit'] = $request->does_has_retailunit;
+                if ($data_to_update['does_has_retailunit'] == 1)
+                {
+                    $data_to_update['retail_uom_quntToParent'] = $request->retail_uom_quntToParent;
+                    $data_to_update['retail_uom_id'] = $request->retail_uom_id;
+                }
             }
-
+            else
+            {
+                $data_to_update['does_has_retailunit'] = $data['does_has_retailunit'];
+            }
+            if ($data_to_update['does_has_retailunit'] == 1)
+            {
+                $data_to_update['price_retail'] = $request->price_retail;
+                $data_to_update['nos_gomla_price_retail'] = $request->nos_gomla_price_retail;
+                $data_to_update['gomla_price_retail'] = $request->gomla_price_retail;
+                $data_to_update['cost_price_retail'] = $request->cost_price_retail;
+            }
             if($request->has('photo'))
             {
                 $request->validate
@@ -296,7 +353,10 @@ class InvItemCardController extends Controller
         {
             $data['updated_by_admin'] = get_field_value(new Admin(),'name',array('id'=>$data['updated_by'] ));
         }
-        return view('admin.inv_itemCard.show',['data'=>$data]);
+        $inv_itemcard_movements_categories = get_cols(new Inv_itemcard_movements_categories(), array("*"), "id", "ASC");
+        $inv_itemcard_movements_types = get_cols(new Inv_itemcard_movements_types(), array("*"), "id", "ASC");
+        $stores = get_cols_where(new Store(), array("id", "name"), array("com_code" => $com_code), "id", "ASC");
+        return view('admin.inv_itemCard.show', ['data' => $data, 'inv_itemcard_movements_categories' => $inv_itemcard_movements_categories, 'inv_itemcard_movements_types' => $inv_itemcard_movements_types, 'stores' => $stores]);
     }
 
 
@@ -378,6 +438,93 @@ class InvItemCardController extends Controller
                 }
             }
             return view('admin.inv_itemCard.ajax_search',['data'=>$data]);
+        }
+    }
+
+
+
+    public function ajax_search_movements(Request $request)
+    {
+        if ($request->ajax())
+        {
+            $store_id = $request->store_id;
+            $movements_categories = $request->movements_categories;
+            $movements_types = $request->movements_types;
+            $from_date = $request->from_date;
+            $to_date = $request->to_date;
+            $moveDateorderType = $request->moveDateorderType;
+            if ($store_id == 'all')
+            {
+                $field1 = "id";
+                $operator1 = ">";
+                $value1 = 0;
+            }
+            else
+            {
+                $field1 = "store_id";
+                $operator1 = "=";
+                $value1 = $store_id;
+            }
+            if ($movements_categories == 'all')
+            {
+                $field2 = "id";
+                $operator2 = ">";
+                $value2 = 0;
+            }
+            else
+            {
+                $field2 = "inv_itemcard_movements_categories";
+                $operator2 = "=";
+                $value2 = $movements_categories;
+            }
+            if ($movements_types == 'all')
+            {
+                $field3 = "id";
+                $operator3 = ">";
+                $value3 = 0;
+            }
+            else
+            {
+                $field3 = "items_movements_types";
+                $operator3 = "=";
+                $value3 = $movements_types;
+            }
+            if ($from_date == '')
+            {
+                $field4 = "id";
+                $operator4 = ">";
+                $value4 = 0;
+            }
+            else
+            {
+                $field4 = "date";
+                $operator4 = ">=";
+                $value4 = $from_date;
+            }
+            if ($to_date == '')
+            {
+                $field5 = "id";
+                $operator5 = ">";
+                $value5 = 0;
+            }
+            else
+            {
+                $field5 = "date";
+                $operator5 = "<=";
+                $value5 = $to_date;
+            }
+            $data = Inv_itemcard_movements::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->orderBy('id', $moveDateorderType)->paginate(PAGINATION_COUNT);
+            if (!empty($data))
+            {
+                foreach ($data as $info)
+                {
+                    $info->added_by_admin = get_field_value(new Admin(), 'name', array('id' => $info->added_by));
+                    $info->inv_itemcard_movements_categories_name = get_field_value(new Inv_itemcard_movements_categories(), 'name', array('id' => $info->inv_itemcard_movements_categories));
+                    $info->inv_itemcard_movements_types_name = get_field_value(new Inv_itemcard_movements_types(), 'type', array('id' => $info->items_movements_types));
+                    $info->store_name = get_field_value(new Store(), 'name', array('id' => $info->store_id));
+                }
+            }
+            return view('admin.inv_itemCard.ajax_search_movements', ['data' => $data]);
         }
     }
 

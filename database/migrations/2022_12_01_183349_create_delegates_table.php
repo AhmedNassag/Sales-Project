@@ -27,7 +27,7 @@ class CreateDelegatesTable extends Migration
             $table->tinyInteger('active')->default(0)->nullable();
             $table->integer('com_code')->nullable();
             $table->date('date')->nullable();
-            $table->integer('phones')->nullable();
+            $table->string('phones')->nullable();
             $table->string('address')->nullable();
             $table->tinyInteger('percent_type')->nullable();
             $table->decimal('percent_collect_commission', 10, 2)->nullable();

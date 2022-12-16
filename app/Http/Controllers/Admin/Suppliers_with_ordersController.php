@@ -616,7 +616,7 @@ class Suppliers_with_ordersController extends Controller
         {
             //Affect on Supplier Balance  حنأثر في رصيد المورد
             //حنجيب  سجل المورد من الشجره المحاسبية برقم الحساب المالب
-            refresh_account_blance($data['account_number'], new Account(), new Supplier(), new Treasuries_transactions(), new Suppliers_with_orders(), false);
+
             //حركات  مختلفه
             //first make treasuries_transactions  action if what paid >0
             if ($request['what_paid'] > 0)
@@ -661,6 +661,8 @@ class Suppliers_with_ordersController extends Controller
                     update(new Treasuries(), $dataUpdateTreasuries, array("com_code" => $com_code, "id" => $user_shift['treasuries_id']));
                 }
             }
+
+            refresh_account_blance_supplier($data['account_number'], new Account(), new Supplier(), new Treasuries_transactions(), new Suppliers_with_orders(), false);
             //store move حركة المخزن
             //first Get item card data جنجيب الاصناف اللي علي الفاتورة
             $items = get_cols_where(new Suppliers_with_orders_details(), array("*"), array("suppliers_with_orders_auto_serial" => $auto_serial, "com_code" => $com_code, "order_type" => 1), "id", "ASC");
@@ -717,8 +719,8 @@ class Suppliers_with_ordersController extends Controller
                             //update current Batch تحديث علي الباتش القديمة
                             $dataUpdateOldBatch['quantity']         = $OldBatchExsists['quantity'] + $quntity;
                             $dataUpdateOldBatch['total_cost_price'] = $OldBatchExsists['unit_cost_price'] * $dataUpdateOldBatch['quantity'];
-                            // $dataUpdateOldBatch["created_at"]       = date("Y-m-d H:i:s");
-                            $dataUpdateOldBatch["added_by"]         = auth()->user()->id;
+                            // $dataUpdateOldBatch["updated_at"]       = date("Y-m-d H:i:s");
+                            $dataUpdateOldBatch["updated_by"]       = auth()->user()->id;
                             update(new Inv_itemcard_batches(), $dataUpdateOldBatch, array("id" => $OldBatchExsists['id'], "com_code" => $com_code));
                         }
                         else

@@ -28,8 +28,7 @@ class AccountsRequestUpdate extends FormRequest
             'is_parent' => 'required',
             'account_type' => 'required',
             'parent_account_number' => 'required_if:is_parent,0',
-            'is_archived' => 'required',
-
+            'active' => 'required',
         ];
     }
 
@@ -40,9 +39,7 @@ class AccountsRequestUpdate extends FormRequest
             'account_type.required' => 'نوع الحساب مطلوب',
             'is_parent.required' => ' هل الحساب اب مطلوب',
             'parent_account_number.required_if' => '  الحساب الاب مطلوب',
-            'is_archived.required' => '   حالة تفعيل الصنف مطلوب',
-
-
+            'active.required' => '   حالة تفعيل الصنف مطلوب',
         ];
     }
 }

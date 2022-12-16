@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+
 @section('title')
     الضبط العام
 @endsection
@@ -27,20 +28,17 @@
                 <div class="card-body">
                     @if (@isset($data) && !@empty($data))
                         <table id="example2" class="table table-bordered table-hover">
-
                             <tr>
-                                <td class="width30">اسم الشركة</td>
-                                <td> {{ $data['system_name'] }}</td>
+                                <td class="text-center width30">اسم الشركة</td>
+                                <td class="text-center"> {{ $data['system_name'] }}</td>
                             </tr>
-
                             <tr>
-                                <td class="width30">كود الشركة</td>
-                                <td> {{ $data['com_code'] }}</td>
+                                <td class="text-center width30">كود الشركة</td>
+                                <td class="text-center"> {{ $data['com_code'] }}</td>
                             </tr>
-
                             <tr>
-                                <td class="width30">حالة الشركة</td>
-                                <td>
+                                <td class="text-center width30">حالة الشركة</td>
+                                <td class="text-center">
                                     @if ($data['active'] == 1)
                                         مفعل
                                     @else
@@ -48,44 +46,45 @@
                                     @endif
                                 </td>
                             </tr>
-
                             <tr>
-                                <td class="width30">عنوان الشركة</td>
-                                <td> {{ $data['address'] }}</td>
+                                <td class="text-center width30">عنوان الشركة</td>
+                                <td class="text-center"> {{ $data['address'] }}</td>
                             </tr>
-
                             <tr>
-                                <td class="width30">هاتف الشركة</td>
-                                <td> {{ $data['phone'] }}</td>
+                                <td class="text-center width30">هاتف الشركة</td>
+                                <td class="text-center"> {{ $data['phone'] }}</td>
                             </tr>
-
                             <tr>
-                                <td class="width30"> اسم الحساب المالي للعملاء الاب</td>
-                                <td> {{ $data['customer_parent_account_name'] }} رقم حساب مالي ( {{ $data['customer_parent_account_number'] }} )</td>
+                                <td class="text-center width30"> اسم الحساب المالي للعملاء الاب</td>
+                                <td class="text-center"> {{ $data['customer_parent_account_name'] }} رقم حساب مالي ( {{ $data['customer_parent_account_number'] }} )</td>
                             </tr>
-
                             <tr>
-                                <td class="width30"> اسم الحساب المالي للموردين الاب</td>
-                                <td> {{ $data['supplier_parent_account_name'] }} رقم حساب مالي ( {{ $data['suppliers_parent_account_number'] }} )</td>
+                                <td class="text-center width30"> اسم الحساب المالي للموردين الاب</td>
+                                <td class="text-center"> {{ $data['supplier_parent_account_name'] }} رقم حساب مالي ( {{ $data['suppliers_parent_account_number'] }} )</td>
                             </tr>
-
                             <tr>
-                                <td class="width30">رسالة التنبية اعلي الشاشة للشركة</td>
-                                <td> {{ $data['general_alert'] }}</td>
+                                <td class="text-center width30"> اسم الحساب المالي للمناديب الاب</td>
+                                <td class="text-center"> {{ $data['delegate_parent_account_number'] }} رقم حساب مالي ( {{ $data['delegate_parent_account_number'] }} )</td>
                             </tr>
-
                             <tr>
-                                <td class="width30">لوجو الشركة</td>
-                                <td>
+                                <td class="text-center width30"> اسم الحساب المالي للموظفين الاب</td>
+                                <td class="text-center"> {{ $data['employees_parent_account_number'] }} رقم حساب مالي ( {{ $data['employees_parent_account_number'] }} )</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center width30">رسالة التنبية اعلي الشاشة للشركة</td>
+                                <td class="text-center"> {{ $data['general_alert'] }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center width30">لوجو الشركة</td>
+                                <td class="text-center">
                                     <div class="image">
                                         <img style="width: 70px; height: 70px;" src="{{ asset('admin/uploads') . '/' . $data['photo'] }}" alt="لوجو الشركة">
                                     </div>
                                 </td>
                             </tr>
-
                             <tr>
-                                <td class="width30"> تاريخ اخر تحديث</td>
-                                <td>
+                                <td class="text-center width30"> تاريخ اخر تحديث</td>
+                                <td class="text-center">
                                     @if ($data['updated_by'] > 0 and $data['updated_by'] != null)
                                         @php
                                             $dt = new DateTime($data['updated_at']);
@@ -102,18 +101,15 @@
                                     @else
                                         لا يوجد تحديث
                                     @endif
-
                                     <a href="{{ route('admin.adminPanelSetting.edit') }}" class="btn btn-sm btn-success">تعديل</a>
                                 </td>
                             </tr>
-
                         </table>
                     @else
-                        <div class="alert alert-danger">
+                        <div class="text-center alert alert-danger">
                             عفوا لاتوجد بيانات لعرضها !!
                         </div>
                     @endif
-
                 </div>
             </div>
         </div>

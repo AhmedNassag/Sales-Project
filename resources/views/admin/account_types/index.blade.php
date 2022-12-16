@@ -35,28 +35,28 @@
                             @endphp
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead class="custom_thead">
-                                    <th>مسلسل</th>
-                                    <th>اسم النوع</th>
-                                    <th>حالة التفعيل</th>
-                                    <th>هل يضاف من شاشه داخلية </th>
+                                    <th class="text-center">مسلسل</th>
+                                    <th class="text-center">اسم النوع</th>
+                                    <th class="text-center">حالة التفعيل</th>
+                                    <th class="text-center">هل يضاف من شاشة داخلية</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $info)
                                         <tr>
-                                            <td>{{ $i }}</td>
-                                            <td>{{ $info->name }}</td>
-                                            <td>
+                                            <td class="text-center">{{ $i }}</td>
+                                            <td class="text-center">{{ $info->name }}</td>
+                                            <td class="text-center">
                                                 @if ($info->active == 1)
                                                     مفعل
                                                 @else
                                                     معطل
                                                 @endif
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 @if ($info->relatediternalaccounts == 1)
-                                                    نعم ويضاف من شاشته
+                                                    نعم ويضاف من شاشته الداخلية ويسمع بشاشة الحسابات الرئيسية
                                                 @else
-                                                    لا ويضاف من شاشه الحسابات
+                                                    لا ويضاف من شاشة الحسابات الرئيسية
                                                 @endif
                                             </td>
                                         </tr>
@@ -68,7 +68,7 @@
                             </table>
                             <br>
                         @else
-                            <div class="alert alert-danger">
+                            <div class="text-center alert alert-danger">
                                 عفوا لاتوجد بيانات لعرضها !!
                             </div>
                         @endif

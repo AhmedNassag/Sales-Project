@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminPanelSettingController;
 use App\Http\Controllers\Admin\Admins_ShiftsContoller;
 use App\Http\Controllers\Admin\CollectController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\DelegatesController;
 use App\Http\Controllers\Admin\ExchangeController;
 use App\Http\Controllers\Admin\Inv_item_card_categoriesController;
 use App\Http\Controllers\Admin\TreasuriesController;
@@ -114,6 +115,7 @@ Route::group([/*'namespace' => 'Admin',*/ 'prefix' => 'admin', 'middleware' => '
     Route::get('/itemcard/delete/{id}', [InvItemCardController::class, 'delete'])->name('admin.itemcard.delete');
     Route::post('/itemcard/ajax_search', [InvItemCardController::class, 'ajax_search'])->name('admin.itemcard.ajax_search');
     Route::get('/itemcard/show/{id}', [InvItemCardController::class, 'show'])->name('admin.itemcard.show');
+    Route::post('/itemcard/ajax_search_movements', [InvItemCardController::class, 'ajax_search_movements'])->name('admin.itemcard.ajax_search_movements');
     /********************************* End itemcard *********************************/
 
 
@@ -216,6 +218,8 @@ Route::group([/*'namespace' => 'Admin',*/ 'prefix' => 'admin', 'middleware' => '
     Route::get('/collect_transaction/index', [CollectController::class, 'index'])->name('admin.collect_transaction.index');
     Route::get('/collect_transaction/create', [CollectController::class, 'create'])->name('admin.collect_transaction.create');
     Route::post('/collect_transaction/store', [CollectController::class, 'store'])->name('admin.collect_transaction.store');
+    Route::post('/collect_transaction/get_account_blance', [CollectController::class, 'get_account_blance'])->name('admin.collect_transaction.get_account_blance');
+    Route::post('/collect_transaction/ajax_search', [CollectController::class, 'ajax_search'])->name('admin.collect_transaction.ajax_search');
     /********************************* End collect_transaction *********************************/
 
 
@@ -223,6 +227,8 @@ Route::group([/*'namespace' => 'Admin',*/ 'prefix' => 'admin', 'middleware' => '
     Route::get('/exchange_transaction/index', [ExchangeController::class, 'index'])->name('admin.exchange_transaction.index');
     Route::get('/exchange_transaction/create', [ExchangeController::class, 'create'])->name('admin.exchange_transaction.create');
     Route::post('/exchange_transaction/store', [ExchangeController::class, 'store'])->name('admin.exchange_transaction.store');
+    Route::post('/exchange_transaction/get_account_blance', [ExchangeController::class, 'get_account_blance'])->name('admin.exchange_transaction.get_account_blance');
+    Route::post('/exchange_transaction/ajax_search', [ExchangeController::class, 'ajax_search'])->name('admin.exchange_transaction.ajax_search');
     /********************************* End exchange_transaction *********************************/
 
 
@@ -256,6 +262,18 @@ Route::group([/*'namespace' => 'Admin',*/ 'prefix' => 'admin', 'middleware' => '
     Route::post('/SalesInvoices/searchforitems', [SalesInvoicesController::class, 'searchforitems'])->name('admin.SalesInvoices.searchforitems');
     Route::get('/SalesInvoices/printsaleswina4/{id}/{size}', [SalesInvoicesController::class, 'printsaleswina4'])->name('admin.SalesInvoices.printsaleswina4');
     /********************************* End SalesInvoices *********************************/
+
+
+    /********************************* Start delegates *********************************/
+    Route::get('/delegates/index', [DelegatesController::class, 'index'])->name('admin.delegates.index');
+    Route::get('/delegates/create', [DelegatesController::class, 'create'])->name('admin.delegates.create');
+    Route::post('/delegates/store', [DelegatesController::class, 'store'])->name('admin.delegates.store');
+    Route::get('/delegates/edit/{id}', [DelegatesController::class, 'edit'])->name('admin.delegates.edit');
+    Route::post('/delegates/update/{id}', [DelegatesController::class, 'update'])->name('admin.delegates.update');
+    Route::get('/delegates/delete/{id}', [DelegatesController::class, 'delete'])->name('admin.delegates.delete');
+    Route::post('/delegates/ajax_search', [DelegatesController::class, 'ajax_search'])->name('admin.delegates.ajax_search');
+    Route::post('/delegates/show', [DelegatesController::class, 'show'])->name('admin.delegates.show');
+    /********************************* End delegates *********************************/
 
 });
 

@@ -113,7 +113,6 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('admin.uoms.edit', $info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>
-                                                <a href="{{ route('admin.uoms.delete', $info->id) }}" class="btn btn-sm are_you_shue  btn-danger">حذف</a>
                                             </td>
                                         </tr>
                                         @php

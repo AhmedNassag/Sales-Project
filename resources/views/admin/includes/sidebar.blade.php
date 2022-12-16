@@ -121,8 +121,8 @@
 
 
                 <!-- Start الحسابات -->
-                <li class="nav-item has-treeview {{ ((request()->is('admin/accountTypes*') || request()->is('admin/accounts*') || request()->is('admin/customer*') || request()->is('admin/suppliers_categories*') || request()->is('admin/supplier*') || (request()->is('admin/collect_transaction*') || request()->is('admin/exchange_transaction*'))) && !request()->is('admin/suppliers_orders*')) ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ ((request()->is('admin/accountTypes*') || request()->is('admin/accounts*') || request()->is('admin/customer*') || request()->is('admin/suppliers_categories*') || request()->is('admin/supplier*') || (request()->is('admin/collect_transaction*') || request()->is('admin/exchange_transaction*'))) && !request()->is('admin/suppliers_orders*')) ? 'active' : '' }}">
+                <li class="nav-item has-treeview {{ ((request()->is('admin/accountTypes*') || request()->is('admin/accounts*') || request()->is('admin/customer*') || request()->is('admin/suppliers_categories*') || request()->is('admin/supplier*') || (request()->is('admin/collect_transaction*') || request()->is('admin/exchange_transaction*') || request()->is('admin/delegates*') )) && !request()->is('admin/suppliers_orders*'))  ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link  {{ ((request()->is('admin/accountTypes*') || request()->is('admin/accounts*') || request()->is('admin/customer*') || request()->is('admin/suppliers_categories*') || request()->is('admin/supplier*') || (request()->is('admin/collect_transaction*') || request()->is('admin/exchange_transaction*') || request()->is('admin/delegates*') )) && !request()->is('admin/suppliers_orders*'))  ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             الحسابات
@@ -160,6 +160,16 @@
                         </li>
                         <!-- End customer -->
 
+                        <!-- Start delegates -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.delegates.index') }}" class="nav-link {{ (request()->is('admin/delegates*') )?'active':'' }}">
+                                <p>
+                                    حسابات المناديب
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End delegates -->
+
                         <!-- Start suppliers_categories -->
                         <li class="nav-item">
                             <a href="{{ route('admin.suppliers_categories.index') }}" class="nav-link {{ (request()->is('admin/suppliers_categories*') )?'active':'' }}">
@@ -179,16 +189,6 @@
                             </a>
                         </li>
                         <!-- End supplier -->
-
-                        <!-- Start -->
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <p>
-                                    حسابات الموردين
-                                </p>
-                            </a>
-                        </li>
-                        <!-- End -->
 
                         <!-- Start collect_transaction -->
                         <li class="nav-item">
