@@ -9,7 +9,7 @@
             <th>النوع</th>
             <th>الفئة</th>
             <th>الوحدة الاب</th>
-            <th>الوحدة التجزئة</th>
+            <th>الكمية الحالية</th>
             <th>حالة التفعيل</th>
             <th>الإجراءات</th>
         </thead>
@@ -31,7 +31,7 @@
                     </td>
                     <td>{{ $info->inv_itemcard_categories_name }}</td>
                     <td>{{ $info->Uom_name }}</td>
-                    <td>{{ $info->retail_uom_name }}</td>
+                    <td>{{ $info->All_QUENTITY*1 }} {{ $info->Uom_name }}</td>
                     <td>
                         @if ($info->active == 1)
                             مفعل
@@ -39,6 +39,7 @@
                             معطل
                         @endif
                     </td>
+
                     <td>
                         <a href="{{ route('admin.itemcard.edit', $info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>
                         <a href="{{ route('admin.itemcard.show', $info->id) }}" class="btn btn-sm   btn-info">عرض</a>

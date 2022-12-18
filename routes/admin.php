@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\InvItemCardController;
 use App\Http\Controllers\Admin\SalesInvoicesController;
 use App\Http\Controllers\Admin\SupplierCategoriesController;
 use App\Http\Controllers\Admin\Suppliers_with_ordersController;
+use App\Http\Controllers\Admin\Suppliers_with_ordersGeneralRetuen;
 use App\Http\Controllers\Admin\SuppliersController;
 
 /*
@@ -275,5 +276,29 @@ Route::group([/*'namespace' => 'Admin',*/ 'prefix' => 'admin', 'middleware' => '
     Route::post('/delegates/show', [DelegatesController::class, 'show'])->name('admin.delegates.show');
     /********************************* End delegates *********************************/
 
+
+    /********************************* End suppliers_orders_general_return *********************************/
+    Route::get('/suppliers_orders_general_return/index', [Suppliers_with_ordersGeneralRetuen::class, 'index'])->name('admin.suppliers_orders_general_return.index');
+    Route::get('/suppliers_orders_general_return/create', [Suppliers_with_ordersGeneralRetuen::class, 'create'])->name('admin.suppliers_orders_general_return.create');
+    Route::post('/suppliers_orders_general_return/store', [Suppliers_with_ordersGeneralRetuen::class, 'store'])->name('admin.suppliers_orders_general_return.store');
+    Route::get('/suppliers_orders_general_return/edit/{id}', [Suppliers_with_ordersGeneralRetuen::class, 'edit'])->name('admin.suppliers_orders_general_return.edit');
+    Route::post('/suppliers_orders_general_return/update/{id}', [Suppliers_with_ordersGeneralRetuen::class, 'update'])->name('admin.suppliers_orders_general_return.update');
+    Route::get('/suppliers_orders_general_return/delete/{id}', [Suppliers_with_ordersGeneralRetuen::class, 'delete'])->name('admin.suppliers_orders_general_return.delete');
+    Route::post('/suppliers_orders_general_return/ajax_search', [Suppliers_with_ordersGeneralRetuen::class, 'ajax_search'])->name('admin.suppliers_orders_general_return.ajax_search');
+    Route::get('/suppliers_orders_general_return/show/{id}', [Suppliers_with_ordersGeneralRetuen::class, 'show'])->name('admin.suppliers_orders_general_return.show');
+    Route::post('/suppliers_orders_general_return/get_item_uoms', [Suppliers_with_ordersGeneralRetuen::class, 'get_item_uoms'])->name('admin.suppliers_orders_general_return.get_item_uoms');
+    Route::post('/suppliers_orders_general_return/load_modal_add_details', [Suppliers_with_ordersGeneralRetuen::class, 'load_modal_add_details'])->name('admin.suppliers_orders_general_return.load_modal_add_details');
+    Route::post('/suppliers_orders_general_return/Add_item_to_invoice', [Suppliers_with_ordersGeneralRetuen::class, 'Add_item_to_invoice'])->name('admin.suppliers_orders_general_return.Add_item_to_invoice');
+    Route::post('/suppliers_orders_general_return/reload_itemsdetials', [Suppliers_with_ordersGeneralRetuen::class, 'reload_itemsdetials'])->name('admin.suppliers_orders_general_return.reload_itemsdetials');
+    Route::post('/suppliers_orders_general_return/reload_parent_pill', [Suppliers_with_ordersGeneralRetuen::class, 'reload_parent_pill'])->name('admin.suppliers_orders_general_return.reload_parent_pill');
+    Route::post('/suppliers_orders_general_return/load_edit_item_details', [Suppliers_with_ordersGeneralRetuen::class, 'load_edit_item_details'])->name('admin.suppliers_orders_general_return.load_edit_item_details');
+    Route::post('/suppliers_orders_general_return/edit_item_details', [Suppliers_with_ordersGeneralRetuen::class, 'edit_item_details'])->name('admin.suppliers_orders_general_return.edit_item_details');
+    Route::get('/suppliers_orders_general_return/delete_details/{id}/{id_parent}', [Suppliers_with_ordersGeneralRetuen::class, 'delete_details'])->name('admin.suppliers_orders_general_return.delete_details');
+    Route::post('/suppliers_orders_general_return/do_approve/{id}', [Suppliers_with_ordersGeneralRetuen::class, 'do_approve'])->name('admin.suppliers_orders_general_return.do_approve');
+    Route::post('/suppliers_orders_general_return/load_modal_approve_invoice', [Suppliers_with_ordersGeneralRetuen::class, 'load_modal_approve_invoice'])->name('admin.suppliers_orders_general_return.load_modal_approve_invoice');
+    Route::post('/suppliers_orders_general_return/load_usershiftDiv', [Suppliers_with_ordersGeneralRetuen::class, 'load_usershiftDiv'])->name('admin.suppliers_orders_general_return.load_usershiftDiv');
+    Route::post('/suppliers_orders_general_return/get_item_batches', [Suppliers_with_ordersGeneralRetuen::class, 'get_item_batches'])->name('admin.suppliers_orders_general_return.get_item_batches');
+    Route::get('/suppliers_orders_general_return/printsaleswina4/{id}/{size}', [Suppliers_with_ordersGeneralRetuen::class, 'printsaleswina4'])->name('admin.suppliers_orders_general_return.printsaleswina4');
+    /********************************* End suppliers_orders_general_return *********************************/
 });
 

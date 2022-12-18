@@ -216,8 +216,8 @@
 
 
                 <!-- Start حركات مخزنية -->
-                <li class="nav-item has-treeview {{ (request()->is('admin/suppliers_orders*'))?'menu-open':'' }}">
-                    <a href="#" class="nav-link {{ (request()->is('admin/suppliers_orders*') )?'active':'' }}">
+                <li class="nav-item has-treeview {{ (request()->is('admin/suppliers_orders*') || request()->is('admin/suppliers_orders_general_return*') )?'menu-open':'' }}">
+                    <a href="#" class="nav-link {{ (request()->is('admin/suppliers_orders*') ||request()->is('admin/suppliers_orders_general_return*') )?'active':'' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             حركات مخزنية
@@ -234,6 +234,16 @@
                             </a>
                         </li>
                         <!-- Start suppliers_orders -->
+
+                        <!-- Start suppliers_orders_general_return -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.suppliers_orders_general_return.index') }}" class="nav-link {{ (request()->is('admin/suppliers_orders_general_return*') )?'active':'' }}">
+                                <p>
+                                    فواتير مرتجع المشتريات العام
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End suppliers_orders_general_return -->
                     </ul>
                 </li>
                 <!-- End حركات مخزنية -->

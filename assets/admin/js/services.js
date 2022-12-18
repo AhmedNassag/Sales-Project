@@ -3,13 +3,13 @@ $(document).on('input','#search_by_text',function(e){
   make_search();
 });
 
-$(document).on('change','#is_master_search',function(e){
+$(document).on('change','#type_search',function(e){
   make_search();
 });
 
 function make_search(){
   var search_by_text=$("#search_by_text").val();
-  var is_master_search=$("#is_master_search").val();
+  var type_search=$("#type_search").val();
   var token_search=$("#token_search").val();
   var ajax_search_url=$("#ajax_search_url").val();
   
@@ -18,7 +18,7 @@ function make_search(){
     type:'post',
     dataType:'html',
     cache:false,
-    data:{search_by_text:search_by_text,is_master_search:is_master_search,"_token":token_search},
+    data:{search_by_text:search_by_text,type_search:type_search,"_token":token_search},
     success:function(data){
    
      $("#ajax_responce_serarchDiv").html(data);
@@ -36,15 +36,17 @@ function make_search(){
 $(document).on('click','#ajax_pagination_in_search a ',function(e){
 e.preventDefault();
 var search_by_text=$("#search_by_text").val();
-var url=$(this).attr("href");
+var type_search=$("#type_search").val();
 var token_search=$("#token_search").val();
+var url=$(this).attr("href");
+
 
 jQuery.ajax({
   url:url,
   type:'post',
   dataType:'html',
   cache:false,
-  data:{search_by_text:search_by_text,"_token":token_search},
+  data:{search_by_text:search_by_text,type_search:type_search,"_token":token_search},
   success:function(data){
  
    $("#ajax_responce_serarchDiv").html(data);

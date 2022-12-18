@@ -156,8 +156,8 @@
                                     <label> سعر تكلفة الشراء بوحدة ( {{ $data['retail_uom_name'] }})</label> <br>
                                     {{ $data['cost_price_retail'] * 1 }}
                                 </td>
-                                <td colspan="2">
-                                    كمية الصنف الحالية ( {{ $data['All_QUENTITY'] * 1 }} {{ $data['Uom_name'] }})
+                                <td colspan="1">
+                                    كمية الصنف الحالية (  {{ $data['All_QUENTITY']*1  }} {{ $data['Uom_name']  }})
                                 </td>
                             </tr>
                         @endif

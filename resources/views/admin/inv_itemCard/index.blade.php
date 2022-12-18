@@ -80,7 +80,7 @@
                                 <th>النوع</th>
                                 <th>الفئة</th>
                                 <th>الوحدة الاب</th>
-                                <th>الوحدة التجزئة</th>
+                                <th>الكمية الحالية</th>
                                 <th>حالة التفعيل</th>
                                 <th>الإجراءات</th>
                             </thead>
@@ -102,7 +102,7 @@
                                         </td>
                                         <td>{{ $info->inv_itemcard_categories_name }}</td>
                                         <td>{{ $info->Uom_name }}</td>
-                                        <td>{{ $info->retail_uom_name }}</td>
+                                        <td>{{ $info->All_QUENTITY*1 }} {{ $info->Uom_name }}</td>
                                         <td>
                                             @if ($info->active == 1)
                                                 مفعل

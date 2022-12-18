@@ -68,7 +68,7 @@ class Suppliers_with_ordersController extends Controller
                 ->with(['error' => 'عفوا   غير قادر علي الوصول الي بيانات المورد المحدد'])
                 ->withInput();
             }
-            $row = get_cols_where_row_orderby(new Suppliers_with_orders(), array("auto_serial"), array("com_code" => $com_code), 'id', 'DESC');
+            $row = get_cols_where_row_orderby(new Suppliers_with_orders(), array("auto_serial"), array("com_code" => $com_code, 'order_type' => 1), 'id', 'DESC');
             if (!empty($row))
             {
                 $data_insert['auto_serial'] = $row['auto_serial'] + 1;
@@ -224,7 +224,7 @@ class Suppliers_with_ordersController extends Controller
         {
             $com_code    = auth()->user()->com_code;
             $auto_serial = $request->autoserailparent;
-            $data = get_cols_where_row(new Suppliers_with_orders(), array("is_approved"), array("auto_serial" => $auto_serial, "com_code" => $com_code, 'order_type' => 1));
+            $data = get_cols_where_row(new Suppliers_with_orders(), array("is_approved","id"), array("auto_serial" => $auto_serial, "com_code" => $com_code, 'order_type' => 1));
             if (!empty($data))
             {
                 $details = get_cols_where(new Suppliers_with_orders_details(), array("*"), array('suppliers_with_orders_auto_serial' => $auto_serial, 'order_type' => 1, 'com_code' => $com_code), 'id', 'DESC');
@@ -525,8 +525,9 @@ class Suppliers_with_ordersController extends Controller
             $data       = get_cols_where_row(new Suppliers_with_orders(), array("*"), array("auto_serial" => $request->autoserailparent, "com_code" => $com_code, 'order_type' => 1));
             //current user shift
             $user_shift = get_user_shift(new Admins_Shifts(), new Treasuries(), new Treasuries_transactions());
+            $counterDetails = get_count_where(new Suppliers_with_orders_details(), array("suppliers_with_orders_auto_serial" => $request->autoserailparent, "com_code" => $com_code, 'order_type' => 1));
+            return view("admin.suppliers_with_orders.load_modal_approve_invoice", ['data' => $data, 'user_shift' => $user_shift, 'counterDetails' => $counterDetails]);
         }
-        return view("admin.suppliers_with_orders.load_modal_approve_invoice", ['data' => $data, 'user_shift' => $user_shift]);
     }
 
 
@@ -559,6 +560,11 @@ class Suppliers_with_ordersController extends Controller
         if ($data['is_approved'] == 1)
         {
             return redirect()->route("admin.suppliers_orders.show", $data['id'])->with(['error' => "عفوا لايمكن اعتماد فاتورة معتمده من قبل !!"]);
+        }
+        $counterDetails = get_count_where(new Suppliers_with_orders_details(), array("suppliers_with_orders_auto_serial" => $auto_serial, "com_code" => $com_code, 'order_type' => 1));
+        if ($counterDetails == 0)
+        {
+            return redirect()->route("admin.suppliers_orders.show", $data['id'])->with(['error' => "عفوا لايمكن اعتماد الفاتورة قبل اضافة الأصناف عليها !!!            "]);
         }
         $dataUpdateParent['tax_percent']          = $request['tax_percent'];
         $dataUpdateParent['tax_value']            = $request['tax_value'];
@@ -882,7 +888,7 @@ class Suppliers_with_ordersController extends Controller
                 $operator5 = ">";
                 $value5    = 0;
             }
-            $data = Suppliers_with_orders::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+            $data = Suppliers_with_orders::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->where('order_type', '=', 1)->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
             if (!empty($data))
             {
                 foreach ($data as $info)

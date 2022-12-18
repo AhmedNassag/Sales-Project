@@ -153,8 +153,7 @@
                                             class="btn btn-sm are_you_shue  btn-danger">حذف</a>
                                         <a href="{{ route('admin.suppliers_orders.edit', $data['id']) }}"
                                             class="btn btn-sm btn-success">تعديل</a>
-                                        <button id="load_close_approve_invoice" class="btn btn-sm btn-primary">تحميل
-                                            الاعتماد والترحيل</button>
+                                        <button id="load_close_approve_invoice" class="btn btn-sm btn-primary">تحميل الاعتماد والترحيل</button>
                                     @endif
                                 </td>
                             </tr>
@@ -171,24 +170,15 @@
                             @endif
                         </h3>
                         <input type="hidden" id="token_search" value="{{ csrf_token() }}">
-                        <input type="hidden" id="ajax_get_item_uoms_url"
-                            value="{{ route('admin.suppliers_orders.get_item_uoms') }}">
-                        <input type="hidden" id="ajax_add_new_details"
-                            value="{{ route('admin.suppliers_orders.add_new_details') }}">
-                        <input type="hidden" id="ajax_reload_itemsdetials"
-                            value="{{ route('admin.suppliers_orders.reload_itemsdetials') }}">
-                        <input type="hidden" id="ajax_reload_parent_pill"
-                            value="{{ route('admin.suppliers_orders.reload_parent_pill') }}">
-                        <input type="hidden" id="ajax_load_edit_item_details"
-                            value="{{ route('admin.suppliers_orders.load_edit_item_details') }}">
-                        <input type="hidden" id="ajax_load_modal_add_details"
-                            value="{{ route('admin.suppliers_orders.load_modal_add_details') }}">
-                        <input type="hidden" id="ajax_edit_item_details"
-                            value="{{ route('admin.suppliers_orders.edit_item_details') }}">
-                        <input type="hidden" id="ajax_load_modal_approve_invoice"
-                            value="{{ route('admin.suppliers_orders.load_modal_approve_invoice') }}">
-                        <input type="hidden" id="ajax_load_usershiftDiv"
-                            value="{{ route('admin.suppliers_orders.load_usershiftDiv') }}">
+                        <input type="hidden" id="ajax_get_item_uoms_url" value="{{ route('admin.suppliers_orders.get_item_uoms') }}">
+                        <input type="hidden" id="ajax_add_new_details" value="{{ route('admin.suppliers_orders.add_new_details') }}">
+                        <input type="hidden" id="ajax_reload_itemsdetials" value="{{ route('admin.suppliers_orders.reload_itemsdetials') }}">
+                        <input type="hidden" id="ajax_reload_parent_pill" value="{{ route('admin.suppliers_orders.reload_parent_pill') }}">
+                        <input type="hidden" id="ajax_load_edit_item_details" value="{{ route('admin.suppliers_orders.load_edit_item_details') }}">
+                        <input type="hidden" id="ajax_load_modal_add_details" value="{{ route('admin.suppliers_orders.load_modal_add_details') }}">
+                        <input type="hidden" id="ajax_edit_item_details" value="{{ route('admin.suppliers_orders.edit_item_details') }}">
+                        <input type="hidden" id="ajax_load_modal_approve_invoice" value="{{ route('admin.suppliers_orders.load_modal_approve_invoice') }}">
+                        <input type="hidden" id="ajax_load_usershiftDiv" value="{{ route('admin.suppliers_orders.load_usershiftDiv') }}">
                         <input type="hidden" id="autoserailparent" value="{{ $data['auto_serial'] }}">
                     </div>
                     <div id="ajax_responce_serarchDivDetails">
@@ -223,10 +213,8 @@
                                             <td>{{ $info->total_price * 1 }}</td>
                                             <td>
                                                 @if ($data['is_approved'] == 0)
-                                                    <button data-id="{{ $info->id }}"
-                                                        class="btn btn-sm load_edit_item_details  btn-primary">تعديل</button>
-                                                    <a href="{{ route('admin.suppliers_orders.delete_details', ['id' => $info->id, 'id_parent' => $data['id']]) }}"
-                                                        class="btn btn-sm are_you_shue  btn-danger">حذف</a>
+                                                    <button data-id="{{ $info->id }}" class="btn btn-sm load_edit_item_details  btn-primary">تعديل</button>
+                                                    <a href="{{ route('admin.suppliers_orders.delete_details', ['id' => $info->id, 'id_parent' => $data['id']]) }}" class="btn btn-sm are_you_shue  btn-danger">حذف</a>
                                                 @endif
                                             </td>
                                         </tr>
