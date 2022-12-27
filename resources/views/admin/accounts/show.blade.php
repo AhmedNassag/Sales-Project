@@ -176,15 +176,23 @@
                                         لا
                                     @endif
                                 </td>
+
                             </tr>
+
+
+
                             <tr>
                                 <td>لوجو الصنف</td>
                                 <td colspan="2">
                                     <div class="image">
-                                        <img class="custom_img" src="{{ asset('assets/admin/uploads') . '/' . $data['photo'] }}" alt="لوجو الشركة">
+                                        <img class="custom_img"
+                                            src="{{ asset('assets/admin/uploads') . '/' . $data['photo'] }}" alt="لوجو الشركة">
+
                                     </div>
+
                                 </td>
                             </tr>
+
                             <tr>
                                 <td> تاريخ اخر تحديث</td>
                                 <td colspan="2">

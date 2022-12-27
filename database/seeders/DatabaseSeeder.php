@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(AdminSeeder::class);
+        $this->call(AdminPanelSettingSeeder::class);
         $this->call(AccountTypesSeeder::class);
         $this->call(MovTypeSeeder::class);
         $this->call(InvItemcardMovementsCategoriesSeeder::class);

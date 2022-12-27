@@ -582,6 +582,7 @@ $(document).ready(function () {
         var tax_value = $("#tax_value").val();
         if (tax_value == "") {
             alert("من فضلك ادخل قيمة ضريبة القيمة المضافة ");
+
             return false;
         }
 
@@ -623,19 +624,19 @@ $(document).ready(function () {
 
         var discount_value = $("#discount_value").val();
         if (discount_value == "") {
-            alert("من فضلك ادخل قيمة الخصم");
+            alert("من فضلك ادخل قيمة الخصم     ");
             return false;
         }
 
         var total_cost = $("#total_cost").val();
         if (total_cost == "") {
-            alert("من فضلك ادخل قيمة اجمالي الفاتورة النهائي");
+            alert("من فضلك ادخل قيمة اجمالي الفاتورة النهائي     ");
             return false;
         }
 
         var pill_type = $("#pill_type").val();
         if (pill_type == "") {
-            alert("من فضلك اختر نوع الفاتورة");
+            alert("من فضلك اختر نوع الفاتورة      ");
             return false;
         }
         var what_paid = $("#what_paid").val();
@@ -643,20 +644,22 @@ $(document).ready(function () {
 
         var what_paid = $("#what_paid").val();
         if (what_paid == "") {
-            alert("من فضلك ادخل المبلغ المدفوع");
+            alert("من فضلك ادخل المبلغ المدفوع        ");
             return false;
         }
         if (parseFloat(what_paid) > parseFloat(total_cost)) {
-            alert("عفوا لايمكن ان يكون المبلغ المصروف اكبر من اجمالي الفاتورة");
+            alert("عفوا لايمكن ان يكون المبلغ المصروف اكبر من اجمالي الفاتورة         ");
             return false;
         }
 
 
         if (pill_type == 1) {
             if (what_paid < total_cost) {
-                alert("عفوا يجب ان يكون كل المبلغ مدفوع في حالة ان الفاتورة كاش");
+                alert("عفوا يجب ان يكون كل المبلغ مدفوع في حالة ان الفاتورة كاش       ");
                 return false;
             }
+
+
         } else {
             if (parseFloat(what_paid) == parseFloat(total_cost)) {
                 alert("عفوا لايمكن ان يكون المبلغ المدفوع يساوي اجمالي الفاتورة في حالة ان الفاتورة اجل      ");
@@ -666,7 +669,7 @@ $(document).ready(function () {
 
         var what_remain = $("#what_remain").val();
         if (what_remain == "") {
-            alert("من فضلك ادخل المبلغ المتبقي");
+            alert("من فضلك ادخل المبلغ المتبقي        ");
             return false;
         }
 
@@ -674,25 +677,30 @@ $(document).ready(function () {
             if (what_remain > 0) {
                 alert("عفوا لايمكن ان يكون المبلغ المتبقي اكبر من الصفر في حالة ان الفاتورة كاش      ");
                 return false;
+
             }
         }
 
         if (what_paid > 0) {
             var treasuries_id = $("#treasuries_id").val();
             if (treasuries_id == "") {
-                alert("من فضلك اختر خزنة الصرف");
+                alert("من فضلك اختر خزنة الصرف         ");
                 return false;
             }
             var treasuries_balance = $("#treasuries_balance").val();
             if (treasuries_balance == "") {
-                alert("من فضلك  ادخل رصيد الخزنة");
+                alert("من فضلك  ادخل رصيد الخزنة          ");
                 return false;
             }
             if (parseFloat(what_paid) > parseFloat(treasuries_balance)) {
                 alert("عفوا لايوجد لديك رصيد كافي في خزنة الصرف !!!");
                 return false;
             }
+
+
+
         }
+
     });
 
 
@@ -714,6 +722,8 @@ $(document).ready(function () {
             data: { "_token": token_search, searchbyradio: searchbyradio, suuplier_code: suuplier_code, store_id: store_id, order_date_form: order_date_form, order_date_to: order_date_to, search_by_text: search_by_text },
             success: function (data) {
                 $("#ajax_responce_serarchDiv").html(data);
+
+
             },
             error: function () {
 
@@ -731,6 +741,7 @@ $(document).ready(function () {
         var order_date_form = $("#order_date_form").val();
         var order_date_to = $("#order_date_to").val();
         var token_search = $("#token_search").val();
+
         var url = $(this).attr("href");
 
         jQuery.ajax({
@@ -740,13 +751,19 @@ $(document).ready(function () {
             cache: false,
             data: { "_token": token_search, searchbyradio: searchbyradio, suuplier_code: suuplier_code, store_id: store_id, order_date_form: order_date_form, order_date_to: order_date_to, search_by_text: search_by_text },
             success: function (data) {
+
                 $("#ajax_responce_serarchDiv").html(data);
             },
             error: function () {
 
             }
         });
+
+
+
     });
+
+
 
 
     $(document).on('change', '#suuplier_code_search', function (e) {
@@ -756,19 +773,15 @@ $(document).ready(function () {
     $(document).on('input', '#search_by_text', function (e) {
         make_search();
     });
-
     $(document).on('change', '#store_id_search', function (e) {
         make_search();
     });
-
     $(document).on('change', '#order_date_form', function (e) {
         make_search();
     });
-
     $(document).on('change', '#order_date_to', function (e) {
         make_search();
     });
-
     $('input[type=radio][name=searchbyradio]').change(function () {
         make_search();
     });

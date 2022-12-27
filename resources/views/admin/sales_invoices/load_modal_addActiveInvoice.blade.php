@@ -1,12 +1,14 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
 @endsection
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
             <label> تاريخ الفاتورة</label>
-            <input type="date" name="invoice_date" id="invoice_date_activeAdd" class="form-control" value="@php echo date("Y-m-d"); @endphp">
+            <input type="date" name="invoice_date" id="invoice_date_activeAdd" class="form-control"
+                value="@php echo date("Y-m-d"); @endphp">
         </div>
     </div>
     <div class="col-md-4">
@@ -30,7 +32,9 @@
                     @endforeach
                 @endif
             </select>
+
         </div>
+
     </div>
     <div class="col-md-4">
         <div class="form-group">
@@ -38,25 +42,34 @@
             <select name="is_has_customer" id="is_has_customer" class="form-control">
                 <option value="1" selected> نعم عميل</option>
                 <option value="0"> لايوجد عميل( طياري )</option>
+
             </select>
+
         </div>
     </div>
     <div class="col-md-4" id="customer_codeDiv">
         <div class="form-group">
+
             <div class="form-group">
-                <label>
-                    بيانات العملاء
-                    (<a id="load_add_new_customer" title=" اضافة عميل جديد " href="#">جديد <i class="fa fa-plus-circle  "></i> </a>)
+                <label> بيانات العملاء
+                    (<a id="load_add_new_customer" title=" اضافة عميل جديد " href="#">جديد <i
+                            class="fa fa-plus-circle  "></i> </a>)
                 </label>
-                <input type="text" class="form-control" id="searchbytextforcustomer" placeholder="اسم العميل - كود العميل">
+                <input type="text" class="form-control" id="searchbytextforcustomer"
+                    placeholder="اسم العميل - كود العميل">
                 <div id="searchbytextforcustomerDiv">
                     <select name="customer_code" id="customer_code" class="form-control ">
                         <option value=""> لايوجد عميل</option>
+
+
                     </select>
                 </div>
             </div>
+
         </div>
+
     </div>
+
     <div class="col-md-4">
         <div class="form-group">
             <label> بيانات المناديب</label>
@@ -68,7 +81,9 @@
                     @endforeach
                 @endif
             </select>
+
         </div>
+
     </div>
     <div class="col-md-4">
         <div class="form-group">
@@ -81,11 +96,15 @@
     </div>
     <div class="col-md-12 text-center">
         <hr>
-        <button type="submit" id="Do_Add_new_active_invoice" class="btn btn-sm btn-success"> اضف الفاتورة (فتح فاتورة جديدة فعلية) </button>
+        <button type="submit" id="Do_Add_new_active_invoice" class="btn btn-sm btn-success"> اضف الفاتورة (فتح فاتورة
+            جديدة فعلية) </button>
+
     </div>
+
 </div>
 
 @section('script')
+
     <script src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>
     <script>
         //Initialize Select2 Elements
@@ -93,4 +112,3 @@
             theme: 'bootstrap4'
         });
     </script>
-@endsection

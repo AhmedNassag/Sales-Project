@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('title')
     الصلاحيات
 @endsection
@@ -27,14 +26,18 @@
                     <h3 class="card-title card_title_center">بيانات المستخدمين</h3>
                     <input type="hidden" id="token_search" value="{{ csrf_token() }}">
                     <input type="hidden" id="ajax_search_url" value="{{ route('admin.admins_accounts.ajax_search') }}">
+
                     <a href="{{ route('admin.admins_accounts.create') }}" class="btn btn-sm btn-success">اضافة جديد</a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="col-md-4">
                         <input type="text" id="search_by_text" placeholder="بحث بالاسم" class="form-control"> <br>
+
                     </div>
+
                     <div id="ajax_responce_serarchDiv">
+
                         @if (@isset($data) && !@empty($data))
                             @php
                                 $i = 1;
@@ -45,6 +48,7 @@
                                     <th>اسم المستخدم</th>
                                     <th>حالة التفعيل</th>
                                     <th>الإجراءات</th>
+
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $info)
@@ -59,14 +63,22 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.admins_accounts.edit', $info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>
-                                                <a href="{{ route('admin.admins_accounts.details', $info->id) }}" class="btn btn-sm  btn-info">صلاحيات خاصة</a>
+                                                <a href="{{ route('admin.admins_accounts.edit', $info->id) }}"
+                                                    class="btn btn-sm  btn-primary">تعديل</a>
+                                                <a href="{{ route('admin.admins_accounts.details', $info->id) }}"
+                                                    class="btn btn-sm  btn-info">صلاحيات خاصة</a>
+
                                             </td>
+
+
                                         </tr>
                                         @php
                                             $i++;
                                         @endphp
                                     @endforeach
+
+
+
                                 </tbody>
                             </table>
                             <br>
@@ -76,11 +88,21 @@
                                 عفوا لاتوجد بيانات لعرضها !!
                             </div>
                         @endif
+
                     </div>
+
+
+
+
+
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
 
 @endsection
 

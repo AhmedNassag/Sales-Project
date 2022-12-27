@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('title')
     الضبط
 @endsection
@@ -28,8 +27,10 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+
                     <form action="{{ route('admin.treasuries.store_treasuries_delivery', $data['id']) }}" method="post">
                         @csrf
+
                         <div class="form-group">
                             <label> اختر الخزنة الفرعية</label>
                             <select name="treasuries_can_delivery_id" id="treasuries_can_delivery_id" class="form-control ">
@@ -40,6 +41,7 @@
                                             value="{{ $info->id }}"> {{ $info->name }} </option>
                                     @endforeach
                                 @endif
+
                             </select>
                             @error('treasuries_can_delivery_id')
                                 <span class="text-danger">{{ $message }}</span>
@@ -47,12 +49,26 @@
                             <div class="form-group text-center"> <br>
                                 <button type="submit" class="btn btn-primary btn-sm">اضافة </button>
                                 <a href="{{ route('admin.treasuries.index') }}" class="btn btn-sm btn-danger">الغاء</a>
+
                             </div>
-                        </div>
+
+
                     </form>
+
+
+
                 </div>
+
+
+
+
             </div>
         </div>
     </div>
+    </div>
+
+
+
+
 
 @endsection

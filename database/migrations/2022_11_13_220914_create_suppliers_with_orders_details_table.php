@@ -27,7 +27,7 @@ class CreateSuppliersWithOrdersDetailsTable extends Migration
             $table->integer('added_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->bigInteger('item_code')->nullable();
-            $table->bigInteger('batch_id')->nullable();
+            $table->bigInteger('batch_auto_serial')->nullable();
             $table->date('production_date')->nullable();
             $table->date('expire_date')->nullable();
             $table->tinyInteger('item_card_type')->nullable();

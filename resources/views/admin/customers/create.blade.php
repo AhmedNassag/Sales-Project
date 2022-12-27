@@ -4,7 +4,7 @@
 @endsection
 
 @section('contentheader')
-    ضبط المخازن
+    الحسابات
 @endsection
 
 @section('contentheaderlink')
@@ -21,9 +21,12 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+
+
             <form action="{{ route('admin.customer.store') }}" method="post">
                 <div class="row">
                     @csrf
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>اسم العميل</label>
@@ -33,14 +36,23 @@
                             @enderror
                         </div>
                     </div>
+
+
+
+
+
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> حالة رصيد اول المدة</label>
                             <select name="start_balance_status" id="start_balance_status" class="form-control">
                                 <option value="">اختر الحالة</option>
-                                <option @if (old('start_balance_status') == 1) selected="selected" @endif value="1"> دائن</option>
-                                <option @if (old('start_balance_status') == 2) selected="selected" @endif value="2"> مدين</option>
-                                <option @if (old('start_balance_status') == 3) selected="selected" @endif value="3"> متزن</option>
+                                <option @if (old('start_balance_status') == 1) selected="selected" @endif value="1"> دائن
+                                </option>
+                                <option @if (old('start_balance_status') == 2) selected="selected" @endif value="2"> مدين
+                                </option>
+                                <option @if (old('start_balance_status') == 3) selected="selected" @endif value="3"> متزن
+                                </option>
                             </select>
                             @error('start_balance_status')
                                 <span class="text-danger">{{ $message }}</span>
@@ -50,7 +62,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> رصيد أول المدة للحساب</label>
-                            <input name="start_balance" id="start_balance" class="form-control" oninput="this.value=this.value.replace(/[^0-9.]/g,'');" value="{{ old('start_balance') }}">
+                            <input name="start_balance" id="start_balance" class="form-control"
+                                oninput="this.value=this.value.replace(/[^0-9.]/g,'');" value="{{ old('start_balance') }}">
                             @error('start_balance')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -83,28 +96,44 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> حالة التفعيل</label>
                             <select name="active" id="active" class="form-control">
                                 <option value="">اختر الحالة</option>
-                                <option @if (old('active') == 1 || old('active') == '') selected="selected" @endif value="1"> نعم</option>
-                                <option @if (old('active') == 0 and old('active') != '') selected="selected" @endif value="0"> لا</option>
+                                <option @if (old('active') == 1 || old('active') == '') selected="selected" @endif value="1"> نعم
+                                </option>
+                                <option @if (old('active') == 0 and old('active') != '') selected="selected" @endif value="0"> لا
+                                </option>
                             </select>
                             @error('active')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
+
+
                     <div class="col-md-12">
                         <div class="form-group text-center">
                             <button id="do_add_item_cardd" type="submit" class="btn btn-primary btn-sm"> اضافة</button>
                             <a href="{{ route('admin.customer.index') }}" class="btn btn-sm btn-danger">الغاء</a>
+
                         </div>
                     </div>
+
                 </div>
+
             </form>
+
+
+
         </div>
+
+
+
+
+    </div>
     </div>
 @endsection
 

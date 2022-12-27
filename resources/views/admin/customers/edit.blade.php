@@ -4,7 +4,7 @@
 @endsection
 
 @section('contentheader')
-    ضبط المخازن
+    الحسابات
 @endsection
 
 @section('contentheaderlink')
@@ -23,9 +23,12 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+
+
             <form action="{{ route('admin.customer.update', $data['id']) }}" method="post">
                 <div class="row">
                     @csrf
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>اسم العميل </label>
@@ -36,10 +39,16 @@
                             @enderror
                         </div>
                     </div>
+
+
+
+
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> العنوان</label>
-                            <input name="address" id="address" class="form-control" value="{{ old('notes', $data['address']) }}">
+                            <input name="address" id="address" class="form-control"
+                                value="{{ old('address', $data['address']) }}">
                             @error('address')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -48,7 +57,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> الهاتف</label>
-                            <input name="phones" id="phones" class="form-control" value="{{ old('phones', $data['phones']) }}">
+                            <input name="phones" id="phones" class="form-control"
+                                value="{{ old('phones', $data['phones']) }}">
                             @error('phones')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -64,6 +74,7 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> حالة التفعيل</label>
@@ -71,22 +82,35 @@
                                 <option value="">اختر الحالة</option>
                                 <option {{ old('active', $data['active']) == 1 ? 'selected' : '' }} value="1"> نعم
                                 </option>
-                                <option {{ old('active', $data['active']) == 0 ? 'selected' : '' }} value="0"> لا</option>
+                                <option {{ old('active', $data['active']) == 0 ? 'selected' : '' }} value="0"> لا
+                                </option>
                             </select>
-                            @error('is_archived')
+                            @error('active')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
+
+
                     <div class="col-md-12">
                         <div class="form-group text-center">
                             <button id="do_add_item_cardd" type="submit" class="btn btn-primary btn-sm"> تعديل</button>
                             <a href="{{ route('admin.customer.index') }}" class="btn btn-sm btn-danger">الغاء</a>
+
                         </div>
                     </div>
+
                 </div>
             </form>
+
+
+
         </div>
+
+
+
+
+    </div>
     </div>
 @endsection
 

@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('title')
     تعديل بيانات خزنة
 @endsection
@@ -99,6 +98,7 @@
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-primary btn-sm">حفظ التعديلات</button>
                                 <a href="{{ route('admin.treasuries.index') }}" class="btn btn-sm btn-danger">الغاء</a>
+
                             </div>
 
 

@@ -6,10 +6,10 @@
         <thead class="custom_thead">
             <th>مسلسل</th>
             <th>اسم الوحدة</th>
-            <th>نوع الوحدة</th>
+            <th> نوع الوحدة</th>
             <th>حالة التفعيل</th>
-            <th>تاريخ الاضافة</th>
-            <th>تاريخ التحديث</th>
+            <th> تاريخ الاضافة</th>
+            <th> تاريخ التحديث</th>
             <th>الإجراءات</th>
 
         </thead>
@@ -25,6 +25,7 @@
                             وحدة تجزئة
                         @endif
                     </td>
+
                     <td>
                         @if ($info->active == 1)
                             مفعل
@@ -33,6 +34,7 @@
                         @endif
                     </td>
                     <td>
+
                         @php
                             $dt = new DateTime($info->created_at);
                             $date = $dt->format('Y-m-d');
@@ -45,7 +47,10 @@
                         {{ $newDateTimeType }} <br>
                         بواسطة
                         {{ $info->added_by_admin }}
+
+
                     </td>
+
                     <td>
                         @if ($info->updated_by > 0 and $info->updated_by != null)
                             @php
@@ -63,16 +68,28 @@
                         @else
                             لايوجد تحديث
                         @endif
+
                     </td>
+
+
                     <td>
+
+
                         <a href="{{ route('admin.uoms.edit', $info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>
-                        <a href="{{ route('admin.uoms.delete', $info->id) }}" class="btn btn-sm are_you_shue  btn-danger">حذف</a>
+                        <a href="{{ route('admin.uoms.delete', $info->id) }}"
+                            class="btn btn-sm are_you_shue  btn-danger">حذف</a>
+
                     </td>
+
+
                 </tr>
                 @php
                     $i++;
                 @endphp
             @endforeach
+
+
+
         </tbody>
     </table>
     <br>

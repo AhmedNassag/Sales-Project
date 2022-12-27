@@ -18,6 +18,7 @@ use App\Models\Customer;
 use App\Models\Sales_invoices;
 use App\Models\SalesReturn;
 use App\Models\Delegate;
+use Carbon\Carbon;
 
 
 class ExchangeController extends Controller
@@ -97,7 +98,7 @@ class ExchangeController extends Controller
             //debit مدين
             $dataInsert['money_for_account'] = $request->money;
             $dataInsert['byan'] = $request->byan;
-            $dataInsert['created_at'] = date("Y-m-Y H:i:s");
+            // $dataInsert['created_at'] = date("Y-m-Y H:i:s");
             $dataInsert['added_by'] = auth()->user()->id;
             $dataInsert['com_code'] = $com_code;
             $flag = insert(new Treasuries_transactions(), $dataInsert);

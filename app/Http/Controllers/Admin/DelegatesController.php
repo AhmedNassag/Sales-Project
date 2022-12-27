@@ -10,7 +10,6 @@ use App\Models\Account;
 use App\Models\Admin_panel_setting;
 use App\Http\Requests\DelegatesRequestAdd;
 use App\Http\Requests\DelegatesUpdateRequest;
-use App\Models\AdminPanelSetting;
 
 class DelegatesController extends Controller
 {
@@ -18,13 +17,10 @@ class DelegatesController extends Controller
     {
         $com_code = auth()->user()->com_code;
         $data = get_cols_where_p(new Delegate(), array("*"), array("com_code" => $com_code), 'id', 'DESC', PAGINATION_COUNT);
-        if (!empty($data))
-        {
-            foreach ($data as $info)
-            {
+        if (!empty($data)) {
+            foreach ($data as $info) {
                 $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
-                if ($info->updated_by > 0 and $info->updated_by != null)
-                {
+                if ($info->updated_by > 0 and $info->updated_by != null) {
                     $info->updated_by_admin = Admin::where('id', $info->updated_by)->value('name');
                 }
             }
@@ -43,88 +39,67 @@ class DelegatesController extends Controller
 
     public function store(DelegatesRequestAdd $request)
     {
-        try
-        {
+        try {
             $com_code = auth()->user()->com_code;
             //check if not exsits for name
             $checkExists_name = get_cols_where_row(new Delegate(), array("id"), array('name' => $request->name, 'com_code' => $com_code));
-            if (!empty($checkExists_name))
-            {
+            if (!empty($checkExists_name)) {
                 return redirect()->back()
-                ->with(['error' => 'عفوا اسم المندوب مسجل من قبل'])
-                ->withInput();
+                    ->with(['error' => 'عفوا اسم المندوب مسجل من قبل'])
+                    ->withInput();
             }
-            if ($request->percent_type == 2)
-            {
-                if ($request->percent_salaes_commission_kataei > 100)
-                {
+            if ($request->percent_type == 2) {
+                if ($request->percent_salaes_commission_kataei > 100) {
                     return redirect()->back()
-                    ->with(['error' => 'عفوا عمولة المندوب بالمبيعات قطاعي لايمكن ان تتخطي  100 %'])
-                    ->withInput();
+                        ->with(['error' => 'عفوا عمولة المندوب بالمبيعات قطاعي لايمكن ان تتخطي  100 %'])
+                        ->withInput();
                 }
-                if ($request->percent_salaes_commission_nosjomla > 100)
-                {
+                if ($request->percent_salaes_commission_nosjomla > 100) {
                     return redirect()->back()
-                    ->with(['error' => 'عفوا عمولة المندوب بالمبيعات نص جملة لايمكن ان تتخطي  100 %'])
-                    ->withInput();
+                        ->with(['error' => 'عفوا عمولة المندوب بالمبيعات نص جملة لايمكن ان تتخطي  100 %'])
+                        ->withInput();
                 }
-                if ($request->percent_salaes_commission_jomla > 100)
-                {
+                if ($request->percent_salaes_commission_jomla > 100) {
                     return redirect()->back()
-                    ->with(['error' => 'عفوا عمولة المندوب بالمبيعات  الجملة لايمكن ان تتخطي  100 %'])
-                    ->withInput();
+                        ->with(['error' => 'عفوا عمولة المندوب بالمبيعات  الجملة لايمكن ان تتخطي  100 %'])
+                        ->withInput();
                 }
-                if ($request->percent_collect_commission > 100)
-                {
+                if ($request->percent_collect_commission > 100) {
                     return redirect()->back()
-                    ->with(['error' => 'عفوا عمولة المندوب بتحصيل الاجل لايمكن ان تتخطي  100 %'])
-                    ->withInput();
+                        ->with(['error' => 'عفوا عمولة المندوب بتحصيل الاجل لايمكن ان تتخطي  100 %'])
+                        ->withInput();
                 }
             }
             //set delegate_code
             $row = get_cols_where_row_orderby(new Delegate(), array("delegate_code"), array("com_code" => $com_code), 'id', 'DESC');
-            if (!empty($row))
-            {
+            if (!empty($row)) {
                 $data_insert['delegate_code'] = $row['delegate_code'] + 1;
-            }
-            else
-            {
+            } else {
                 $data_insert['delegate_code'] = 1;
             }
             //set account number نديله رقم حساب مالي بالشجرة المحاسبية
             $row = get_cols_where_row_orderby(new Account(), array("account_number"), array("com_code" => $com_code), 'id', 'DESC');
-            if (!empty($row))
-            {
+            if (!empty($row)) {
                 $data_insert['account_number'] = $row['account_number'] + 1;
-            }
-            else
-            {
+            } else {
                 $data_insert['account_number'] = 1;
             }
             $data_insert['name'] = $request->name;
             $data_insert['address'] = $request->address;
             $data_insert['start_balance_status'] = $request->start_balance_status;
-            if ($data_insert['start_balance_status'] == 1)
-            {
+            if ($data_insert['start_balance_status'] == 1) {
                 //credit
                 $data_insert['start_balance'] = $request->start_balance * (-1);
-            }
-            elseif ($data_insert['start_balance_status'] == 2)
-            {
+            } elseif ($data_insert['start_balance_status'] == 2) {
                 //debit
                 $data_insert['start_balance'] = $request->start_balance;
-                if ($data_insert['start_balance'] < 0)
-                {
+                if ($data_insert['start_balance'] < 0) {
                     $data_insert['start_balance'] = $data_insert['start_balance'] * (-1);
                 }
-            }
-            elseif ($data_insert['start_balance_status'] == 3)
-            {
+            } elseif ($data_insert['start_balance_status'] == 3) {
                 //balanced
                 $data_insert['start_balance'] = 0;
-            }
-            else
-            {
+            } else {
                 $data_insert['start_balance_status'] = 3;
                 $data_insert['start_balance'] = 0;
             }
@@ -138,41 +113,32 @@ class DelegatesController extends Controller
             $data_insert['notes'] = $request->notes;
             $data_insert['active'] = $request->active;
             $data_insert['added_by'] = auth()->user()->id;
-            $data_insert['created_at'] = date("Y-m-d H:i:s");
+            // $data_insert['created_at'] = date("Y-m-d H:i:s");
             $data_insert['date'] = date("Y-m-d");
             $data_insert['com_code'] = $com_code;
             $flag = insert(new Delegate(), $data_insert);
-            if ($flag)
-            {
+            if ($flag) {
                 //insert into accounts حنفتح ليه حساب مالي بالشجرة المحاسبية
                 $data_insert_account['name'] = $request->name;
                 $data_insert_account['start_balance_status'] = $request->start_balance_status;
-                if ($data_insert_account['start_balance_status'] == 1)
-                {
+                if ($data_insert_account['start_balance_status'] == 1) {
                     //credit
                     $data_insert_account['start_balance'] = $request->start_balance * (-1);
-                }
-                elseif ($data_insert_account['start_balance_status'] == 2)
-                {
+                } elseif ($data_insert_account['start_balance_status'] == 2) {
                     //debit
                     $data_insert_account['start_balance'] = $request->start_balance;
-                    if ($data_insert_account['start_balance'] < 0)
-                    {
+                    if ($data_insert_account['start_balance'] < 0) {
                         $data_insert_account['start_balance'] = $data_insert_account['start_balance'] * (-1);
                     }
-                }
-                elseif ($data_insert_account['start_balance_status'] == 3)
-                {
+                } elseif ($data_insert_account['start_balance_status'] == 3) {
                     //balanced
                     $data_insert_account['start_balance'] = 0;
-                }
-                else
-                {
+                } else {
                     $data_insert_account['start_balance_status'] = 3;
                     $data_insert_account['start_balance'] = 0;
                 }
                 $data_insert_account['current_balance'] = $data_insert_account['start_balance'];
-                $delegates_parent_account_number = get_field_value(new AdminPanelSetting(), "delegate_parent_account_number", array('com_code' => $com_code));
+                $delegates_parent_account_number = get_field_value(new Admin_panel_setting(), "delegate_parent_account_number", array('com_code' => $com_code));
                 $data_insert_account['notes'] = $request->notes;
                 //المناديب الاب
                 $data_insert_account['parent_account_number'] = $delegates_parent_account_number;
@@ -181,19 +147,17 @@ class DelegatesController extends Controller
                 $data_insert_account['account_type'] = 4;
                 $data_insert_account['active'] = $request->active;
                 $data_insert_account['added_by'] = auth()->user()->id;
-                $data_insert_account['created_at'] = date("Y-m-d H:i:s");
+                // $data_insert_account['created_at'] = date("Y-m-d H:i:s");
                 $data_insert_account['date'] = date("Y-m-d");
                 $data_insert_account['com_code'] = $com_code;
                 $data_insert_account['other_table_FK'] = $data_insert['delegate_code'];
                 $flag = insert(new Account(), $data_insert_account);
             }
             return redirect()->route('admin.delegates.index')->with(['success' => 'لقد تم اضافة البيانات بنجاح']);
-        }
-        catch (\Exception $ex)
-        {
+        } catch (\Exception $ex) {
             return redirect()->back()
-            ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()])
-            ->withInput();
+                ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()])
+                ->withInput();
         }
     }
 
@@ -210,20 +174,17 @@ class DelegatesController extends Controller
 
     public function update($id, DelegatesUpdateRequest $request)
     {
-        try
-        {
+        try {
             $com_code = auth()->user()->com_code;
             $data = get_cols_where_row(new Delegate(), array("id", "account_number", "delegate_code"), array("id" => $id, "com_code" => $com_code));
-            if (empty($data))
-            {
+            if (empty($data)) {
                 return redirect()->route('admin.customers.index')->with(['error' => 'عفوا غير قادر علي الوصول الي البيانات المطلوبة !!']);
             }
             $checkExists = Delegate::where(['name' => $request->name, 'com_code' => $com_code])->where('id', '!=', $id)->first();
-            if ($checkExists != null)
-            {
+            if ($checkExists != null) {
                 return redirect()->back()
-                ->with(['error' => 'عفوا اسم الحساب مسجل من قبل'])
-                ->withInput();
+                    ->with(['error' => 'عفوا اسم الحساب مسجل من قبل'])
+                    ->withInput();
             }
             $data_to_update['name'] = $request->name;
             $data_to_update['phones'] = $request->phones;
@@ -236,23 +197,20 @@ class DelegatesController extends Controller
             $data_to_update['notes'] = $request->notes;
             $data_to_update['active'] = $request->active;
             $data_to_update['updated_by'] = auth()->user()->id;
-            $data_to_update['updated_at'] = date("Y-m-d H:i:s");
+            // $data_to_update['updated_at'] = date("Y-m-d H:i:s");
             $flag = update(new Delegate(), $data_to_update, array('id' => $id, 'com_code' => $com_code));
-            if ($flag)
-            {
+            if ($flag) {
                 $data_to_update_account['name'] = $request->name;
                 $data_to_update_account['updated_by'] = auth()->user()->id;
-                $data_to_update_account['updated_at'] = date("Y-m-d H:i:s");
+                // $data_to_update_account['updated_at'] = date("Y-m-d H:i:s");
                 $data_to_update_account['active'] = $request->active;
                 $flag = update(new Account(), $data_to_update_account, array('account_number' => $data['account_number'], 'other_table_FK' => $data['delegate_code'], 'com_code' => $com_code, 'account_type' => 4));
             }
             return redirect()->route('admin.delegates.index')->with(['success' => 'لقد تم تحديث البيانات بنجاح']);
-        }
-        catch (\Exception $ex)
-        {
+        } catch (\Exception $ex) {
             return redirect()->back()
-            ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()])
-            ->withInput();
+                ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()])
+                ->withInput();
         }
     }
 
@@ -260,89 +218,71 @@ class DelegatesController extends Controller
 
     public function ajax_search(Request $request)
     {
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
+
             $com_code = auth()->user()->com_code;
             $search_by_text = $request->search_by_text;
             $searchbyradio = $request->searchbyradio;
             $searchByBalanceStatus = $request->searchByBalanceStatus;
             $searchByactiveStatus = $request->searchByactiveStatus;
             $mirror['searchByBalanceStatus'] = $searchByBalanceStatus;
-            if ($search_by_text != '')
-            {
-                if ($searchbyradio == 'delegate_code')
-                {
+
+            if ($search_by_text != '') {
+                if ($searchbyradio == 'delegate_code') {
                     $field1 = "delegate_code";
                     $operator1 = "=";
                     $value1 = $search_by_text;
-                }
-                elseif ($searchbyradio == 'account_number')
-                {
+                } elseif ($searchbyradio == 'account_number') {
                     $field1 = "account_number";
                     $operator1 = "=";
                     $value1 = $search_by_text;
-                }
-                else
-                {
+                } else {
                     $field1 = "name";
                     $operator1 = "like";
                     $value1 = "%{$search_by_text}%";
                 }
-            }
-            else
-            {
+            } else {
                 //true
                 $field1 = "id";
                 $operator1 = ">";
                 $value1 = 0;
             }
-            if ($searchByBalanceStatus == "all")
-            {
+
+            if ($searchByBalanceStatus == "all") {
                 $field2 = "id";
                 $operator2 = ">";
                 $value2 = 0;
-            }
-            else
-            {
-                if ($searchByBalanceStatus == 1)
-                {
+            } else {
+                if ($searchByBalanceStatus == 1) {
                     $field2 = "current_balance";
                     $operator2 = "<";
                     $value2 = 0;
-                }
-                elseif ($searchByBalanceStatus == 2)
-                {
+                } elseif ($searchByBalanceStatus == 2) {
                     $field2 = "current_balance";
                     $operator2 = ">";
                     $value2 = 0;
-                }
-                else
-                {
+                } else {
                     $field2 = "current_balance";
                     $operator2 = "=";
                     $value2 = 0;
                 }
             }
-            if ($searchByactiveStatus == "all")
-            {
+
+            if ($searchByactiveStatus == "all") {
                 $field3 = "id";
                 $operator3 = ">";
                 $value3 = 0;
-            }
-            else
-            {
+            } else {
+
                 $field3 = "active";
                 $operator3 = "=";
                 $value3 = $searchByactiveStatus;
             }
             $data = Delegate::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where(['com_code' => $com_code])->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
-            if (!empty($data))
-            {
-                foreach ($data as $info)
-                {
+            if (!empty($data)) {
+                foreach ($data as $info) {
                     $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
-                    if ($info->updated_by > 0 and $info->updated_by != null)
-                    {
+                    if ($info->updated_by > 0 and $info->updated_by != null) {
                         $info->updated_by_admin = Admin::where('id', $info->updated_by)->value('name');
                     }
                 }
@@ -359,16 +299,13 @@ class DelegatesController extends Controller
 
     public function show(Request $request)
     {
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
             $com_code = auth()->user()->com_code;
             $id = $request->id;
             $data = get_cols_where_row(new Delegate(), array("*"), array("id" => $id, "com_code" => $com_code));
-            if (!empty($data))
-            {
+            if (!empty($data)) {
                 $data['added_by_admin'] = get_field_value(new Admin(), "name", array("id" => $data['added_by'], 'com_code' => $com_code));
-                if ($data['updated_by'] > 0)
-                {
+                if ($data['updated_by'] > 0) {
                     $data['updated_by_admin'] = get_field_value(new Admin(), "name", array("id" => $data['updated_by'], 'com_code' => $com_code));
                 }
             }

@@ -56,8 +56,8 @@
 
 
                 <!-- Start ضبط المخازن -->
-                <li class="nav-item has-treeview {{ request()->is('admin/sales_matrial_types*') || request()->is('admin/stores*') || request()->is('admin/uoms*') || request()->is('admin/inv_itemcard_categories*') || request()->is('admin/itemcard*') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->is('admin/sales_matrial_types*') || request()->is('admin/stores*') || request()->is('admin/uoms*') || request()->is('admin/inv_itemcard_categories*') || request()->is('admin/itemcard*') ? 'active' : '' }}">
+                <li class="nav-item has-treeview {{ ((request()->is('admin/sales_matrial_types*') || request()->is('admin/stores*') || request()->is('admin/uoms*') || request()->is('admin/inv_itemcard_categories*') || request()->is('admin/itemcard*')) and !request()->is('admin/itemcardBalance*')) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ ((request()->is('admin/sales_matrial_types*') || request()->is('admin/stores*') || request()->is('admin/uoms*') || request()->is('admin/inv_itemcard_categories*') || request()->is('admin/itemcard*')) and !request()->is('admin/itemcardBalance*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             ضبط المخازن
@@ -216,8 +216,8 @@
 
 
                 <!-- Start حركات مخزنية -->
-                <li class="nav-item has-treeview {{ (request()->is('admin/suppliers_orders*') || request()->is('admin/suppliers_orders_general_return*') )?'menu-open':'' }}">
-                    <a href="#" class="nav-link {{ (request()->is('admin/suppliers_orders*') ||request()->is('admin/suppliers_orders_general_return*') )?'active':'' }}">
+                <li class="nav-item has-treeview {{ (request()->is('admin/suppliers_orders*') || request()->is('admin/suppliers_orders_general_return*') || request()->is('admin/itemcardBalance*')) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ (request()->is('admin/suppliers_orders*') || request()->is('admin/suppliers_orders_general_return*') || request()->is('admin/itemcardBalance*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             حركات مخزنية
@@ -227,7 +227,7 @@
                     <ul class="nav nav-treeview">
                         <!-- Start suppliers_orders -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.suppliers_orders.index') }}" class="nav-link {{ (request()->is('admin/suppliers_orders*') )?'active':'' }}">
+                            <a href="{{ route('admin.suppliers_orders.index') }}" class="nav-link {{ (request()->is('admin/suppliers_orders*') and !request()->is('admin/suppliers_orders_general_return*') ) ? 'active' : '' }}">
                                 <p>
                                     فواتير المشتريات
                                 </p>
@@ -237,13 +237,24 @@
 
                         <!-- Start suppliers_orders_general_return -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.suppliers_orders_general_return.index') }}" class="nav-link {{ (request()->is('admin/suppliers_orders_general_return*') )?'active':'' }}">
+                            <a href="{{ route('admin.suppliers_orders_general_return.index') }}" class="nav-link {{ (request()->is('admin/suppliers_orders_general_return*') ) ? 'active' : '' }}">
                                 <p>
                                     فواتير مرتجع المشتريات العام
                                 </p>
                             </a>
                         </li>
                         <!-- End suppliers_orders_general_return -->
+
+                        <!-- Start itemcardBalance -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.itemcardBalance.index') }}" class="nav-link {{ (request()->is('admin/itemcardBalance*')) ? 'active' : '' }}">
+                                <p>
+                                    أرصدة الأصناف
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End itemcardBalance -->
+
                     </ul>
                 </li>
                 <!-- End حركات مخزنية -->
@@ -251,8 +262,8 @@
 
 
                 <!-- Start المبيعات -->
-                <li class="nav-item has-treeview {{ (request()->is('admin/SalesInvoices*'))?'menu-open':'' }}     ">
-                    <a href="#" class="nav-link {{ (request()->is('admin/SalesInvoices*') )?'active':'' }}">
+                <li class="nav-item has-treeview {{ (request()->is('admin/SalesInvoices*') || request()->is('admin/SalesReturnInvoices*') ) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ (request()->is('admin/SalesInvoices*')  || request()->is('admin/SalesReturnInvoices*') ) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             المبيعات
@@ -269,6 +280,16 @@
                             </a>
                         </li>
                         <!-- End SalesInvoices -->
+
+                        <!-- End SalesReturnInvoices -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.SalesReturnInvoices.index') }}" class="nav-link {{ (request()->is('admin/SalesReturnInvoices*') )?'active':'' }}">
+                                <p>
+                                    مرتجع المبيعات العام
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End SalesReturnInvoices -->
                     </ul>
                 </li>
                 <!-- End المبيعات -->

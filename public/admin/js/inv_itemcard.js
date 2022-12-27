@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $(document).on("change", "#does_has_retailunit", function (e) {
+    $(document).on('change', '#does_has_retailunit', function (e) {
         var uom_id = $("#uom_id").val();
-        if (uom_id == "") {
+        if (uom_id == '') {
             alert("اختر الوحده الاب اولا");
             $("#does_has_retailunit").val("");
             return false;
@@ -10,7 +10,7 @@ $(document).ready(function () {
         if ($(this).val() == 1) {
             $("#retail_uom_idDiv").show();
             var retail_uom_id = $("#retail_uom_id").val();
-            if (retail_uom_id != "") {
+            if (retail_uom_id != '') {
                 $(".relatied_retial_counter").show();
             } else {
                 $(".relatied_retial_counter").hide();
@@ -21,45 +21,58 @@ $(document).ready(function () {
         }
 
         $("#retail_uom_id").val("");
+
     });
 
-    $(document).on("change", "#uom_id", function (e) {
-        if ($(this).val() != "") {
+    $(document).on('change', '#uom_id', function (e) {
+        if ($(this).val() != '') {
             var name = $("#uom_id option:selected").text();
             $(".parentuomname").text(name);
             var does_has_retailunit = $("#does_has_retailunit").val();
             if (does_has_retailunit == 1) {
                 var retail_uom_id = $("#retail_uom_id").val();
-                if (retail_uom_id != "") {
+                if (retail_uom_id != '') {
                     $(".relatied_retial_counter").show();
                 } else {
                     $(".relatied_retial_counter").hide();
                 }
+
+
             } else {
                 $(".relatied_retial_counter").hide();
                 $("#retail_uom_idDiv").hide();
             }
             $(".relatied_parent_counter").show();
+
+
+
         } else {
-            $(".parentuomname").text("");
+            $(".parentuomname").text('');
             $(".relatied_retial_counter").hide();
             $(".relatied_parent_counter").hide();
             $("#retail_uom_idDiv").hide();
+
         }
+
     });
 
-    $(document).on("change", "#retail_uom_id", function (e) {
-        if ($(this).val() != "") {
+
+    $(document).on('change', '#retail_uom_id', function (e) {
+        if ($(this).val() != '') {
             var name = $("#retail_uom_id option:selected").text();
             $(".childuomname").text(name);
             $(".relatied_retial_counter").show();
+
         } else {
-            $(".childuomname").text("");
+            $(".childuomname").text('');
             $(".relatied_retial_counter").hide();
+
         }
+
     });
 
-    $(document).on("click", "#do_add_item_card", function (e) {
+
+    $(document).on('click', '#do_add_item_card', function (e) {
         var name = $("#name").val();
         if (name == "") {
             alert("من فضلك ادخل اسم الصنف");
@@ -97,6 +110,7 @@ $(document).ready(function () {
         if (does_has_retailunit == 1) {
             var uom_id = $("#retail_uom_id").val();
             if (uom_id == "") {
+
                 alert("من فضلك اختر وحده القياس التجزئة الابن للصنف");
                 $("#uom_id").focus();
                 return false;
@@ -108,6 +122,7 @@ $(document).ready(function () {
                 $("#retail_uom_quntToParent").focus();
                 return false;
             }
+
         }
 
         var price = $("#price").val();
@@ -140,6 +155,7 @@ $(document).ready(function () {
         if (does_has_retailunit == 1) {
             //start valid child prices if exsists
 
+
             var price_retail = $("#price_retail").val();
             if (price_retail == "") {
                 alert("من فضلك  ادخل السعر القطاعي للوحده التجزئة   ");
@@ -166,6 +182,7 @@ $(document).ready(function () {
                 $("#cost_price_retail").focus();
                 return false;
             }
+
         }
 
         var has_fixced_price = $("#has_fixced_price").val();
@@ -180,9 +197,13 @@ $(document).ready(function () {
             $("#has_fixced_price").focus();
             return false;
         }
+
     });
 
-    $(document).on("click", "#do_edit_item_cardd", function (e) {
+
+
+    $(document).on('click', '#do_edit_item_cardd', function (e) {
+
         var barcode = $("#barcode").val();
         if (barcode == "") {
             alert("من فضلك ادخل باركود الصنف");
@@ -190,6 +211,7 @@ $(document).ready(function () {
             return false;
         }
 
+
         var name = $("#name").val();
         if (name == "") {
             alert("من فضلك ادخل اسم الصنف");
@@ -227,6 +249,7 @@ $(document).ready(function () {
         if (does_has_retailunit == 1) {
             var uom_id = $("#retail_uom_id").val();
             if (uom_id == "") {
+
                 alert("من فضلك اختر وحده القياس التجزئة الابن للصنف");
                 $("#uom_id").focus();
                 return false;
@@ -238,6 +261,7 @@ $(document).ready(function () {
                 $("#retail_uom_quntToParent").focus();
                 return false;
             }
+
         }
 
         var price = $("#price").val();
@@ -253,7 +277,6 @@ $(document).ready(function () {
             $("#nos_gomla_price").focus();
             return false;
         }
-
         var gomla_price = $("#gomla_price").val();
         if (gomla_price == "") {
             alert("من فضلك  ادخل السعر  الجملة للوحده الاب   ");
@@ -267,14 +290,18 @@ $(document).ready(function () {
             $("#cost_price").focus();
             return false;
         }
+
         if (does_has_retailunit == 1) {
             //start valid child prices if exsists
+
+
             var price_retail = $("#price_retail").val();
             if (price_retail == "") {
                 alert("من فضلك  ادخل السعر القطاعي للوحده التجزئة   ");
                 $("#price_retail").focus();
                 return false;
             }
+
             var nos_gomla_price_retail = $("#nos_gomla_price_retail").val();
             if (nos_gomla_price_retail == "") {
                 alert("من فضلك  ادخل السعر النص جملة للوحده التجزئة   ");
@@ -287,12 +314,14 @@ $(document).ready(function () {
                 $("#gomla_price_retail").focus();
                 return false;
             }
+
             var cost_price_retail = $("#cost_price_retail").val();
             if (cost_price_retail == "") {
                 alert("من فضلك  ادخل  سعر تكلفة الشراء للوحدة التجزئة   ");
                 $("#cost_price_retail").focus();
                 return false;
             }
+
         }
 
         var has_fixced_price = $("#has_fixced_price").val();
@@ -301,28 +330,29 @@ $(document).ready(function () {
             $("#has_fixced_price").focus();
             return false;
         }
-
         var active = $("#active").val();
         if (active == "") {
             alert("من فضلك اختر حالة تفعيل الصنف     ");
             $("#has_fixced_price").focus();
             return false;
         }
+
     });
 
-    $(document).on("input", "#search_by_text", function (e) {
+    $(document).on('input', '#search_by_text', function (e) {
         make_search();
     });
 
-    $(document).on("change", "#item_type_search", function (e) {
+    $(document).on('change', '#item_type_search', function (e) {
         make_search();
     });
 
-    $(document).on("change", "#inv_itemcard_categories_id_search", function (e) {
+    $(document).on('change', '#inv_itemcard_categories_id_search', function (e) {
         make_search();
     });
 
-    $("input[type=radio][name=searchbyradio]").change(function () {
+    $('input[type=radio][name=searchbyradio]').change(function () {
+
         make_search();
     });
 
@@ -335,144 +365,152 @@ $(document).ready(function () {
         var searchbyradio = $("input[type=radio][name=searchbyradio]:checked").val();
         var token_search = $("#token_search").val();
         var ajax_search_url = $("#ajax_search_url").val();
+
         jQuery.ajax({
             url: ajax_search_url,
-            type: "post",
-            dataType: "html",
+            type: 'post',
+            dataType: 'html',
             cache: false,
-            data: {
-                search_by_text: search_by_text,
-                item_type: item_type,
-                inv_itemcard_categories_id: inv_itemcard_categories_id,
-                _token: token_search,
-                searchbyradio: searchbyradio,
-            },
+            data: { search_by_text: search_by_text, item_type: item_type, inv_itemcard_categories_id: inv_itemcard_categories_id, "_token": token_search, searchbyradio: searchbyradio },
             success: function (data) {
+
                 $("#ajax_responce_serarchDiv").html(data);
             },
-            error: function () { },
+            error: function () {
+
+            }
         });
+
     }
 
-    $(document).on("click", "#ajax_pagination_in_search a ", function (e) {
+    $(document).on('click', '#ajax_pagination_in_search a ', function (e) {
         e.preventDefault();
         var search_by_text = $("#search_by_text").val();
         var item_type = $("#item_type_search").val();
         var inv_itemcard_categories_id = $("#inv_itemcard_categories_id_search").val();
         var searchbyradio = $("input[type=radio][name=searchbyradio]:checked").val();
         var token_search = $("#token_search").val();
+
         var url = $(this).attr("href");
+
         jQuery.ajax({
             url: url,
-            type: "post",
-            dataType: "html",
+            type: 'post',
+            dataType: 'html',
             cache: false,
-            data: {
-                search_by_text: search_by_text,
-                item_type: item_type,
-                inv_itemcard_categories_id: inv_itemcard_categories_id,
-                _token: token_search,
-                searchbyradio: searchbyradio,
-            },
+            data: { search_by_text: search_by_text, item_type: item_type, inv_itemcard_categories_id: inv_itemcard_categories_id, "_token": token_search, searchbyradio: searchbyradio },
             success: function (data) {
+
                 $("#ajax_responce_serarchDiv").html(data);
             },
-            error: function () { },
+            error: function () {
+
+            }
         });
+
+
+
     });
 
 
 
-    function make_search_movements()
-    {
-        var store_id=$("#store_id_move_search").val();
-        var movements_categories=$("#movements_categoriesMoveSearch").val();
-        var movements_types=$("#movements_typesMoveSearch").val();
-        var from_date=$("#from_date_moveSearch").val();
-        var to_date=$("#to_date_moveSearch").val();
-        var moveDateorderType=$("#moveDateorderType").val();
-        var token_search=$("#token_search").val();
-        var ajax_search_url=$("#ajax_search_movements").val();
+
+
+    function make_search_movements() {
+        var store_id = $("#store_id_move_search").val();
+        var movements_categories = $("#movements_categoriesMoveSearch").val();
+        var movements_types = $("#movements_typesMoveSearch").val();
+        var from_date = $("#from_date_moveSearch").val();
+        var to_date = $("#to_date_moveSearch").val();
+        var moveDateorderType = $("#moveDateorderType").val();
+        var token_search = $("#token_search").val();
+        var ajax_search_url = $("#ajax_search_movements").val();
+
         jQuery.ajax({
-            url:ajax_search_url,
-            type:'post',
-            dataType:'html',
-            cache:false,
-            data:{
-                store_id:store_id,
-                movements_categories:movements_categories,
-                movements_types:movements_types,
-                from_date:from_date,
-                to_date:to_date,
-                moveDateorderType:moveDateorderType,
-                "_token":token_search,
+            url: ajax_search_url,
+            type: 'post',
+            dataType: 'html',
+            cache: false,
+            data: {
+                store_id: store_id, movements_categories: movements_categories, movements_types: movements_types,
+                from_date: from_date, to_date: to_date
+                , "_token": token_search, moveDateorderType: moveDateorderType
             },
-            success:function(data){
+            success: function (data) {
+
                 $("#ajaxSearchMovementsDiv").html(data);
             },
-            error:function(){ }
+            error: function () {
+
+            }
         });
+
     }
 
-    $(document).on('click','#ajax_pagination_in_searchMovements a ',function(e){
+    $(document).on('click', '#ajax_pagination_in_searchMovements a ', function (e) {
         e.preventDefault();
-        var store_id=$("#store_id_move_search").val();
-        var movements_categories=$("#movements_categoriesMoveSearch").val();
-        var movements_types=$("#movements_typesMoveSearch").val();
-        var from_date=$("#from_date_moveSearch").val();
-        var to_date=$("#to_date_moveSearch").val();
-        var moveDateorderType=$("#moveDateorderType").val();
-        var token_search=$("#token_search").val();
-        var ajax_search_url=$("#ajax_search_movements").val();
-        var token_search=$("#token_search").val();
-        var url=$(this).attr("href");
+        var store_id = $("#store_id_move_search").val();
+        var movements_categories = $("#movements_categoriesMoveSearch").val();
+        var movements_types = $("#movements_typesMoveSearch").val();
+        var from_date = $("#from_date_moveSearch").val();
+        var to_date = $("#to_date_moveSearch").val();
+        var moveDateorderType = $("#moveDateorderType").val();
+        var token_search = $("#token_search").val();
+        var ajax_search_url = $("#ajax_search_movements").val();
+
+        var token_search = $("#token_search").val();
+
+        var url = $(this).attr("href");
+
         jQuery.ajax({
-            url:url,
-            type:'post',
-            dataType:'html',
-            cache:false,
-            data:{
-                store_id:store_id,
-                movements_categories:movements_categories,
-                movements_types:movements_types,
-                from_date:from_date,
-                to_date:to_date,
-                moveDateorderType:moveDateorderType,
-                "_token":token_search
+            url: url,
+            type: 'post',
+            dataType: 'html',
+            cache: false,
+            data: {
+                store_id: store_id, movements_categories: movements_categories, movements_types: movements_types,
+                from_date: from_date, to_date: to_date
+                , "_token": token_search, moveDateorderType: moveDateorderType
             },
-            success:function(data){
+            success: function (data) {
+
                 $("#ajaxSearchMovementsDiv").html(data);
             },
-            error:function(){ }
+            error: function () {
+
+            }
         });
+
+
+
     });
 
-    $(document).on('click','#ShowMovementsBtn',function(e){
+
+    $(document).on('click', '#ShowMovementsBtn', function (e) {
         make_search_movements();
     });
-
-    $(document).on('change','#store_id_move_search',function(e){
+    $(document).on('change', '#store_id_move_search', function (e) {
         make_search_movements();
     });
-
-    $(document).on('change','#movements_categoriesMoveSearch',function(e){
-        make_search_movements();
-    });
-
-    $(document).on('change','#movements_typesMoveSearch',function(e){
+    $(document).on('change', '#movements_categoriesMoveSearch', function (e) {
         make_search_movements();
     });
 
-    $(document).on('change','#from_date_moveSearch',function(e){
+    $(document).on('change', '#movements_typesMoveSearch', function (e) {
         make_search_movements();
     });
 
-    $(document).on('change','#to_date_moveSearch',function(e){
+    $(document).on('change', '#from_date_moveSearch', function (e) {
         make_search_movements();
     });
-    
-    $(document).on('change','#moveDateorderType',function(e){
+
+    $(document).on('change', '#to_date_moveSearch', function (e) {
         make_search_movements();
     });
+    $(document).on('change', '#moveDateorderType', function (e) {
+        make_search_movements();
+    });
+
+
 
 });

@@ -1,29 +1,22 @@
 @extends('layouts.admin')
-
 @section('title')
     المشتريات
 @endsection
-
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 @endsection
-
 @section('contentheader')
     حركات مخزنية
 @endsection
-
 @section('contentheaderlink')
     <a href="{{ route('admin.suppliers_orders.index') }}"> فواتير المشتريات </a>
 @endsection
-
 @section('contentheaderactive')
     اضافة
 @endsection
-
-
-
 @section('content')
+
 
     <div class="row">
         <div class="col-12">
@@ -33,6 +26,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+
                     <form action="{{ route('admin.suppliers_orders.store') }}" method="post">
                         @csrf
                         <div class="form-group">
@@ -66,6 +60,8 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
+
                         <div class="form-group">
                             <label> نوع الفاتورة</label>
                             <select name="pill_type" id="pill_type" class="form-control">
@@ -93,6 +89,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="form-group">
                             <label> ملاحظات</label>
                             <input name="notes" id="notes" class="form-control" value="{{ old('notes') }}">
@@ -100,14 +97,26 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary btn-sm"> اضافة</button>
                             <a href="{{ route('admin.suppliers_orders.index') }}" class="btn btn-sm btn-danger">الغاء</a>
+
                         </div>
+
+
                     </form>
+
+
+
                 </div>
+
+
+
+
             </div>
         </div>
+    </div>
     </div>
 
 @endsection

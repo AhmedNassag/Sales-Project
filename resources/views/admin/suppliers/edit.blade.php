@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('title')
     الموردين
 @endsection
@@ -16,8 +15,6 @@
     تعديل
 @endsection
 
-
-
 @section('content')
 
     <div class="card">
@@ -26,18 +23,24 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+
+
             <form action="{{ route('admin.supplier.update', $data['id']) }}" method="post">
                 <div class="row">
                     @csrf
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>اسم المورد </label>
-                            <input name="name" id="name" class="form-control" value="{{ old('name', $data['name']) }}">
+                            <input name="name" id="name" class="form-control"
+                                value="{{ old('name', $data['name']) }}">
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
+
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> فئة المورد</label>
@@ -45,7 +48,9 @@
                                 <option value="">اختر الفئة</option>
                                 @if (@isset($suppliers_categories) && !@empty($suppliers_categories))
                                     @foreach ($suppliers_categories as $info)
-                                        <option {{ old('suppliers_categories_id', $data['suppliers_categories_id']) == $info->id ? 'selected' : '' }} value="{{ $info->id }}"> {{ $info->name }} </option>
+                                        <option
+                                            {{ old('suppliers_categories_id', $data['suppliers_categories_id']) == $info->id ? 'selected' : '' }}
+                                            value="{{ $info->id }}"> {{ $info->name }} </option>
                                     @endforeach
                                 @endif
                             </select>
@@ -54,10 +59,14 @@
                             @enderror
                         </div>
                     </div>
+
+
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> العنوان</label>
-                            <input name="address" id="address" class="form-control" value="{{ old('notes', $data['address']) }}">
+                            <input name="address" id="address" class="form-control"
+                                value="{{ old('notes', $data['address']) }}">
                             @error('address')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -66,7 +75,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> الهاتف</label>
-                            <input name="phones" id="phones" class="form-control" value="{{ old('phones', $data['phones']) }}">
+                            <input name="phones" id="phones" class="form-control"
+                                value="{{ old('phones', $data['phones']) }}">
                             @error('phones')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -75,37 +85,59 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> ملاحظات</label>
-                            <input name="notes" id="notes" class="form-control" value="{{ old('notes', $data['notes']) }}">
+                            <input name="notes" id="notes" class="form-control"
+                                value="{{ old('notes', $data['notes']) }}">
                             @error('notes')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> حالة التفعيل</label>
                             <select name="active" id="active" class="form-control">
                                 <option value="">اختر الحالة</option>
-                                <option {{ old('active', $data['active']) == 1 ? 'selected' : '' }} value="1"> نعم</option>
-                                <option {{ old('active', $data['active']) == 0 ? 'selected' : '' }} value="0"> لا</option>
+                                <option {{ old('active', $data['active']) == 1 ? 'selected' : '' }} value="1"> نعم
+                                </option>
+                                <option {{ old('active', $data['active']) == 0 ? 'selected' : '' }} value="0"> لا
+                                </option>
                             </select>
                             @error('is_archived')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
+
+
                     <div class="col-md-12">
                         <div class="form-group text-center">
                             <button id="do_add_item_cardd" type="submit" class="btn btn-primary btn-sm"> تعديل</button>
                             <a href="{{ route('admin.supplier.index') }}" class="btn btn-sm btn-danger">الغاء</a>
+
                         </div>
                     </div>
+
                 </div>
             </form>
+
+
+
         </div>
+
+
+
+
+    </div>
     </div>
 
+
+
+
+
+
 @endsection
+
 
 @section('script')
     <script src="{{ asset('admin/js/accounts.js') }}"></script>

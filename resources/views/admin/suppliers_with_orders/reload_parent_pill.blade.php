@@ -1,4 +1,5 @@
 @if (@isset($data) && !@empty($data))
+
     <table id="example2" class="table table-bordered table-hover">
         <tr>
             <td class="width30"> كود الفاتورة الالي</td>
@@ -30,6 +31,8 @@
             <td class="width30"> المخزن المستلم للفاتورة </td>
             <td> {{ $data['store_name'] }}</td>
         </tr>
+
+
         <tr>
             <td class="width30"> اسم المورد </td>
             <td> {{ $data['supplier_name'] }}</td>
@@ -38,7 +41,10 @@
             <td class="width30"> اجمالي الفاتورة </td>
             <td> {{ $data['total_befor_discount'] * 1 }}</td>
         </tr>
+
+
         @if ($data['discount_type'] != null)
+
             <tr>
                 <td class="width30"> الخصم علي الفاتورة </td>
                 <td>
@@ -47,6 +53,8 @@
                     @else
                         خصم يدوي وقيمته( {{ $data['discount_value'] * 1 }} )
                     @endif
+
+
                 </td>
             </tr>
         @else
@@ -54,7 +62,11 @@
                 <td class="width30"> الخصم علي الفاتورة </td>
                 <td> لايوجد</td>
             </tr>
+
         @endif
+
+
+
         <tr>
             <td class="width30"> نسبة القيمة المضافة </td>
             <td>
@@ -63,6 +75,7 @@
                 @else
                     بنسبة ({{ $data['tax_percent'] * 1 }}) % وقيمتها ( {{ $data['tax_value'] * 1 }} )
                 @endif
+
             </td>
         </tr>
         <tr>
@@ -75,9 +88,12 @@
                 @endif
             </td>
         </tr>
+
+
         <tr>
             <td class="width30"> تاريخ الاضافة</td>
             <td>
+
                 @php
                     $dt = new DateTime($data['created_at']);
                     $date = $dt->format('Y-m-d');
@@ -90,8 +106,13 @@
                 {{ $newDateTimeType }}
                 بواسطة
                 {{ $data['added_by_admin'] }}
+
             </td>
         </tr>
+
+
+
+
         <tr>
             <td class="width30"> تاريخ اخر تحديث</td>
             <td>
@@ -119,8 +140,10 @@
                     <button id="load_close_approve_invoice" class="btn btn-sm btn-primary">تحميل الاعتماد
                         والترحيل</button>
                 @endif
+
             </td>
         </tr>
+
     </table>
 @else
     <div class="alert alert-danger">

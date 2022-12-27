@@ -43,7 +43,7 @@
               <div class="form-group">
                             <label>تاريخ الحركة </label>
                             <input type="date" name="move_date" id="move_date" class="form-control"
-                                value="{{ old('move_date', date('Y-m-d')) }}">
+                                value="{{ old('move_date',date("Y-m-d")) }}">
                             @error('move_date')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -272,10 +272,9 @@
                         <th> المبلغ</th>
                         <th> الحركة</th>
                         <th> الحساب المالي</th>
-
                         <th> البيان</th>
                         <th> المستخدم</th>
-                        <th></th>
+                        <th>الإجراءات</th>
 
                     </thead>
                     <tbody>

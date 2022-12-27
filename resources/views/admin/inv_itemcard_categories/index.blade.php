@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('title')
     الضبط العام
 @endsection
@@ -27,37 +26,42 @@
                     <h3 class="card-title card_title_center">بيانات فئات الاصناف</h3>
                     <input type="hidden" id="token_search" value="{{ csrf_token() }}">
                     <input type="hidden" id="ajax_search_url" value="{{ route('admin.treasuries.ajax_search') }}">
+
                     <a href="{{ route('inv_itemcard_categories.create') }}" class="btn btn-sm btn-success">اضافة جديد</a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+
                     <div id="ajax_responce_serarchDiv">
+
                         @if (@isset($data) && !@empty($data))
                             @php
                                 $i = 1;
                             @endphp
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead class="custom_thead">
-                                    <th class="text-center">مسلسل</th>
-                                    <th class="text-center">اسم الفئة</th>
-                                    <th class="text-center">حالة التفعيل</th>
-                                    <th class="text-center"> تاريخ الاضافة</th>
-                                    <th class="text-center"> تاريخ التحديث</th>
-                                    <th class="text-center">الإجراءات</th>
+                                    <th>مسلسل</th>
+                                    <th>اسم الفئة</th>
+                                    <th>حالة التفعيل</th>
+                                    <th> تاريخ الاضافة</th>
+                                    <th> تاريخ التحديث</th>
+                                    <th>الإجراءات</th>
+
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $info)
                                         <tr>
-                                            <td class="text-center">{{ $i }}</td>
-                                            <td class="text-center">{{ $info->name }}</td>
-                                            <td class="text-center">
+                                            <td>{{ $i }}</td>
+                                            <td>{{ $info->name }}</td>
+                                            <td>
                                                 @if ($info->active == 1)
                                                     مفعل
                                                 @else
                                                     معطل
                                                 @endif
                                             </td>
-                                            <td class="text-center">
+                                            <td>
+
                                                 @php
                                                     $dt = new DateTime($info->created_at);
                                                     $date = $dt->format('Y-m-d');
@@ -70,8 +74,11 @@
                                                 {{ $newDateTimeType }} <br>
                                                 بواسطة
                                                 {{ $info->added_by_admin }}
+
+
                                             </td>
-                                            <td class="text-center">
+
+                                            <td>
                                                 @if ($info->updated_by > 0 and $info->updated_by != null)
                                                     @php
                                                         $dt = new DateTime($info->updated_at);
@@ -84,19 +91,32 @@
                                                     {{ $time }}
                                                     {{ $newDateTimeType }} <br>
                                                     بواسطة
-                                                    {{ $info->updated_by_admin }}
+                                                    {{ $data['updated_by_admin'] }}
                                                 @else
                                                     لايوجد تحديث
                                                 @endif
+
                                             </td>
-                                            <td class="text-center">
-                                                <a href="{{ route('inv_itemcard_categories.edit', $info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>
+
+
+                                            <td>
+
+
+                                                <a href="{{ route('inv_itemcard_categories.edit', $info->id) }}"
+                                                    class="btn btn-sm  btn-primary">تعديل</a>
+
+
                                             </td>
+
+
                                         </tr>
                                         @php
                                             $i++;
                                         @endphp
                                     @endforeach
+
+
+
                                 </tbody>
                             </table>
                             <br>
@@ -106,14 +126,24 @@
                                 عفوا لاتوجد بيانات لعرضها !!
                             </div>
                         @endif
+
                     </div>
+
+
+
+
+
                 </div>
             </div>
         </div>
     </div>
 
+
+
+
+
 @endsection
 
 @section('script')
-    <script src="{{ asset('assets/admin/js/treasuries.js') }}"></script>
+    <script src="{{ asset('admin/js/treasuries.js') }}"></script>
 @endsection

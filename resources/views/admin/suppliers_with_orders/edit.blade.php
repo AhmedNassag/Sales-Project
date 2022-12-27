@@ -1,29 +1,22 @@
 @extends('layouts.admin')
-
 @section('title')
     المشتريات
 @endsection
-
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 @endsection
-
 @section('contentheader')
     حركات مخزنية
 @endsection
-
 @section('contentheaderlink')
     <a href="{{ route('admin.suppliers_orders.index') }}"> فواتير المشتريات </a>
 @endsection
-
 @section('contentheaderactive')
     تعديل
 @endsection
-
-
-
 @section('content')
+
 
     <div class="row">
         <div class="col-12">
@@ -34,7 +27,9 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     @if (!@empty($data))
+
                         @if ($data['is_approved'] == 0)
+
                             <form action="{{ route('admin.suppliers_orders.update', $data['id']) }}" method="post">
                                 @csrf
                                 <div class="form-group">
@@ -69,6 +64,8 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
+
                                 <div class="form-group">
                                     <label> نوع الفاتورة</label>
                                     <select name="pill_type" id="pill_type" class="form-control">
@@ -96,6 +93,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
                                 <div class="form-group">
                                     <label> ملاحظات</label>
                                     <input name="notes" id="notes" class="form-control"
@@ -104,11 +102,15 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
                                 <div class="form-group text-center">
                                     <button type="submit" class="btn btn-primary btn-sm"> تعديل</button>
                                     <a href="{{ route('admin.suppliers_orders.index') }}"
                                         class="btn btn-sm btn-danger">الغاء</a>
+
                                 </div>
+
+
                             </form>
                         @else
                             <div class="alert alert-danger">
@@ -120,9 +122,22 @@
                             عفوا لاتوجد بيانات لعرضها !!
                         </div>
                     @endif
+
+
+
+
+
+
+
+
                 </div>
+
+
+
+
             </div>
         </div>
+    </div>
     </div>
 
 @endsection

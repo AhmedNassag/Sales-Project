@@ -40,6 +40,7 @@ class CreateSuppliersWithOrdersTable extends Migration
             $table->decimal('Supplier_balance_after', 10, 2)->nullable();
             $table->integer('added_by')->nullable();
             $table->integer('updated_by')->nullable();
+            $table->integer('approved_by')->nullable();
             $table->decimal('total_cost_items', 10, 2)->nullable();
             $table->integer('store_id')->nullable();
             $table->date('date')->nullable();

@@ -1,4 +1,5 @@
 @if (!@empty($parent_pill_data))
+
     @if ($parent_pill_data['is_approved'] == 0)
         @if (!@empty($item_data_detials))
             <div class="row">
@@ -20,7 +21,9 @@
                         @enderror
                     </div>
                 </div>
+
                 <div class="col-md-4  relatied_to_itemCard" id="UomDivAdd">
+
                     <div class="form-group">
                         <label> بيانات وحدات الصنف</label>
                         <select id="uom_id_Add" class="form-control select2" style="width: 100%;">
@@ -37,8 +40,10 @@
                                     <option selected data-isparentuom="1" value="{{ $item_card_Data['uom_id'] }}">
                                         {{ $item_card_Data['parent_uom_name'] }} (وحده اب) </option>
                                 @endif
+
                             @endif
                         </select>
+
                     </div>
                 </div>
                 <div class="col-md-4 relatied_to_itemCard">
@@ -59,6 +64,7 @@
                             onchange="try{setCustomValidity('')}catch(e){}">
                     </div>
                 </div>
+
                 <div class="col-md-4 relatied_to_date" @if ($item_data_detials['item_card_type'] != 2) style="display: none;" @endif>
                     <div class="form-group">
                         <label> تاريخ الانتاج</label>
@@ -68,6 +74,7 @@
                             onchange="try{setCustomValidity('')}catch(e){}">
                     </div>
                 </div>
+
                 <div class="col-md-4 relatied_to_date" @if ($item_data_detials['item_card_type'] != 2) style="display: none;" @endif>
                     <div class="form-group">
                         <label> تاريخ انتهاء الصلاحية</label>
@@ -86,12 +93,14 @@
                             onchange="try{setCustomValidity('')}catch(e){}">
                     </div>
                 </div>
+
                 <div class="col-md-12">
                     <div class="form-group text-center">
                         <button data-id="{{ $item_data_detials['id'] }}" type="button" class="btn btn-sm btn-danger"
                             id="EditDetailsItem">تعديل للفاتورة</button>
                     </div>
                 </div>
+
             </div>
         @else
             <div class="alert alert-danger">

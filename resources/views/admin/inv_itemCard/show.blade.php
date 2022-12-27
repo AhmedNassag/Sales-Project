@@ -1,14 +1,11 @@
 @extends('layouts.admin')
-
 @section('title')
     ضبط الاصناف
 @endsection
-
-@section("css")
+@section('css')
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 @endsection
-
 @section('contentheader')
     الاصناف
 @endsection
@@ -22,8 +19,9 @@
 @endsection
 
 
-
 @section('content')
+
+
 
     <div class="card">
         <div class="card-header">
@@ -38,10 +36,18 @@
                             <td colspan="3">
                                 <label>كود الصنف الثابت الالي من النظام</label> <br>
                                 {{ $data['item_code'] }}
+
                                 <input type="hidden" id="token_search" value="{{ csrf_token() }}">
-                                <input type="hidden" id="ajax_search_movements" value="{{ route('admin.itemcard.ajax_search_movements') }}">
+                                <input type="hidden" id="ajax_search_movements"
+                                    value="{{ route('admin.itemcard.ajax_search_movements') }}">
+
+
+
+
                             </td>
                         </tr>
+
+
                         <tr>
                             <td>
                                 <label>باركود الصنف</label> <br>
@@ -64,6 +70,7 @@
                                 @endif
                             </td>
                         </tr>
+
                         <tr>
                             <td>
                                 <label>فئة الصنف</label> <br>
@@ -78,6 +85,8 @@
                                 {{ $data['Uom_name'] }}
                             </td>
                         </tr>
+
+
                         <tr>
                             <td @if ($data['does_has_retailunit'] == 0) colspan="3" @endif>
                                 <label> هل للصنف وحدة تجزئة ابن</label> <br>
@@ -99,6 +108,7 @@
                                 </td>
                             @endif
                         </tr>
+
                         <tr>
                             <td @if ($data['does_has_retailunit'] == 0) colspan="3" @endif>
                                 <label> هل للصنف وحدة تجزئة ابن</label> <br>
@@ -120,6 +130,7 @@
                                 </td>
                             @endif
                         </tr>
+
                         <tr>
                             <td>
                                 <label> سعر القطاعي جملة بوحدة ( {{ $data['Uom_name'] }})</label> <br>
@@ -134,6 +145,7 @@
                                 {{ $data['gomla_price'] * 1 }}
                             </td>
                         </tr>
+
                         <tr>
                             <td @if ($data['does_has_retailunit'] == 0) colspan="3" @endif>
                                 <label> سعر تكلفة الشراء بوحدة ( {{ $data['Uom_name'] }})</label> <br>
@@ -156,8 +168,9 @@
                                     <label> سعر تكلفة الشراء بوحدة ( {{ $data['retail_uom_name'] }})</label> <br>
                                     {{ $data['cost_price_retail'] * 1 }}
                                 </td>
-                                <td colspan="1">
-                                    كمية الصنف الحالية (  {{ $data['All_QUENTITY']*1  }} {{ $data['Uom_name']  }})
+                                <td colspan="2">
+                                    كمية الصنف الحالية ( {{ $data['All_QUENTITY'] * 1 }} {{ $data['Uom_name'] }})
+
                                 </td>
                             </tr>
                         @endif
@@ -178,15 +191,23 @@
                                     لا
                                 @endif
                             </td>
+
                         </tr>
+
+
+
                         <tr>
                             <td>لوجو الصنف</td>
                             <td colspan="2">
                                 <div class="image">
-                                    <img class="custom_img" src="{{ asset('assets/admin/uploads') . '/' . $data['photo'] }}" alt="لوجو الشركة">
+                                    <img class="custom_img" src="{{ asset('assets/admin/uploads') . '/' . $data['photo'] }}"
+                                        alt="لوجو الشركة">
+
                                 </div>
+
                             </td>
                         </tr>
+
                         <tr>
                             <td> تاريخ اخر تحديث</td>
                             <td colspan="2">
@@ -206,9 +227,14 @@
                                 @else
                                     لايوجد تحديث
                                 @endif
-                                <a href="{{ route('admin.itemcard.edit', $data['id']) }}" class="btn btn-sm btn-success">تعديل</a>
+
+                                <a href="{{ route('admin.itemcard.edit', $data['id']) }}"
+                                    class="btn btn-sm btn-success">تعديل</a>
+
+
                             </td>
                         </tr>
+
                     </table>
                 </div>
                 <hr style="border:1px solid #3c8dbc;">
@@ -225,12 +251,16 @@
                                     @endforeach
                                 @endif
                             </select>
+
                         </div>
+
                     </div>
+
                     <div class="col-md-4">
                         <div class="form-group">
                             <label> بحث بقسم الحركة </label>
-                            <select name="movements_categoriesMoveSearch" id="movements_categoriesMoveSearch" class="form-control select2">
+                            <select name="movements_categoriesMoveSearch" id="movements_categoriesMoveSearch"
+                                class="form-control select2">
                                 <option value="all">بحث بالكل </option>
                                 @if (@isset($inv_itemcard_movements_categories) && !@empty($inv_itemcard_movements_categories))
                                     @foreach ($inv_itemcard_movements_categories as $info)
@@ -240,10 +270,12 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="form-group">
                             <label> بحث بنوع الحركة </label>
-                            <select name="movements_typesMoveSearch" id="movements_typesMoveSearch" class="form-control select2">
+                            <select name="movements_typesMoveSearch" id="movements_typesMoveSearch"
+                                class="form-control select2">
                                 <option value="all">بحث بالكل </option>
                                 @if (@isset($inv_itemcard_movements_types) && !@empty($inv_itemcard_movements_types))
                                     @foreach ($inv_itemcard_movements_types as $info)
@@ -253,16 +285,20 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="form-group">
                             <label> بحث من تاريخ حركة</label>
-                            <input name="from_date_moveSearch" id="from_date_moveSearch" class="form-control" type="date" value="">
+                            <input name="from_date_moveSearch" id="from_date_moveSearch" class="form-control" type="date"
+                                value="">
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="form-group">
                             <label> بحث الي تاريخ حركة </label>
-                            <input name="to_date_moveSearch" id="to_date_moveSearch" class="form-control" type="date" value="">
+                            <input name="to_date_moveSearch" id="to_date_moveSearch" class="form-control" type="date"
+                                value="">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -271,9 +307,11 @@
                             <select name="moveDateorderType" id="moveDateorderType" class="form-control select2">
                                 <option value="DESC">بحث ترتيب تنازلي </option>
                                 <option value="ASC">بحث ترتيب تصاعدي </option>
+
                             </select>
                         </div>
                     </div>
+
                     <div class="clearfix"></div>
                     <div class="col-md-12 text-center" id="ajaxSearchMovementsDiv">
                         <button class="btn btn-sm btn-danger" id="ShowMovementsBtn">عرض سجل الحركة </button>
@@ -283,6 +321,9 @@
                         عفوا لاتوجد بيانات لعرضها !!
                     </div>
             @endif
+
+
+
         </div>
     </div>
 

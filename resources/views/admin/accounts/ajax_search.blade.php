@@ -1,61 +1,72 @@
 @if (@isset($data) && !@empty($data) && count($data) > 0)
-
     <table id="example2" class="table table-bordered table-hover">
         <thead class="custom_thead">
-            <th class="text-center">الاسم </th>
-            <th class="text-center"> رقم الحساب</th>
-            <th class="text-center"> النوع</th>
-            <th class="text-center"> هل أب</th>
-            <th class="text-center"> الحساب الاب</th>
-            <th class="text-center"> الرصيد</th>
-            <th class="text-center">حالة التفعيل</th>
-            <th class="text-center">الإجراءات</th>
+
+            <th>الاسم </th>
+            <th> رقم الحساب </th>
+            <th> النوع </th>
+            <th> هل أب </th>
+            <th> الحساب الاب </th>
+            <th> الرصيد </th>
+            <th> التفعيل</th>
+            <th>الإجراءات</th>
+
         </thead>
         <tbody>
             @foreach ($data as $info)
                 <tr>
-                    <td class="text-center">{{ $info->name }}</td>
-                    <td class="text-center">{{ $info->account_number }}</td>
-                    <td class="text-center">{{ $info->account_types_name }}</td>
-                    <td class="text-center">
+
+                    <td>{{ $info->name }}</td>
+                    <td>{{ $info->account_number }}</td>
+                    <td>{{ $info->account_types_name }}</td>
+                    <td>
                         @if ($info->is_parent == 1)
                             نعم
                         @else
                             لا
                         @endif
                     </td>
-                    <td class="text-center">{{ $info->parent_account_name }}</td>
-                    <td class="text-center">
-                        @if($info->is_parent == 0)
+                    <td>{{ $info->parent_account_name }}</td>
+                    <td>
+                        @if ($info->is_parent == 0)
                             @if ($info->current_balance > 0)
-                                مدين ب ( {{ $info->current_balance * 1 }} ) جنيه
+                                مدين ب ({{ $info->current_balance * 1 }}) جنيه
                             @elseif ($info->current_balance < 0)
-                                دائن ب ( {{ $info->current_balance * 1 * (-1) }} )جنيه
+                                دائن ب ({{ $info->current_balance * 1 * -1 }}) جنيه
                             @else
                                 متزن
                             @endif
                         @else
-                            راجع ميزان المراجعة
+                            من ميزان المراجعه
                         @endif
                     </td>
-                    <td class="text-center">
+
+                    <td @if ($info->active == 1) class="bg-success" @else class="bg-danger" @endif>
                         @if ($info->active == 1)
                             مفعل
                         @else
                             معطل
                         @endif
                     </td>
-                    <td class="text-center">
+
+                    <td>
                         @if ($info->relatediternalaccounts == 0)
-                            <a href="{{ route('admin.accounts.edit', $info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>
+                            <a href="{{ route('admin.accounts.edit', $info->id) }}"
+                                class="btn btn-sm  btn-primary">تعديل</a>
                         @else
-                            يتم تعديله من شاشته
+                            يعدل من شاشته
                         @endif
                     </td>
+
+
                 </tr>
             @endforeach
+
+
+
         </tbody>
     </table>
+
     <br>
     <div class="col-md-12" id="ajax_pagination_in_search">
         {{ $data->links() }}

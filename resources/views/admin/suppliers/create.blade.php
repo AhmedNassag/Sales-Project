@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('title')
     الموردين
 @endsection
@@ -16,8 +15,6 @@
     اضافة
 @endsection
 
-
-
 @section('content')
 
     <div class="card">
@@ -26,9 +23,12 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+
+
             <form action="{{ route('admin.supplier.store') }}" method="post">
                 <div class="row">
                     @csrf
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>اسم المورد</label>
@@ -45,7 +45,8 @@
                                 <option value="">اختر الفئة</option>
                                 @if (@isset($suppliers_categories) && !@empty($suppliers_categories))
                                     @foreach ($suppliers_categories as $info)
-                                        <option @if (old('suppliers_categories_id') == $info->id) selected="selected" @endif value="{{ $info->id }}"> {{ $info->name }} </option>
+                                        <option @if (old('suppliers_categories_id') == $info->id) selected="selected" @endif
+                                            value="{{ $info->id }}"> {{ $info->name }} </option>
                                     @endforeach
                                 @endif
                             </select>
@@ -54,14 +55,22 @@
                             @enderror
                         </div>
                     </div>
+
+
+
+
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> حالة رصيد اول المدة</label>
                             <select name="start_balance_status" id="start_balance_status" class="form-control">
                                 <option value="">اختر الحالة</option>
-                                <option @if (old('start_balance_status') == 1) selected="selected" @endif value="1"> دائن </option>
-                                <option @if (old('start_balance_status') == 2) selected="selected" @endif value="2"> مدين </option>
-                                <option @if (old('start_balance_status') == 3) selected="selected" @endif value="3"> متزن </option>
+                                <option @if (old('start_balance_status') == 1) selected="selected" @endif value="1"> دائن
+                                </option>
+                                <option @if (old('start_balance_status') == 2) selected="selected" @endif value="2"> مدين
+                                </option>
+                                <option @if (old('start_balance_status') == 3) selected="selected" @endif value="3"> متزن
+                                </option>
                             </select>
                             @error('start_balance_status')
                                 <span class="text-danger">{{ $message }}</span>
@@ -71,7 +80,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> رصيد أول المدة للحساب</label>
-                            <input name="start_balance" id="start_balance" class="form-control" oninput="this.value=this.value.replace(/[^0-9.]/g,'');" value="{{ old('start_balance') }}">
+                            <input name="start_balance" id="start_balance" class="form-control"
+                                oninput="this.value=this.value.replace(/[^0-9.]/g,'');" value="{{ old('start_balance') }}">
                             @error('start_balance')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -104,31 +114,52 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> حالة التفعيل</label>
                             <select name="active" id="active" class="form-control">
                                 <option value="">اختر الحالة</option>
-                                <option @if (old('active') == 1 || old('active') == '') selected="selected" @endif value="1"> نعم </option>
-                                <option @if (old('active') == 0 and old('active') != '') selected="selected" @endif value="0"> لا </option>
+                                <option @if (old('active') == 1 || old('active') == '') selected="selected" @endif value="1"> نعم
+                                </option>
+                                <option @if (old('active') == 0 and old('active') != '') selected="selected" @endif value="0"> لا
+                                </option>
                             </select>
                             @error('active')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
+
+
                     <div class="col-md-12">
                         <div class="form-group text-center">
                             <button id="do_add_item_cardd" type="submit" class="btn btn-primary btn-sm"> اضافة</button>
                             <a href="{{ route('admin.supplier.index') }}" class="btn btn-sm btn-danger">الغاء</a>
+
                         </div>
                     </div>
+
                 </div>
             </form>
+
+
+
         </div>
+
+
+
+
+    </div>
     </div>
 
+
+
+
+
+
 @endsection
+
 
 @section('script')
     <script src="{{ asset('admin/js/customers.js') }}"></script>

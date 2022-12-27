@@ -2,7 +2,8 @@
     @php
         $i = 1;
     @endphp
-    <p class="text-center" style="font-size: 15px; color:brown;font-weight: bold"> اجمالي التحصيل طبقا لنتجية البحث ({{ $totalCollectInSearch * 1 }})</p>
+    <p class="text-center" style="font-size: 15px; color:brown;font-weight: bold"> اجمالي التحصيل طبقا لنتجية البحث
+        ({{ $totalCollectInSearch * 1 }})</p>
 
     <table id="example2" class="table table-bordered table-hover">
         <thead class="custom_thead">
@@ -15,6 +16,7 @@
             <th> البيان</th>
             <th> المستخدم</th>
             <th>الإجراءات</th>
+
         </thead>
         <tbody>
             @foreach ($data as $info)
@@ -24,9 +26,13 @@
                     <td>{{ $info->treasuries_name }}</td>
                     <td>{{ $info->money * 1 }}</td>
                     <td>{{ $info->mov_type_name }}</td>
-                    <td>{{ $info->account_name }} <br> ({{ $info->account_type_name }})</td>
+                    <td>{{ $info->account_name }} <br>
+                        ({{ $info->account_type_name }})
+                    </td>
+
                     <td>{{ $info->byan }}</td>
                     <td>
+
                         @php
                             $dt = new DateTime($info->created_at);
                             $date = $dt->format('Y-m-d');
@@ -39,13 +45,23 @@
                         {{ $newDateTimeType }} <br>
                         بواسطة
                         {{ $info->added_by_admin }}
+
+
                     </td>
                     <td>
-                        <a href="{{ route('admin.treasuries.edit', $info->id) }}" class="btn btn-sm  btn-primary">طباعة</a>
-                        <a href="{{ route('admin.treasuries.details', $info->id) }}" class="btn btn-sm  btn-info">المزيد</a>
+                        <a href="{{ route('admin.treasuries.edit', $info->id) }}"
+                            class="btn btn-sm  btn-primary">طباعة</a>
+                        <a href="{{ route('admin.treasuries.details', $info->id) }}"
+                            class="btn btn-sm  btn-info">المزيد</a>
+
                     </td>
+
+
                 </tr>
             @endforeach
+
+
+
         </tbody>
     </table>
     <br>

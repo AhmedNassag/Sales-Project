@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title> طباعة فاتورة مبيعات </title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
     <style>
         td {
             font-size: 15px !important;
@@ -87,10 +88,11 @@
 <body style="padding-top: 10px;font-family: tahoma;">
     <table class="mainheadtable" cellspacing="0" dir="rtl">
         <tr>
-            <td style="padding: 5px; text-align: right;font-weight: bold;"> فاتورة مبيعات رقم <span style="margin-right: 10px;">/ {{ $data['auto_serial'] }}</span></td>
+            <td style="padding: 5px; text-align: right;font-weight: bold;"> فاتورة مبيعات رقم <span
+                    style="margin-right: 10px;">/ {{ $data['auto_serial'] }}</span></td>
         </tr>
         <tr>
-            <td class="text-center tdhead"> كود العميل
+            <td class="tdhead"> كود العميل
                 @if ($data['is_has_customer'] == 1)
                     <span style="margin-right: 10px;">/ {{ $data['customer_code'] }}</span>
                 @else
@@ -100,43 +102,61 @@
         </tr>
         @if ($data['is_has_customer'] == 1)
             <tr>
-                <td class="text-center" style="padding: 5px; text-align: right;font-weight: bold;"> اسم العميل <span style="margin-right: 10px;">/ {{ $data['customer_name'] }}</span></td>
+                <td style="padding: 5px; text-align: right;font-weight: bold;"> اسم العميل <span
+                        style="margin-right: 10px;">/ {{ $data['customer_name'] }}</span></td>
             </tr>
 
             <tr>
-                <td class="text-center" style="padding: 5px; text-align: right;font-weight: bold;"> رقم التيلفون <span style="margin-right: 10px;">/ {{ $data['customer_phones'] }}</span></td>
+                <td style="padding: 5px; text-align: right;font-weight: bold;"> رقم التيلفون <span
+                        style="margin-right: 10px;">/ {{ $data['customer_phones'] }}</span></td>
             </tr>
         @endif
         <tr>
-            <td class="text-center" style="padding: 5px; text-align: right;font-weight: bold;"> تاريخ الفاتورة <span style="margin-right: 10px;">/ {{ $data['invoice_date'] }}</span></td>
+            <td style="padding: 5px; text-align: right;font-weight: bold;"> تاريخ الفاتورة <span
+                    style="margin-right: 10px;">/ {{ $data['invoice_date'] }}</span></td>
         </tr>
         <tr>
-            <td class="text-center" style="padding: 5px; text-align: right;font-weight: bold;"> نوع الفاتورة <span style="margin-right: 10px;">/ @if ($data['pill_type'] == 1) كاش @else آجل @endif </span></td>
+            <td style="padding: 5px; text-align: right;font-weight: bold;"> نوع الفاتورة <span
+                    style="margin-right: 10px;">/ @if ($data['pill_type'] == 1)
+                        كاش
+                    @else
+                        آجل
+                    @endif
+                </span>
+            </td>
         </tr>
         <tr>
-            <td class="text-center" style="padding: 5px; text-align: right;font-weight: bold;"> حالة الفاتورة <span style="margin-right: 10px;">/ @if ($data['is_approved'] == 1) معتمدة @else غير معتمدة @endif </span></td>
+            <td style="padding: 5px; text-align: right;font-weight: bold;"> حالة الفاتورة <span
+                    style="margin-right: 10px;">/ @if ($data['is_approved'] == 1)
+                        معتمدة
+                    @else
+                        غير معتمدة
+                    @endif
+                </span></td>
         </tr>
     </table>
     <br>
+
     <table class="headimg" dir="rtl" style="margin-bottom: 5px;">
         <tr>
-            <td class="text-center" style="text-align:left !important;padding: 5px;">
+            <td style="text-align:left !important;padding: 5px;">
                 <img class="headimg_img" src="{{ asset('assets/admin/uploads') . '/' . $systemData['photo'] }}">
                 <p>{{ $systemData['system_name'] }}</p>
             </td>
         </tr>
     </table>
+
     <table dir="rtl" border="1" style="width: 98%; margin: 0 auto;" id="example2" cellpadding="1"
         cellspacing="0" aria-describedby="example2_info">
         <tr style="background-color: gainsboro">
-            <td class="text-center" style="font-weight: bold;">م</td>
-            <td class="text-center" style="font-weight: bold;">كود</td>
-            <td class="text-center" style="font-weight: bold;">الصنف</td>
-            <td class="text-center" style="font-weight: bold;">الوحدة </td>
-            <td class="text-center" style="font-weight: bold;">الكمية</td>
-            <td class="text-center" style="font-weight: bold;">السعر</td>
-            <td class="text-center" style="font-weight: bold;">اجمالي</td>
-            <td class="text-center" style="font-weight: bold;">المخزن</td>
+            <td style="font-weight: bold;">م</td>
+            <td style="font-weight: bold;">كود</td>
+            <td style="font-weight: bold;">الصنف</td>
+            <td style="font-weight: bold;">الوحدة </td>
+            <td style="font-weight: bold;">الكمية</td>
+            <td style="font-weight: bold;">السعر</td>
+            <td style="font-weight: bold;">اجمالي</td>
+            <td style="font-weight: bold;">المخزن</td>
         </tr>
         @if (!@empty($sales_invoices_details) and count($sales_invoices_details) > 0)
             @php
@@ -145,13 +165,13 @@
             @endphp
             @foreach ($sales_invoices_details as $info)
                 <tr>
-                    <td class="text-center">
+                    <td>
                         {{ $i }}
                     </td>
-                    <td class="text-center">
+                    <td>
                         {{ $info->item_code }}
                     </td>
-                    <td class="text-center">
+                    <td>
                         {{ $info->item_name }}
                         @if ($info->is_normal_orOther > 1):?>
                             ( ملاحظة هذا
@@ -167,59 +187,59 @@
                             )
                         @endif
                     </td>
-                    <td class="text-center">
+                    <td>
                         {{ $info->uom_name }}
                     </td>
-                    <td class="text-center">
+                    <td>
                         {{ $info->quantity * 1 }}
                     </td>
-                    <td class="text-center">
+                    <td>
                         {{ $info->unit_price * 1 }}
                     </td>
-                    <td class="text-center">
+                    <td>
                         {{ $info->total_price * 1 }}
                     </td>
-                    <td class="text-center">
+                    <td>
                         {{ $info->store_name }}
                     </td>
                 </tr>
                 <?php $i++; endforeach;?>
                 <tr>
-                    <td class="text-center" colspan="8" style="color:brown !important"><br> اجمالي الاصناف
+                    <td colspan="8" style="color:brown !important"><br> اجمالي الاصناف
                         <?= $data['total_cost_items'] * 1 ?> جنيه فقط لاغير
                     </td>
                 </tr>
             @endif
     </table>
     <br>
-    <table dir="rtl" border="1" style="width: 98%; margin: 0 auto;" id="example2" cellpadding="1" cellspacing="0" aria-describedby="example2_info">
+    <table dir="rtl" border="1" style="width: 98%; margin: 0 auto;" id="example2" cellpadding="1"
+        cellspacing="0" aria-describedby="example2_info">
         <tr>
-            <td class="text-center" style="font-weight: bold;">اجمالي الفاتورة</td>
-            <td class="text-center" style="font-weight: bold;">خصم</td>
-            <td class="text-center" style="font-weight: bold;">قيمة مضافة</td>
-            <td class="text-center" style="font-weight: bold;">صافي الفاتورة </td>
-            <td class="text-center" style="font-weight: bold;">مدفوع</td>
-            <td class="text-center" style="font-weight: bold;">متبقي</td>
+            <td style="font-weight: bold;">اجمالي الفاتورة</td>
+            <td style="font-weight: bold;">خصم</td>
+            <td style="font-weight: bold;">قيمة مضافة</td>
+            <td style="font-weight: bold;">صافي الفاتورة </td>
+            <td style="font-weight: bold;">مدفوع</td>
+            <td style="font-weight: bold;">متبقي</td>
         </tr>
         <tr>
-            <td class="text-center">{{ $data['total_befor_discount'] * 1 }}</td>
-            <td class="text-center">{{ $data['discount_value'] * 1 }}</td>
-            <td class="text-center">{{ $data['tax_value'] * 1 }}</td>
-            <td class="text-center">{{ $data['total_cost'] * 1 }}</td>
-            <td class="text-center">{{ $data['what_paid'] * 1 }}</td>
-            <td class="text-center">{{ $data['what_remain'] * 1 }}</td>
+            <td>{{ $data['total_befor_discount'] * 1 }}</td>
+            <td>{{ $data['discount_value'] * 1 }}</td>
+            <td>{{ $data['tax_value'] * 1 }}</td>
+            <td>{{ $data['total_cost'] * 1 }}</td>
+            <td>{{ $data['what_paid'] * 1 }}</td>
+            <td>{{ $data['what_remain'] * 1 }}</td>
         </tr>
     </table>
-    <p style="position: fixed;
-        padding: 10px 10px 0px 10px;
-        bottom: 0;
-        width: 100%;
-        /* Height of the footer*/
-        text-align: center;font-size: 11px; font-weight: bold;
-        "
-    >
-        {{ $systemData['address'] }} - {{ $systemData['phone'] }}
-    </p>
+    <p
+        style="position: fixed;
+         padding: 10px 10px 0px 10px;
+         bottom: 0;
+         width: 100%;
+         /* Height of the footer*/
+         text-align: center;font-size: 11px; font-weight: bold;
+         ">
+        {{ $systemData['address'] }} - {{ $systemData['phone'] }} </p>
     <script>
         window.print();
     </script>

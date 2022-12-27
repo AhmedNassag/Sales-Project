@@ -11,6 +11,7 @@
             <th> تاريخ الاضافة</th>
             <th> تاريخ التحديث</th>
             <th>الإجراءات</th>
+
         </thead>
         <tbody>
             @foreach ($data as $info)
@@ -24,6 +25,7 @@
                             وحدة تجزئة
                         @endif
                     </td>
+
                     <td>
                         @if ($info->active == 1)
                             مفعل
@@ -32,6 +34,7 @@
                         @endif
                     </td>
                     <td>
+
                         @php
                             $dt = new DateTime($info->created_at);
                             $date = $dt->format('Y-m-d');
@@ -44,7 +47,10 @@
                         {{ $newDateTimeType }} <br>
                         بواسطة
                         {{ $info->added_by_admin }}
+
+
                     </td>
+
                     <td>
                         @if ($info->updated_by > 0 and $info->updated_by != null)
                             @php
@@ -58,20 +64,32 @@
                             {{ $time }}
                             {{ $newDateTimeType }} <br>
                             بواسطة
-                            {{ $info->updated_by_admin }}
+                            {{ $data['updated_by_admin'] }}
                         @else
                             لايوجد تحديث
                         @endif
+
                     </td>
+
+
                     <td>
+
+
                         <a href="{{ route('admin.uoms.edit', $info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>
-                        <a href="{{ route('admin.uoms.delete', $info->id) }}" class="btn btn-sm are_you_shue  btn-danger">حذف</a>
+                        <a href="{{ route('admin.uoms.delete', $info->id) }}"
+                            class="btn btn-sm are_you_shue  btn-danger">حذف</a>
+
                     </td>
+
+
                 </tr>
                 @php
                     $i++;
                 @endphp
             @endforeach
+
+
+
         </tbody>
     </table>
     <br>

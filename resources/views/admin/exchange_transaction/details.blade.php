@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('title')
     الضبط العام
 @endsection
@@ -31,6 +30,7 @@
                 <div class="card-body">
                     @if (@isset($data) && !@empty($data))
                         <table id="example2" class="table table-bordered table-hover">
+
                             <tr>
                                 <td class="width30">اسم الخزنة</td>
                                 <td> {{ $data['name'] }}</td>
@@ -39,6 +39,7 @@
                                 <td class="width30"> اخر ايصال صرف</td>
                                 <td> {{ $data['last_isal_exhcange'] }}</td>
                             </tr>
+
                             <tr>
                                 <td class="width30">اخر ايصال تحصيل </td>
                                 <td> {{ $data['last_isal_collect'] }}</td>
@@ -53,6 +54,7 @@
                                     @endif
                                 </td>
                             </tr>
+
                             <tr>
                                 <td class="width30">حالة تفعيل الخزنة</td>
                                 <td>
@@ -63,9 +65,12 @@
                                     @endif
                                 </td>
                             </tr>
+
+
                             <tr>
                                 <td class="width30"> تاريخ الاضافة</td>
                                 <td>
+
                                     @php
                                         $dt = new DateTime($data['created_at']);
                                         $date = $dt->format('Y-m-d');
@@ -78,8 +83,14 @@
                                     {{ $newDateTimeType }}
                                     بواسطة
                                     {{ $data['added_by_admin'] }}
+
+
                                 </td>
                             </tr>
+
+
+
+
                             <tr>
                                 <td class="width30"> تاريخ اخر تحديث</td>
                                 <td>
@@ -99,18 +110,28 @@
                                     @else
                                         لايوجد تحديث
                                     @endif
-                                    <a href="{{ route('admin.treasuries.edit', $data['id']) }}" class="btn btn-sm btn-success">تعديل</a>
+
+                                    <a href="{{ route('admin.treasuries.edit', $data['id']) }}"
+                                        class="btn btn-sm btn-success">تعديل</a>
+
+
                                 </td>
                             </tr>
+
                         </table>
                         <!--  treasuries_delivery   -->
                         <div class="card-header">
                             <h3 class="card-title card_title_center">الخزن الفرعية التي سوف تسلم عهدتها الي الخزنة (
                                 {{ $data['name'] }} )
-                                <a href="{{ route('admin.treasuries.Add_treasuries_delivery', $data['id']) }}" class="btn btn-sm btn-primary">اضافة جديد</a>
+
+                                <a href="{{ route('admin.treasuries.Add_treasuries_delivery', $data['id']) }}"
+                                    class="btn btn-sm btn-primary">اضافة جديد</a>
+
                             </h3>
+
                         </div>
                         <div id="ajax_responce_serarchDiv">
+
                             @if (@isset($treasuries_delivery) && !@empty($treasuries_delivery))
                                 @php
                                     $i = 1;
@@ -127,7 +148,9 @@
                                             <tr>
                                                 <td>{{ $i }}</td>
                                                 <td>{{ $info->name }}</td>
+
                                                 <td>
+
                                                     @php
                                                         $dt = new DateTime($info->created_at);
                                                         $date = $dt->format('Y-m-d');
@@ -140,15 +163,26 @@
                                                     {{ $newDateTimeType }}
                                                     بواسطة
                                                     {{ $info->added_by_admin }}
+
+
                                                 </td>
+
+
+
                                                 <td>
-                                                    <a href="{{ route('admin.treasuries.delete_treasuries_delivery', $info->id) }}" class="btn btn-sm btn-danger are_you_shue">حذف</a>
+                                                    <a href="{{ route('admin.treasuries.delete_treasuries_delivery', $info->id) }}"
+                                                        class="btn btn-sm btn-danger are_you_shue">حذف</a>
                                                 </td>
+
+
                                             </tr>
                                             @php
                                                 $i++;
                                             @endphp
                                         @endforeach
+
+
+
                                     </tbody>
                                 </table>
                             @else
@@ -156,16 +190,28 @@
                                     عفوا لاتوجد بيانات لعرضها !!
                                 </div>
                             @endif
+
                         </div>
+
+
+
+
                         <!--  End treasuries_delivery   -->
                     @else
                         <div class="alert alert-danger">
                             عفوا لاتوجد بيانات لعرضها !!
                         </div>
                     @endif
+
+
+
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
 
 @endsection

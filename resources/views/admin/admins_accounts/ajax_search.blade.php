@@ -11,6 +11,7 @@
             <th>اخر ايصال تحصيل</th>
             <th>حالة التفعيل</th>
             <th>الإجراءات</th>
+
         </thead>
         <tbody>
             @foreach ($data as $info)
@@ -36,12 +37,18 @@
                     <td>
                         <a href="{{ route('admin.treasuries.edit', $info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>
                         <button data-id="{{ $info->id }}" class="btn btn-sm  btn-info">المذيد</button>
+
                     </td>
+
+
                 </tr>
                 @php
                     $i++;
                 @endphp
             @endforeach
+
+
+
         </tbody>
     </table>
     <br>

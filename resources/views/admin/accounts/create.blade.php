@@ -134,8 +134,10 @@
                             <label> حالة التفعيل</label>
                             <select name="active" id="active" class="form-control">
                                 <option value="">اختر الحالة</option>
-                                <option @if (old('active') == 1 and old('active') != '') selected="selected" @endif value="1"> نعم </option>
-                                <option @if (old('active') == 0 and old('active') != '') selected="selected" @endif value="0"> لا </option>
+                                <option @if (old('active') == 1) selected="selected" @endif value="1"> نعم
+                                </option>
+                                <option @if (old('active') == 0 and old('active') != '') selected="selected" @endif value="0"> لا
+                                </option>
                             </select>
                             @error('active')
                                 <span class="text-danger">{{ $message }}</span>
@@ -174,5 +176,5 @@
 
 
 @section('script')
-    <script src="{{ asset('assets/admin/js/accounts.js') }}"></script>
+    <script src="{{ asset('admin/js/accounts.js') }}"></script>
 @endsection

@@ -17,6 +17,7 @@
 
 
 @section('content')
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -33,6 +34,8 @@
                                     {{ $data['item_code'] }}
                                 </td>
                             </tr>
+
+
                             <tr>
                                 <td>
                                     <label>باركود الصنف</label> <br>
@@ -55,6 +58,7 @@
                                     @endif
                                 </td>
                             </tr>
+
                             <tr>
                                 <td>
                                     <label>فئة الصنف</label> <br>
@@ -69,6 +73,8 @@
                                     {{ $data['Uom_name'] }}
                                 </td>
                             </tr>
+
+
                             <tr>
                                 <td @if ($data['does_has_retailunit'] == 0) colspan="3" @endif>
                                     <label> هل للصنف وحدة تجزئة ابن</label> <br>
@@ -90,6 +96,7 @@
                                     </td>
                                 @endif
                             </tr>
+
                             <tr>
                                 <td @if ($data['does_has_retailunit'] == 0) colspan="3" @endif>
                                     <label> هل للصنف وحدة تجزئة ابن</label> <br>
@@ -111,6 +118,7 @@
                                     </td>
                                 @endif
                             </tr>
+
                             <tr>
                                 <td>
                                     <label> سعر القطاعي جملة بوحدة ( {{ $data['Uom_name'] }})</label> <br>
@@ -125,6 +133,7 @@
                                     {{ $data['gomla_price'] * 1 }}
                                 </td>
                             </tr>
+
                             <tr>
                                 <td @if ($data['does_has_retailunit'] == 0) colspan="3" @endif>
                                     <label> سعر تكلفة الشراء بوحدة ( {{ $data['Uom_name'] }})</label> <br>
@@ -147,6 +156,7 @@
                                         <label> سعر تكلفة الشراء بوحدة ( {{ $data['retail_uom_name'] }})</label> <br>
                                         {{ $data['cost_price_retail'] * 1 }}
                                     </td>
+
                                 </tr>
                             @endif
                             <tr>
@@ -166,15 +176,23 @@
                                         لا
                                     @endif
                                 </td>
+
                             </tr>
+
+
+
                             <tr>
                                 <td>لوجو الصنف</td>
                                 <td colspan="2">
                                     <div class="image">
-                                        <img class="custom_img" src="{{ asset('assets/admin/uploads') . '/' . $data['photo'] }}" alt="لوجو الشركة">
+                                        <img class="custom_img"
+                                            src="{{ asset('assets/admin/uploads') . '/' . $data['photo'] }}" alt="لوجو الشركة">
+
                                     </div>
+
                                 </td>
                             </tr>
+
                             <tr>
                                 <td> تاريخ اخر تحديث</td>
                                 <td colspan="2">
@@ -195,17 +213,29 @@
                                         لايوجد تحديث
                                     @endif
 
-                                    <a href="{{ route('admin.itemcard.edit', $data['id']) }}" class="btn btn-sm btn-success">تعديل</a>
+                                    <a href="{{ route('admin.itemcard.edit', $data['id']) }}"
+                                        class="btn btn-sm btn-success">تعديل</a>
+
+
                                 </td>
                             </tr>
+
                         </table>
                     @else
                         <div class="alert alert-danger">
                             عفوا لاتوجد بيانات لعرضها !!
                         </div>
                     @endif
+
+
+
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
+
 @endsection

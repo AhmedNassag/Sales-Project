@@ -24,11 +24,14 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title card_title_center">بيانات فئات الموردين</h3>
+
                     <a href="{{ route('admin.suppliers_categories.create') }}" class="btn btn-sm btn-success">اضافة جديد</a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+
                     <div id="ajax_responce_serarchDiv">
+
                         @if (@isset($data) && !@empty($data))
                             @php
                                 $i = 1;
@@ -41,6 +44,7 @@
                                     <th> تاريخ الاضافة</th>
                                     <th> تاريخ التحديث</th>
                                     <th>الإجراءات</th>
+
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $info)
@@ -55,6 +59,7 @@
                                                 @endif
                                             </td>
                                             <td>
+
                                                 @php
                                                     $dt = new DateTime($info->created_at);
                                                     $date = $dt->format('Y-m-d');
@@ -67,7 +72,10 @@
                                                 {{ $newDateTimeType }} <br>
                                                 بواسطة
                                                 {{ $info->added_by_admin }}
+
+
                                             </td>
+
                                             <td>
                                                 @if ($info->updated_by > 0 and $info->updated_by != null)
                                                     @php
@@ -85,15 +93,27 @@
                                                 @else
                                                     لايوجد تحديث
                                                 @endif
+
                                             </td>
+
+
                                             <td>
-                                                <a href="{{ route('admin.suppliers_categories.edit', $info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>
+
+
+                                                <a href="{{ route('admin.suppliers_categories.edit', $info->id) }}"
+                                                    class="btn btn-sm  btn-primary">تعديل</a>
+
                                             </td>
+
+
                                         </tr>
                                         @php
                                             $i++;
                                         @endphp
                                     @endforeach
+
+
+
                                 </tbody>
                             </table>
                             <br>
@@ -103,14 +123,24 @@
                                 عفوا لاتوجد بيانات لعرضها !!
                             </div>
                         @endif
+
                     </div>
+
+
+
+
+
                 </div>
             </div>
         </div>
     </div>
 
+
+
+
+
 @endsection
 
 @section('script')
-    <script src="{{ asset('assets/admin/js/treasuries.js') }}"></script>
+    <script src="{{ asset('admin/js/treasuries.js') }}"></script>
 @endsection

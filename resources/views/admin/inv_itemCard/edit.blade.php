@@ -1,23 +1,16 @@
 @extends('layouts.admin')
-
 @section('title')
     تعديل صنف
 @endsection
-
 @section('contentheader')
     الاصناف
 @endsection
-
 @section('contentheaderlink')
     <a href="{{ route('admin.itemcard.index') }}"> الاصناف </a>
 @endsection
-
 @section('contentheaderactive')
     اضافة
 @endsection
-
-
-
 @section('content')
 
     <div class="card">
@@ -26,6 +19,8 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+
+
             <form action="{{ route('admin.itemcard.update', $data['id']) }}" method="post" enctype="multipart/form-data">
                 <div class="row">
                     @csrf
@@ -52,7 +47,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> نوع الصنف</label>
-                            <select @if($counterUsedBefore>0) disabled  @endif name="item_type" id="item_type" class="form-control">
+                            <select @if ($counterUsedBefore > 0) disabled @endif name="item_type" id="item_type"
+                                class="form-control">
                                 <option value="">اختر النوع</option>
                                 <option {{ old('item_type', $data['item_type']) == 1 ? 'selected' : '' }} value="1"> مخزني
                                 </option>
@@ -61,11 +57,13 @@
                                 <option {{ old('item_type', $data['item_type']) == 3 ? 'selected' : '' }} value="3"> عهدة
                                 </option>
                             </select>
+
                             @error('item_type')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> فئة الصنف</label>
@@ -105,7 +103,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> وحدة القياس الاب</label>
-                            <select @if($counterUsedBefore>0) disabled  @endif name="uom_id" id="uom_id" class="form-control ">
+                            <select @if ($counterUsedBefore > 0) disabled @endif name="uom_id" id="uom_id"
+                                class="form-control ">
                                 <option value="">اختر الوحدة الاب</option>
                                 @if (@isset($inv_uoms_parent) && !@empty($inv_uoms_parent))
                                     @foreach ($inv_uoms_parent as $info)
@@ -119,26 +118,32 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> هل للصنف وحدة تجزئة ابن</label>
-                            <select @if($counterUsedBefore>0) disabled  @endif name="does_has_retailunit" id="does_has_retailunit" class="form-control">
+                            <select @if ($counterUsedBefore > 0) disabled @endif name="does_has_retailunit"
+                                id="does_has_retailunit" class="form-control">
                                 <option value="">اختر الحالة</option>
                                 <option {{ old('does_has_retailunit', $data['does_has_retailunit']) == 1 ? 'selected' : '' }}
                                     value="1"> نعم </option>
                                 <option {{ old('does_has_retailunit', $data['does_has_retailunit']) == 0 ? 'selected' : '' }}
                                     value="0"> لا</option>
                             </select>
+
                             @error('does_has_retailunit')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-6" @if (old('does_has_retailunit', $data['does_has_retailunit']) != 1) style="display: none;" @endif
+
+
+                    <div class="col-md-6  " @if (old('does_has_retailunit', $data['does_has_retailunit']) != 1) style="display: none;" @endif
                         id="retail_uom_idDiv">
                         <div class="form-group">
                             <label> وحدة القياس التجزئة الابن بالنسبة للأب(<span class="parentuomname"></span>)</label>
-                            <select @if($counterUsedBefore>0) disabled  @endif name="retail_uom_id" id="retail_uom_id" class="form-control ">
+                            <select @if ($counterUsedBefore > 0) disabled @endif name="retail_uom_id"
+                                id="retail_uom_id" class="form-control ">
                                 <option value="">اختر الوحدة الاب</option>
                                 @if (@isset($inv_uoms_child) && !@empty($inv_uoms_child))
                                     @foreach ($inv_uoms_child as $info)
@@ -155,9 +160,12 @@
                     </div>
                     <div class="col-md-6 relatied_retial_counter "
                         @if (old('does_has_retailunit', $data['does_has_retailunit']) != 1) style="display: none;" @endif>
+
                         <div class="form-group">
-                            <label>عدد وحدات التجزئة (<span class="childuomname"></span>) بالنسبة للأب (<span class="parentuomname"></span>) </label>
-                            <input @if($counterUsedBefore>0) disabled  @endif oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="retail_uom_quntToParent"
+                            <label>عدد وحدات التجزئة (<span class="childuomname"></span>) بالنسبة للأب (<span
+                                    class="parentuomname"></span>) </label>
+                            <input @if ($counterUsedBefore > 0) disabled @endif
+                                oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="retail_uom_quntToParent"
                                 id="retail_uom_quntToParent" class="form-control"
                                 value="{{ old('retail_uom_quntToParent', $data['retail_uom_quntToParent'] * 1) }}"
                                 placeholder="ادخل  عدد وحدات التجزئة">
@@ -166,7 +174,10 @@
                             @enderror
                         </div>
                     </div>
+
+
                     <div class="col-md-6 relatied_parent_counter ">
+
                         <div class="form-group">
                             <label>سعر القطاعي بوحدة (<span class="parentuomname"></span>) </label>
                             <input oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="price" id="price"
@@ -188,6 +199,7 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-6 relatied_parent_counter ">
                         <div class="form-group">
                             <label>سعر جملة بوحدة (<span class="parentuomname"></span>) </label>
@@ -210,8 +222,10 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-6 relatied_retial_counter "
                         @if (old('does_has_retailunit', $data['does_has_retailunit']) != 1) style="display: none;" @endif>
+
                         <div class="form-group">
                             <label>سعر القطاعي بوحدة (<span class="childuomname"></span>) </label>
                             <input oninput="this.value=this.value.replace(/[^0-9.]/g,'');" name="price_retail"
@@ -235,6 +249,7 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-6 relatied_retial_counter "
                         @if (old('does_has_retailunit', $data['does_has_retailunit']) != 1) style="display: none;" @endif>
                         <div class="form-group">
@@ -248,6 +263,8 @@
                             @enderror
                         </div>
                     </div>
+
+
                     <div class="col-md-6 relatied_retial_counter "
                         @if (old('does_has_retailunit', $data['does_has_retailunit']) != 1) style="display: none;" @endif>
                         <div class="form-group">
@@ -261,6 +278,8 @@
                             @enderror
                         </div>
                     </div>
+
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> هل للصنف سعر ثابت </label>
@@ -276,6 +295,7 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label> حالة التفعيل</label>
@@ -291,6 +311,7 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-6" style="border:solid 5px #000 ; margin:10px;">
                         <div class="form-group">
                             <label> صورة الصنف</label>
@@ -301,10 +322,15 @@
                                     الصورة</button>
                                 <button type="button" class="btn btn-sm btn-danger" style="display: none;"
                                     id="cancel_update_image"> الغاء</button>
+
+
+
                             </div>
                             <div id="oldimage">
 
                             </div>
+
+
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -312,15 +338,29 @@
                             <button id="do_edit_item_cardd" type="submit" class="btn btn-primary btn-sm"> حفظ
                                 التعديلات</button>
                             <a href="{{ route('admin.itemcard.index') }}" class="btn btn-sm btn-danger">الغاء</a>
+
                         </div>
                     </div>
+
                 </div>
             </form>
+
+
+
         </div>
+
+
+
+
+    </div>
     </div>
 
-@endsection
 
+
+
+
+
+@endsection
 
 
 @section('script')
