@@ -44,9 +44,9 @@ class CreateSalesInvoicesTable extends Migration
             $table->tinyInteger('is_has_customer')->nullable();
             $table->date('date')->nullable();
             $table->bigInteger('delegate_code')->nullable();
-            $table->integer('sales_item_type')->nullable();
-            $table->decimal('delegate_commission_percent')->nullable();
-            $table->decimal('delegate_commission_value')->nullable();
+            $table->tinyInteger('sales_item_type')->nullable();
+            $table->decimal('delegate_commission_percent', 10, 2)->default(0)->nullable();
+            $table->decimal('delegate_commission_value', 10, 2)->default(0)->nullable();
             $table->decimal('delegate_commission_percent_type')->nullable();
             $table->timestamps();
         });
