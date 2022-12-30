@@ -20,8 +20,23 @@
 
         <link rel="stylesheet" href="{{ asset('admin/css/bootstrap_rtl-v4.2.1/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('admin/css/bootstrap_rtl-v4.2.1/custom_rtl.css') }}">
+
+        <style>
+            .login-box-msg,
+            .register-box-msg {
+                margin: 0;
+                padding: 0 20px 20px;
+                text-align: center;
+                /* color: #000; */
+                font-size: 1.5vw;
+            }
+            span.fas {
+                /* color: #000; */
+            }
+        </style>
+
     </head>
-    <body class="hold-transition login-page">
+    <body class="hold-transition login-page" style="background-image: url({{ asset('admin/imgs/login.jpg') }}) ;background-size:cover;background-repeate:ni-repeate; min-height:600px;">
         <div class="login-box">
 
             <!-- /.login-logo -->
