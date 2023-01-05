@@ -281,7 +281,7 @@
                         </li>
                         <!-- End SalesInvoices -->
 
-                        <!-- End SalesReturnInvoices -->
+                        <!-- Start SalesReturnInvoices -->
                         <li class="nav-item">
                             <a href="{{ route('admin.SalesReturnInvoices.index') }}" class="nav-link {{ (request()->is('admin/SalesReturnInvoices*') )?'active':'' }}">
                                 <p>
@@ -364,8 +364,8 @@
 
 
                 <!-- Start التقارير -->
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link ">
+                <li class="nav-item has-treeview {{ (request()->is('admin/FinancialReport*') || request()->is('admin/customeraccountmirror*') ||request()->is('admin/FinancialReport/delegateaccountmirror') )?'menu-open':'' }}     ">
+                    <a href="#" class="nav-link {{ (request()->is('admin/FinancialReport*') || request()->is('admin/customeraccountmirror*') ||request()->is('admin/FinancialReport/delegateaccountmirror') )?'active':'' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             التقارير
@@ -373,8 +373,35 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <!-- Start FinancialReport.supplieraccountmirror -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.FinancialReport.supplieraccountmirror') }}" class="nav-link {{ (request()->is('admin/FinancialReport/supplieraccountmirror') )?'active':'' }}">
+                            <p>
+                                كشف حساب مورد
+                            </p>
+                            </a>
+                        </li>
+                        <!-- End FinancialReport.supplieraccountmirror -->
 
+                        <!-- Start FinancialReport.customeraccountmirror -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.FinancialReport.customeraccountmirror') }}" class="nav-link {{ (request()->is('admin/FinancialReport/customeraccountmirror') )?'active':'' }}">
+                                <p>
+                                    كشف حساب عميل
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End FinancialReport.customeraccountmirror -->
 
+                        <!-- Start FinancialReport.delegateaccountmirror -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.FinancialReport.delegateaccountmirror') }}" class="nav-link {{ (request()->is('admin/FinancialReport/delegateaccountmirror') )?'active':'' }}">
+                                <p>
+                                    كشف حساب مندوب
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End FinancialReport.delegateaccountmirror -->
                     </ul>
                 </li>
                 <!-- End التقارير -->

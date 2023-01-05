@@ -220,7 +220,7 @@ class SalesReturnInvoicesController extends Controller
             $data_insert['sales_matrial_types'] = $request->sales_matrial_types;
             $data_insert['pill_type'] = $request->pill_type;
             $data_insert['added_by'] = auth()->user()->id;
-            // $data_insert['created_at'] = date("Y-m-d H:i:s");
+            $data_insert['created_at'] = date("Y-m-d H:i:s");
             $data_insert['date'] = date("Y-m-d");
             $data_insert['com_code'] = $com_code;
             $flag = insert(new SalesReturn(), $data_insert, false);
@@ -285,7 +285,7 @@ class SalesReturnInvoicesController extends Controller
                             $datainsert_items['batch_auto_serial'] = $request->inv_itemcard_batches_autoserial;
                             $datainsert_items['expire_date'] = $request->expire_date;
                             $datainsert_items['added_by'] = auth()->user()->id;
-                            // $datainsert_items['created_at'] = date("Y-m-d H:i:s");
+                            $datainsert_items['created_at'] = date("Y-m-d H:i:s");
                             $datainsert_items['date'] = date("Y-m-d");
                             $datainsert_items['com_code'] = $com_code;
                             $flag_datainsert_items = insert(new SalesReturnDetails(), $datainsert_items, true);
@@ -352,7 +352,7 @@ class SalesReturnInvoicesController extends Controller
                                         $dataInsertBatch["quantity"] = $item_quantityByParentUom;
                                         $dataInsertBatch["unit_cost_price"] = $priceCostUnit;
                                         $dataInsertBatch["total_cost_price"] =  $priceCostUnit * $item_quantityByParentUom;
-                                        // $dataInsertBatch["created_at"] = date("Y-m-d H:i:s");
+                                        $dataInsertBatch["created_at"] = date("Y-m-d H:i:s");
                                         $dataInsertBatch["added_by"] = auth()->user()->id;
                                         $dataInsertBatch["com_code"] = $com_code;
                                         $row = get_cols_where_row_orderby(new Inv_itemcard_batches(), array("auto_serial"), array("com_code" => $com_code), 'id', 'DESC');
@@ -387,7 +387,7 @@ class SalesReturnInvoicesController extends Controller
                                             $dataUpdateOldBatch['quantity'] = $batch_data['quantity'] + $item_quantityByParentUom;
                                         }
                                         $dataUpdateOldBatch['total_cost_price'] = $batch_data['unit_cost_price'] * $dataUpdateOldBatch['quantity'];
-                                        // $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
+                                        $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
                                         $dataUpdateOldBatch["updated_by"] = auth()->user()->id;
                                         $flag = update(new Inv_itemcard_batches(), $dataUpdateOldBatch, array("id" => $batch_data['id'], "com_code" => $com_code));
                                     }
@@ -430,7 +430,7 @@ class SalesReturnInvoicesController extends Controller
                                     // كمية الصنف بالمخزن الحالي بعد الحركة الحركة
                                     $dataInsert_inv_itemcard_movements['quantity_after_move_store'] = "عدد " . " " . ($quantityAfterMoveCurrentStore * 1) . " " . $MainUomName;
                                     $dataInsert_inv_itemcard_movements["store_id"] = $request->store_id;
-                                    // $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
+                                    $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
                                     $dataInsert_inv_itemcard_movements["added_by"] = auth()->user()->id;
                                     $dataInsert_inv_itemcard_movements["date"] = date("Y-m-d");
                                     $dataInsert_inv_itemcard_movements["com_code"] = $com_code;
@@ -503,7 +503,7 @@ class SalesReturnInvoicesController extends Controller
                     $dataUpdateParent['discount_value'] = $request->discount_value;
                     $dataUpdateParent['total_cost'] = $request->total_cost;
                     $dataUpdateParent['notes'] = $request->notes;
-                    // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+                    $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
                     $dataUpdateParent['updated_by'] = auth()->user()->com_code;
                     update(new SalesReturn(), $dataUpdateParent, array("com_code" => $com_code, "auto_serial" => $request->auto_serial));
                     echo json_encode("done");
@@ -561,7 +561,7 @@ class SalesReturnInvoicesController extends Controller
                                     //update current Batch تحديث علي الباتش القديمة
                                     $dataUpdateOldBatch['quantity'] = $batch_data['quantity'] - $item_quantityByParentUom;
                                     $dataUpdateOldBatch['total_cost_price'] = $batch_data['unit_cost_price'] * $dataUpdateOldBatch['quantity'];
-                                    // $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
+                                    $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
                                     $dataUpdateOldBatch["updated_by"] = auth()->user()->id;
                                     $flag = update(new Inv_itemcard_batches(), $dataUpdateOldBatch, array("id" => $batch_data['id'], "com_code" => $com_code));
                                     if ($flag) {
@@ -602,7 +602,7 @@ class SalesReturnInvoicesController extends Controller
                                         // كمية الصنف بالمخزن الحالي بعد الحركة الحركة
                                         $dataInsert_inv_itemcard_movements['quantity_after_move_store'] = "عدد " . " " . ($quantityAfterMoveCurrentStore * 1) . " " . $MainUomName;
                                         $dataInsert_inv_itemcard_movements["store_id"] = $sales_invoices_details_data['store_id'];
-                                        // $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
+                                        $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
                                         $dataInsert_inv_itemcard_movements["added_by"] = auth()->user()->id;
                                         $dataInsert_inv_itemcard_movements["date"] = date("Y-m-d");
                                         $dataInsert_inv_itemcard_movements["com_code"] = $com_code;
@@ -652,7 +652,7 @@ class SalesReturnInvoicesController extends Controller
                     $dataUpdateParent['money_for_account'] = $invoice_data['total_cost'] * (-1);
                     $dataUpdateParent['is_approved'] = 1;
                     $dataUpdateParent['approved_by'] = auth()->user()->com_code;
-                    // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+                    $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
                     $dataUpdateParent['updated_by'] = auth()->user()->com_code;
                     $dataUpdateParent['what_paid'] = $request->what_paid;
                     $dataUpdateParent['what_remain'] = $request->what_remain;
@@ -687,7 +687,7 @@ class SalesReturnInvoicesController extends Controller
                             //debit دائن
                             $dataInsert_treasuries_transactions['money_for_account'] = $request->what_paid;
                             $dataInsert_treasuries_transactions['byan'] = "تحصيل نظير فاتورة مبيعات  رقم" . $request->auto_serial;
-                            // $dataInsert_treasuries_transactions['created_at'] = date("Y-m-Y H:i:s");
+                            $dataInsert_treasuries_transactions['created_at'] = date("Y-m-Y H:i:s");
                             $dataInsert_treasuries_transactions['added_by'] = auth()->user()->id;
                             $dataInsert_treasuries_transactions['com_code'] = $com_code;
                             $flag = insert(new Treasuries_transactions(), $dataInsert_treasuries_transactions);
@@ -967,7 +967,7 @@ class SalesReturnInvoicesController extends Controller
                 $data_insert['notes'] = $request->notes;
                 $data_insert['active'] = $request->active;
                 $data_insert['added_by'] = auth()->user()->id;
-                // $data_insert['created_at'] = date("Y-m-d H:i:s");
+                $data_insert['created_at'] = date("Y-m-d H:i:s");
                 $data_insert['date'] = date("Y-m-d");
                 $data_insert['com_code'] = $com_code;
                 $flag = insert(new Customer(), $data_insert);
@@ -1004,7 +1004,7 @@ class SalesReturnInvoicesController extends Controller
                     $data_insert_account['account_type'] = 3;
                     $data_insert_account['active'] = $request->active;
                     $data_insert_account['added_by'] = auth()->user()->id;
-                    // $data_insert_account['created_at'] = date("Y-m-d H:i:s");
+                    $data_insert_account['created_at'] = date("Y-m-d H:i:s");
                     $data_insert_account['date'] = date("Y-m-d");
                     $data_insert_account['com_code'] = $com_code;
                     $data_insert_account['other_table_FK'] = $data_insert['customer_code'];
@@ -1063,7 +1063,7 @@ class SalesReturnInvoicesController extends Controller
     }
 
 
-
+    
     public function printsaleswina4($id, $size)
     {
         $com_code = auth()->user()->com_code;

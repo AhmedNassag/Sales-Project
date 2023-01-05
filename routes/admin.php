@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CollectController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DelegatesController;
 use App\Http\Controllers\Admin\ExchangeController;
+use App\Http\Controllers\Admin\FinancialReportController;
 use App\Http\Controllers\Admin\Inv_item_card_categoriesController;
 use App\Http\Controllers\Admin\TreasuriesController;
 use App\Http\Controllers\Admin\SalesMatrialTypesController;
@@ -341,5 +342,15 @@ Route::group([/*'namespace' => 'Admin',*/ 'prefix' => 'admin', 'middleware' => '
     Route::get('/SalesReturnInvoices/printsaleswina4/{id}/{size}', [SalesReturnInvoicesController::class, 'printsaleswina4'])->name('admin.SalesReturnInvoices.printsaleswina4');
     /********************************* End SalesReturnInvoices *********************************/
 
+
+    /********************************* Start FinancialReport *********************************/
+    Route::get('/FinancialReport/supplieraccountmirror', [FinancialReportController::class, 'supplier_account_mirror'])->name('admin.FinancialReport.supplieraccountmirror');
+    Route::post('/FinancialReport/supplieraccountmirror', [FinancialReportController::class, 'supplier_account_mirror'])->name('admin.FinancialReport.supplieraccountmirror');
+    Route::get('/FinancialReport/customeraccountmirror', [FinancialReportController::class, 'customer_account_mirror'])->name('admin.FinancialReport.customeraccountmirror');
+    Route::post('/FinancialReport/customeraccountmirror', [FinancialReportController::class, 'customer_account_mirror'])->name('admin.FinancialReport.customeraccountmirror');
+    Route::post('/FinancialReport/searchforcustomer', [FinancialReportController::class, 'searchforcustomer'])->name('admin.FinancialReport.searchforcustomer');
+    Route::get('/FinancialReport/delegateaccountmirror', [FinancialReportController::class, 'delegate_account_mirror'])->name('admin.FinancialReport.delegateaccountmirror');
+    Route::post('/FinancialReport/delegateaccountmirror', [FinancialReportController::class, 'delegate_account_mirror'])->name('admin.FinancialReport.delegateaccountmirror');
+    /********************************* End FinancialReport *********************************/
 });
 
