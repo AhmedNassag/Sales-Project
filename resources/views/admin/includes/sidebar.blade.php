@@ -273,7 +273,7 @@
                     <ul class="nav nav-treeview">
                         <!-- Start SalesInvoices -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.SalesInvoices.index') }}" class="nav-link {{ (request()->is('admin/SalesInvoices*') )?'active':'' }}">
+                            <a href="{{ route('admin.SalesInvoices.index') }}" class="nav-link {{ (request()->is('admin/SalesInvoices*') ) ? 'active' : '' }}">
                                 <p>
                                     فواتير المبيعات
                                 </p>
@@ -283,7 +283,7 @@
 
                         <!-- Start SalesReturnInvoices -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.SalesReturnInvoices.index') }}" class="nav-link {{ (request()->is('admin/SalesReturnInvoices*') )?'active':'' }}">
+                            <a href="{{ route('admin.SalesReturnInvoices.index') }}" class="nav-link {{ (request()->is('admin/SalesReturnInvoices*') ) ? 'active' : '' }}">
                                 <p>
                                     مرتجع المبيعات العام
                                 </p>
@@ -297,8 +297,8 @@
 
 
                 <!-- Start خدمات داخلية وخارجية -->
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link ">
+                <li class="nav-item has-treeview  {{ (request()->is('admin/Services*') ||request()->is('admin/Services_orders*') ) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ (request()->is('admin/Services*') ||request()->is('admin/Services_orders*') )?  'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             خدمات داخلية وخارجية
@@ -306,8 +306,25 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <!-- Start Services -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.Services.index') }}" class="nav-link {{ (request()->is('admin/Services*') and !request()->is('admin/Services_orders*') ) ? 'active' : '' }}">
+                                <p>
+                                    ضبط الخدمات
+                                </p>
+                            </a>
+                        </li>
+                        <!-- Start Services -->
 
-
+                        <!-- Start Services_orders -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.Services_orders.index') }}" class="nav-link {{ (request()->is('admin/Services_orders*') ) ? 'active' : '' }}">
+                                <p>
+                                    فواتير الخدمات
+                                </p>
+                            </a>
+                        </li>
+                        <!-- Start Services_orders -->
                     </ul>
                 </li>
                 <!-- End خدمات داخلية وخارجية -->
@@ -315,8 +332,8 @@
 
 
                 <!-- Start حركة شفت الخزينة -->
-                <li class="nav-item has-treeview {{ (request()->is('admin/admin_shift*'))?'menu-open':'' }}     ">
-                    <a href="#" class="nav-link {{ (request()->is('admin/admin_shift*') )?'active':'' }}">
+                <li class="nav-item has-treeview {{ (request()->is('admin/admin_shift*') ) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ (request()->is('admin/admin_shift*') ) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             حركة شفت الخزينة
@@ -326,7 +343,7 @@
                     <ul class="nav nav-treeview">
                         <!-- Start admin_shift -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.admin_shift.index') }}" class="nav-link {{ (request()->is('admin/admin_shift*') )?'active':'' }}">
+                            <a href="{{ route('admin.admin_shift.index') }}" class="nav-link {{ (request()->is('admin/admin_shift*') ) ? 'active' : '' }}">
                                 <p>
                                     شفتات الخزن
                                 </p>
@@ -339,8 +356,8 @@
 
 
                 <!-- Start الصلاحيات -->
-                <li class="nav-item has-treeview {{ (request()->is('admin/admins_accounts*'))?'menu-open':'' }} ">
-                    <a href="#" class="nav-link {{ (request()->is('admin/admins_accounts*') )?'active':'' }}">
+                <li class="nav-item has-treeview {{ (request()->is('admin/admins_accounts*') ) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ (request()->is('admin/admins_accounts*') ) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             الصلاحيات
@@ -350,7 +367,7 @@
                     <ul class="nav nav-treeview">
                         <!-- Start admins_accounts -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.admins_accounts.index') }}" class="nav-link {{ (request()->is('admin/admins_accounts*') )?'active':'' }}">
+                            <a href="{{ route('admin.admins_accounts.index') }}" class="nav-link {{ (request()->is('admin/admins_accounts*') ) ? 'active' : '' }}">
                                 <p>
                                     المستخدمين
                                 </p>
@@ -364,8 +381,8 @@
 
 
                 <!-- Start التقارير -->
-                <li class="nav-item has-treeview {{ (request()->is('admin/FinancialReport*') || request()->is('admin/customeraccountmirror*') ||request()->is('admin/FinancialReport/delegateaccountmirror') )?'menu-open':'' }}     ">
-                    <a href="#" class="nav-link {{ (request()->is('admin/FinancialReport*') || request()->is('admin/customeraccountmirror*') ||request()->is('admin/FinancialReport/delegateaccountmirror') )?'active':'' }}">
+                <li class="nav-item has-treeview {{ (request()->is('admin/FinancialReport*') || request()->is('admin/customeraccountmirror*') ||request()->is('admin/FinancialReport/delegateaccountmirror') ) ? 'menu-open' : '' }}     ">
+                    <a href="#" class="nav-link {{ (request()->is('admin/FinancialReport*') || request()->is('admin/customeraccountmirror*') ||request()->is('admin/FinancialReport/delegateaccountmirror') ) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             التقارير
@@ -375,7 +392,7 @@
                     <ul class="nav nav-treeview">
                         <!-- Start FinancialReport.supplieraccountmirror -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.FinancialReport.supplieraccountmirror') }}" class="nav-link {{ (request()->is('admin/FinancialReport/supplieraccountmirror') )?'active':'' }}">
+                            <a href="{{ route('admin.FinancialReport.supplieraccountmirror') }}" class="nav-link {{ (request()->is('admin/FinancialReport/supplieraccountmirror') ) ? 'active' : '' }}">
                             <p>
                                 كشف حساب مورد
                             </p>
@@ -385,7 +402,7 @@
 
                         <!-- Start FinancialReport.customeraccountmirror -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.FinancialReport.customeraccountmirror') }}" class="nav-link {{ (request()->is('admin/FinancialReport/customeraccountmirror') )?'active':'' }}">
+                            <a href="{{ route('admin.FinancialReport.customeraccountmirror') }}" class="nav-link {{ (request()->is('admin/FinancialReport/customeraccountmirror') ) ? 'active' : '' }}">
                                 <p>
                                     كشف حساب عميل
                                 </p>
@@ -395,7 +412,7 @@
 
                         <!-- Start FinancialReport.delegateaccountmirror -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.FinancialReport.delegateaccountmirror') }}" class="nav-link {{ (request()->is('admin/FinancialReport/delegateaccountmirror') )?'active':'' }}">
+                            <a href="{{ route('admin.FinancialReport.delegateaccountmirror') }}" class="nav-link {{ (request()->is('admin/FinancialReport/delegateaccountmirror') ) ? 'active' : '' }}">
                                 <p>
                                     كشف حساب مندوب
                                 </p>
