@@ -39,6 +39,7 @@ class CreateServicesWithOrdersTable extends Migration
             $table->integer('approved_by')->nullable();
             $table->tinyInteger('is_account_number')->nullable();
             $table->string('entity_name')->nullable();
+            $table->decimal('total_services', 10, 2)->default(0)->nullable();
             $table->timestamps();
         });
     }

@@ -15,16 +15,15 @@ class CreateServicesWithOrdersDetailsTable extends Migration
     {
         Schema::create('services_with_orders_details', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('services_with_orders_auto_serial');
-            $table->integer('service_id');
-            $table->text('notes');
-            $table->decimal('total', 10, 2)->default(0);
-            $table->integer('added_by');
-            $table->integer('updated_by');
-            $table->integer('com_code');
-            $table->date('date');
-            $table->tinyInteger('order_type');
-            $table->integer('total_services');
+            $table->bigInteger('services_with_orders_auto_serial')->nullable();
+            $table->integer('service_id')->nullable();
+            $table->text('notes')->nullable();
+            $table->decimal('total', 10, 2)->default(0)->nullable();
+            $table->integer('added_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('com_code')->nullable();
+            $table->date('date')->nullable();
+            $table->tinyInteger('order_type')->nullable();
             $table->timestamps();
         });
     }

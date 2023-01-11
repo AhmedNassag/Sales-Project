@@ -34,7 +34,7 @@
                                         @if ($data['order_type'] == 1)
                                             خدمات مقدمة لنا
                                         @else
-                                            خدمات مقدمه للغير
+                                            خدمات نقدمها للغير
                                         @endif
                                     </td>
                                 </tr>
@@ -165,6 +165,7 @@
                                     </td>
                                 </tr>
                             </table>
+
                     </div>
                     <!--  treasuries_delivery   -->
                     <div class="card-header">
@@ -177,14 +178,22 @@
                             @endif
                         </h3>
                         <input type="hidden" id="token_search" value="{{ csrf_token() }}">
-                        <input type="hidden" id="ajax_add_new_details" value="{{ route('admin.Services_orders.add_new_details') }}">
-                        <input type="hidden" id="ajax_reload_itemsdetials" value="{{ route('admin.Services_orders.reload_itemsdetials') }}">
-                        <input type="hidden" id="ajax_reload_parent_pill" value="{{ route('admin.Services_orders.reload_parent_pill') }}">
-                        <input type="hidden" id="ajax_load_edit_item_details" value="{{ route('admin.Services_orders.load_edit_item_details') }}">
-                        <input type="hidden" id="ajax_load_modal_add_details" value="{{ route('admin.Services_orders.load_modal_add_details') }}">
-                        <input type="hidden" id="ajax_edit_item_details" value="{{ route('admin.Services_orders.edit_item_details') }}">
-                        <input type="hidden" id="ajax_load_modal_approve_invoice" value="{{ route('admin.Services_orders.load_modal_approve_invoice') }}">
-                        <input type="hidden" id="ajax_load_usershiftDiv" value="{{ route('admin.Services_orders.load_usershiftDiv') }}">
+                        <input type="hidden" id="ajax_add_new_details"
+                            value="{{ route('admin.Services_orders.add_new_details') }}">
+                        <input type="hidden" id="ajax_reload_itemsdetials"
+                            value="{{ route('admin.Services_orders.reload_itemsdetials') }}">
+                        <input type="hidden" id="ajax_reload_parent_pill"
+                            value="{{ route('admin.Services_orders.reload_parent_pill') }}">
+                        <input type="hidden" id="ajax_load_edit_item_details"
+                            value="{{ route('admin.Services_orders.load_edit_item_details') }}">
+                        <input type="hidden" id="ajax_load_modal_add_details"
+                            value="{{ route('admin.Services_orders.load_modal_add_details') }}">
+                        <input type="hidden" id="ajax_edit_item_details"
+                            value="{{ route('admin.Services_orders.edit_item_details') }}">
+                        <input type="hidden" id="ajax_load_modal_approve_invoice"
+                            value="{{ route('admin.Services_orders.load_modal_approve_invoice') }}">
+                        <input type="hidden" id="ajax_load_usershiftDiv"
+                            value="{{ route('admin.Services_orders.load_usershiftDiv') }}">
                         <input type="hidden" id="autoserailparent" value="{{ $data['auto_serial'] }}">
                         <input type="hidden" id="id_parent_pill" value="{{ $data['id'] }}">
                     </div>
@@ -193,6 +202,7 @@
                             @php
                                 $i = 1;
                             @endphp
+
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead class="custom_thead">
                                     <th>مسلسل</th>
@@ -201,7 +211,7 @@
                                     <th> ملاحظات</th>
                                     <th> الاضافة</th>
                                     <th> التحديث</th>
-                                    <th>الإجراءات</th>
+                                    <th></th>
                                 </thead>
                                 <tbody>
                                     @foreach ($details as $info)
@@ -244,8 +254,10 @@
                                             </td>
                                             <td>
                                                 @if ($data['is_approved'] == 0)
-                                                    <button data-id="{{ $info->id }}" class="btn btn-sm load_edit_item_details  btn-primary">تعديل</button>
-                                                    <a href="{{ route('admin.suppliers_orders.delete_details', ['id' => $info->id, 'id_parent' => $data['id']]) }}" class="btn btn-sm are_you_shue   btn-danger">حذف</a>
+                                                    <button data-id="{{ $info->id }}"
+                                                        class="btn btn-sm load_edit_item_details  btn-primary">تعديل</button>
+                                                    <a href="{{ route('admin.Services_orders.delete_details', ['id' => $info->id, 'id_parent' => $data['id']]) }}"
+                                                        class="btn btn-sm are_you_shue   btn-danger">حذف</a>
                                                 @endif
                                             </td>
                                         </tr>
@@ -277,8 +289,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">اضافة خدمة للفاتورة</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                        <span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body" id="Add_item_Modal_body" style="background-color: white !important; color:black;">
                 </div>
@@ -295,12 +306,12 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content bg-info">
                 <div class="modal-header">
-                    <h4 class="modal-title text-center">تحديث صنف بالفاتورة</h4>
+                    <h4 class="modal-title text-center">تحديث خدمة بالفاتورة</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                        <span aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body" id="edit_item_Modal_body" style="background-color: white !important; color:black;">
+                <div class="modal-body" id="edit_item_Modal_body"
+                    style="background-color: white !important; color:black;">
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">اغلاق</button>
@@ -314,12 +325,12 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content bg-info">
                 <div class="modal-header">
-                    <h4 class="modal-title" style="text-align: center"> اعتماد وترحيل فاتورة المشتريات</h4>
+                    <h4 class="modal-title" style="text-align: center"> اعتماد وترحيل فاتورة خدمات</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                        <span aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body" id="ModalApproveInvocie_body" style="background-color: white !important; color:black;">
+                <div class="modal-body" id="ModalApproveInvocie_body"
+                    style="background-color: white !important; color:black;">
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">اغلاق</button>
@@ -328,6 +339,22 @@
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
+    </div>
+    <div class="modal modal-info" id="alert_message_modal">
+        <div class="modal-dialog">
+            <div class="modal-content modal-info  bg-info">
+                <div class="modal-header">
+                    <div class="modal-body "
+                        style="color: black !important;    background: white !important;
+               text-align: center;
+               font-size: 1.3vw;">
+                        تمت العملية بنجاح<span class="glyphicon glyphicon-ok"></span>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
     </div>
 @endsection
 @section('script')

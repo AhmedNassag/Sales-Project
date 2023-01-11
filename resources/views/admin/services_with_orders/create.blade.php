@@ -16,6 +16,8 @@
     اضافة
 @endsection
 @section('content')
+
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -24,6 +26,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+
                     <form action="{{ route('admin.Services_orders.store') }}" method="post">
                         @csrf
                         <div class="form-group">
@@ -34,11 +37,14 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="form-group">
                             <label> فئة الفاتورة</label>
                             <select name="order_type" id="order_type" class="form-control">
-                                <option @if (old('order_type') == 1) selected="selected" @endif value="1"> خدمات مقدمة لنا</option>
-                                <option @if (old('order_type') == 2) selected="selected" @endif value="2"> خدمات نقدمها للغير</option>
+                                <option @if (old('order_type') == 1) selected="selected" @endif value="1"> خدمات
+                                    مقدمة لنا</option>
+                                <option @if (old('order_type') == 2) selected="selected" @endif value="2"> خدمات
+                                    نقدمها للغير</option>
                             </select>
                             @error('order_type')
                                 <span class="text-danger">{{ $message }}</span>
@@ -47,14 +53,18 @@
                         <div class="form-group">
                             <label> هل حساب مالي</label>
                             <select name="is_account_number" id="is_account_number" class="form-control">
-                                <option @if (old('is_account_number') == '') selected="selected" @endif value=""> اختر الحالة</option>
-                                <option @if (old('is_account_number') == 1) selected="selected" @endif value="1"> نعم</option>
-                                <option @if (old('is_account_number') == 0 and old('is_account_number') != '') selected="selected" @endif value="0"> لا</option>
+                                <option @if (old('is_account_number') == '') selected="selected" @endif value=""> اختر
+                                    الحالة</option>
+                                <option @if (old('is_account_number') == 1) selected="selected" @endif value="1"> نعم
+                                </option>
+                                <option @if (old('is_account_number') == 0 and old('is_account_number') != '') selected="selected" @endif value="0"> لا
+                                </option>
                             </select>
                             @error('is_account_number')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="form-group" id="account_numberDiv"
                             @if (old('is_account_number') != 1) style="display: none;" @endif>
                             <label> بيانات الحسابات المالية</label>
@@ -62,7 +72,8 @@
                                 <option value=""> اختر الحساب المالي</option>
                                 @if (@isset($accounts) && !@empty($accounts))
                                     @foreach ($accounts as $info)
-                                        <option @if (old('account_number') == $info->account_number) selected="selected" @endif value="{{ $info->account_number }}"> {{ $info->name }} </option>
+                                        <option @if (old('account_number') == $info->account_number) selected="selected" @endif
+                                            value="{{ $info->account_number }}"> {{ $info->name }} </option>
                                     @endforeach
                                 @endif
                             </select>
@@ -70,24 +81,32 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="form-group" id="entity_nameDiv"
                             @if (old('is_account_number') == '' || old('is_account_number') == 1) style="display: none;" @endif>
-                            <label> اسم الجهة</label>
-                            <input name="entity_name" class="form-control" id="entity_name" type="text" value="{{ old('entity_name') }}">
+                            <label> اسم الجهة ( طياري )</label>
+                            <input name="entity_name" class="form-control" id="entity_name" type="text"
+                                value="{{ old('entity_name') }}">
                             @error('entity_name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
+
                         <div class="form-group">
                             <label> نوع الفاتورة</label>
                             <select name="pill_type" id="pill_type" class="form-control">
-                                <option @if (old('pill_type') == 1) selected="selected" @endif value="1"> كاش</option>
-                                <option @if (old('pill_type') == 2) selected="selected" @endif value="2"> اجل</option>
+                                <option @if (old('pill_type') == 1) selected="selected" @endif value="1"> كاش
+                                </option>
+                                <option @if (old('pill_type') == 2) selected="selected" @endif value="2"> اجل
+                                </option>
                             </select>
                             @error('pill_type')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
+
                         <div class="form-group">
                             <label> ملاحظات</label>
                             <input name="notes" id="notes" class="form-control" value="{{ old('notes') }}">
@@ -95,17 +114,30 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary btn-sm"> اضافة</button>
                             <a href="{{ route('admin.Services_orders.index') }}" class="btn btn-sm btn-danger">الغاء</a>
+
                         </div>
+
+
                     </form>
+
+
+
                 </div>
+
+
+
+
             </div>
         </div>
     </div>
     </div>
+
 @endsection
+
 @section('script')
     <script src="{{ asset('admin/js/services_with_orders.js') }}"></script>
     <script src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>

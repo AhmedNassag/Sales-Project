@@ -1,20 +1,42 @@
 @if (@isset($data) && !@empty($data))
     <table id="example2" class="table table-bordered table-hover">
         <tr>
-            <td class="width30"> كود الفاتورة الالي</td>
-            <td> {{ $data['auto_serial'] }}</td>
+            <td class="width30"> فئة الفاتورة</td>
+            <td>
+                @if ($data['order_type'] == 1)
+                    خدمات مقدمة لنا
+                @else
+                    خدمات نقدمها للغير
+                @endif
+            </td>
         </tr>
         <tr>
-            <td class="width30"> كود الفاتورة بأصل فاتورة المشتريات </td>
-            <td> {{ $data['DOC_NO'] }}</td>
+            <td class="width30"> كود الفاتورة الالي</td>
+            <td> {{ $data['auto_serial'] }}</td>
         </tr>
         <tr>
             <td class="width30"> تاريخ الفاتورة </td>
             <td> {{ $data['order_date'] }}</td>
         </tr>
         <tr>
-            <td class="width30"> اسم المورد </td>
-            <td> {{ $data['supplier_name'] }}</td>
+            <td class="width30"> هل حساب مالي</td>
+            <td>
+                @if ($data['is_account_number'] == 1)
+                    نعم حساب مالي
+                @else
+                    لا
+                @endif
+            </td>
+        </tr>
+        <tr>
+            <td class="width30"> اسم الحساب / الجهة </td>
+            <td>
+                @if ($data['is_account_number'] == 1)
+                    {{ $data['account_name'] }} كود {{ $data['account_number'] }}
+                @else
+                    {{ $data['entity_name'] }}
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="width30"> نوع الفاتورة</td>
@@ -25,14 +47,6 @@
                     اجل
                 @endif
             </td>
-        </tr>
-        <tr>
-            <td class="width30"> المخزن المستلم للفاتورة </td>
-            <td> {{ $data['store_name'] }}</td>
-        </tr>
-        <tr>
-            <td class="width30"> اسم المورد </td>
-            <td> {{ $data['supplier_name'] }}</td>
         </tr>
         <tr>
             <td class="width30"> اجمالي الفاتورة </td>
@@ -54,7 +68,6 @@
                 <td class="width30"> الخصم علي الفاتورة </td>
                 <td> لايوجد</td>
             </tr>
-
         @endif
         <tr>
             <td class="width30"> نسبة القيمة المضافة </td>
@@ -113,9 +126,12 @@
                     لايوجد تحديث
                 @endif
                 @if ($data['is_approved'] == 0)
-                    <a href="{{ route('admin.suppliers_orders.delete', $data['id']) }}" class="btn btn-sm are_you_shue  btn-danger">حذف</a>
-                    <a href="{{ route('admin.suppliers_orders.edit', $data['id']) }}" class="btn btn-sm btn-success">تعديل</a>
-                    <button id="load_close_approve_invoice" class="btn btn-sm btn-primary">تحميل الاعتماد والترحيل</button>
+                    <a href="{{ route('admin.Services_orders.delete', $data['id']) }}"
+                        class="btn btn-sm are_you_shue  btn-danger">حذف</a>
+                    <a href="{{ route('admin.Services_orders.edit', $data['id']) }}"
+                        class="btn btn-sm btn-success">تعديل</a>
+                    <button id="load_close_approve_invoice" class="btn btn-sm btn-primary">تحميل الاعتماد
+                        والترحيل</button>
                 @endif
             </td>
         </tr>

@@ -11,6 +11,7 @@
             <th> تاريخ الاضافة</th>
             <th> تاريخ التحديث</th>
             <th>الإجراءات</th>
+
         </thead>
         <tbody>
             @foreach ($data as $info)
@@ -24,6 +25,7 @@
                             خدمات نقدمها للغير
                         @endif
                     </td>
+
                     <td>
                         @if ($info->active == 1)
                             مفعل
@@ -32,6 +34,7 @@
                         @endif
                     </td>
                     <td>
+
                         @php
                             $dt = new DateTime($info->created_at);
                             $date = $dt->format('Y-m-d');
@@ -44,7 +47,10 @@
                         {{ $newDateTimeType }} <br>
                         بواسطة
                         {{ $info->added_by_admin }}
+
+
                     </td>
+
                     <td>
                         @if ($info->updated_by > 0 and $info->updated_by != null)
                             @php
@@ -62,18 +68,31 @@
                         @else
                             لايوجد تحديث
                         @endif
+
                     </td>
+
+
                     <td>
+
+
                         <a href="{{ route('admin.Services.edit', $info->id) }}" class="btn btn-sm  btn-primary">تعديل</a>
-                        <a href="{{ route('admin.Services.delete', $info->id) }}" class="btn are_you_shue btn-sm  btn-danger">حذف</a>
+                        <a href="{{ route('admin.Services.delete', $info->id) }}"
+                            class="btn are_you_shue btn-sm  btn-danger">حذف</a>
+
                     </td>
+
+
                 </tr>
                 @php
                     $i++;
                 @endphp
             @endforeach
+
+
+
         </tbody>
     </table>
+
     <br>
     <div class="col-md-12" id="ajax_pagination_in_search">
         {{ $data->links() }}
