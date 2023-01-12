@@ -150,5 +150,21 @@ class MovTypeSeeder extends Seeder
             'is_private_internal' => 0
         ]);
 
+        $mov_type27 = Mov_type::create([
+            'id'                  => 27,
+            'name'                => 'صرف نظير خدمات مقدمة لنا',
+            'active'              => 1,
+            'in_screen'           => 1,
+            'is_private_internal' => 0
+        ]);
+
+        $mov_type28 = Mov_type::create([
+            'id'                  => 28,
+            'name'                => 'صرف نظير خدمات نقدمها للغير',
+            'active'              => 1,
+            'in_screen'           => 2,
+            'is_private_internal' => 0
+        ]);
+
     }
 }

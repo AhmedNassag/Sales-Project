@@ -1,5 +1,5 @@
 <?php
-//لاتنسونا من صالح الدعاء وجزاكم الله خيرا
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -28,16 +28,10 @@ class ServicesController extends Controller
             return redirect()->back()->with(['error' => 'عفوا حدث خطأ ما']);
         }
     }
-
-
-    
     public function create()
     {
         return view('admin.services.create');
     }
-
-
-
     public function store(ServicesRequest $request)
     {
         try {
@@ -48,7 +42,7 @@ class ServicesController extends Controller
                 $data['name'] = $request->name;
                 $data['type'] = $request->type;
                 $data['active'] = $request->active;
-                $data['created_at'] = date("Y-m-d H:i:s");
+                // $data['created_at'] = date("Y-m-d H:i:s");
                 $data['added_by'] = auth()->user()->id;
                 $data['com_code'] = $com_code;
                 $data['date'] = date("Y-m-d");
@@ -56,17 +50,15 @@ class ServicesController extends Controller
                 return redirect()->route('admin.Services.index')->with(['success' => 'لقد تم اضافة البيانات بنجاح']);
             } else {
                 return redirect()->back()
-                ->with(['error' => 'عفوا اسم الخدمة مسجل من قبل'])
-                ->withInput();
+                    ->with(['error' => 'عفوا اسم الخدمة مسجل من قبل'])
+                    ->withInput();
             }
         } catch (\Exception $ex) {
             return redirect()->back()
-            ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()])
-            ->withInput();
+                ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()])
+                ->withInput();
         }
     }
-
-
 
     public function edit($id)
     {
@@ -74,13 +66,10 @@ class ServicesController extends Controller
         $data = get_cols_where_row(new Services(), array("*"), array("com_code" => $com_code, 'id' => $id));
         if (empty($data)) {
             return redirect()->back()
-            ->with(['error' => 'عفوا غير قادر الي الوصول الي البيانات المطلوبة !']);
+                ->with(['error' => 'عفوا غير قادر الي الوصول الي البيانات المطلوبة !']);
         }
         return view('admin.services.edit', ['data' => $data]);
     }
-
-
-
     public function update($id, ServicesRequest $request)
     {
         try {
@@ -88,29 +77,26 @@ class ServicesController extends Controller
             $data = get_cols_where_row(new Services(), array("id"), array("com_code" => $com_code, 'id' => $id));
             if (empty($data)) {
                 return redirect()->back()
-                ->with(['error' => 'عفوا غير قادر الي الوصول الي البيانات المطلوبة !']);
+                    ->with(['error' => 'عفوا غير قادر الي الوصول الي البيانات المطلوبة !']);
             }
             $checkExists = Services::where(['name' => $request->name, 'com_code' => $com_code])->where('id', '!=', $id)->first();
             if ($checkExists != null) {
                 return redirect()->back()
-                ->with(['error' => 'عفوا اسم الخدمة مسجل من قبل'])
-                ->withInput();
+                    ->with(['error' => 'عفوا اسم الخدمة مسجل من قبل'])
+                    ->withInput();
             }
             $data_to_update['name'] = $request->name;
             $data_to_update['active'] = $request->active;
             $data_to_update['updated_by'] = auth()->user()->id;
-            $data_to_update['updated_at'] = date("Y-m-d H:i:s");
+            // $data_to_update['updated_at'] = date("Y-m-d H:i:s");
             update(new Services(), $data_to_update, array('id' => $id, 'com_code' => $com_code));
             return redirect()->route('admin.Services.index')->with(['success' => 'لقد تم تحديث البيانات بنجاح']);
         } catch (\Exception $ex) {
             return redirect()->back()
-            ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()])
-            ->withInput();
+                ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()])
+                ->withInput();
         }
     }
-
-
-
     public function delete($id)
     {
         try {
@@ -119,23 +105,20 @@ class ServicesController extends Controller
                 $flag = $item_row->delete();
                 if ($flag) {
                     return redirect()->back()
-                    ->with(['success' => '   تم حذف البيانات بنجاح']);
+                        ->with(['success' => '   تم حذف البيانات بنجاح']);
                 } else {
                     return redirect()->back()
-                    ->with(['error' => 'عفوا حدث خطأ ما']);
+                        ->with(['error' => 'عفوا حدث خطأ ما']);
                 }
             } else {
                 return redirect()->back()
-                ->with(['error' => 'عفوا غير قادر الي الوصول للبيانات المطلوبة']);
+                    ->with(['error' => 'عفوا غير قادر الي الوصول للبيانات المطلوبة']);
             }
         } catch (\Exception $ex) {
             return redirect()->back()
-            ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()]);
+                ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()]);
         }
     }
-
-
-
     public function ajax_search(Request $request)
     {
         if ($request->ajax()) {
