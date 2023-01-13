@@ -1,4 +1,5 @@
 <?php
+/* لاتنسونا من صالح الدعاء وجزاكم الله كل خير  */
 
 namespace App\Http\Controllers\Admin;
 
@@ -6,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Sales_invoices;
 use App\Models\Admin;
+use App\Models\Sales_matrial_types;
 use App\Models\Customer;
 use App\Models\Inv_itemCard;
 use App\Models\Inv_itemcard_batches;
@@ -18,9 +20,11 @@ use App\Models\Delegate;
 use App\Models\Sales_invoices_details;
 use App\Models\Inv_itemcard_movements;
 use App\Models\Account;
+use App\Models\Supplier;
+use App\Models\Suppliers_with_orders;
 use App\Models\SalesReturn;
 use App\Models\Admin_panel_setting;
-use App\Models\Sales_matrial_types;
+use App\Models\services_with_orders;
 
 class SalesInvoicesController extends Controller
 {
@@ -44,9 +48,6 @@ class SalesInvoicesController extends Controller
         $Sales_matrial_types = get_cols_where(new Sales_matrial_types(), array("id", "name"), array("com_code" => $com_code, "active" => 1));
         return view("admin.sales_invoices.index", ['data' => $data, 'delegates' => $delegates, 'customers' => $customers, 'Sales_matrial_types' => $Sales_matrial_types]);
     }
-
-
-
     public function get_item_uoms(Request $request)
     {
         if ($request->ajax()) {
@@ -64,9 +65,6 @@ class SalesInvoicesController extends Controller
             return view("admin.sales_invoices.get_item_uoms", ['item_card_Data' => $item_card_Data]);
         }
     }
-
-
-
     //مرآة فاتوةر موقته للعميل لاتؤثر علي اي شيء  مجرد عرض سعر
     public function load_modal_addMirror(Request $request)
     {
@@ -78,9 +76,6 @@ class SalesInvoicesController extends Controller
             return view("admin.sales_invoices.loadModalAddInvoiceMirror", ['item_cards' => $item_cards, 'stores' => $stores, 'user_shift' => $user_shift]);
         }
     }
-
-
-
     //عرض صفحة اضافة فاتورة مبيعات فعلية ذات الخصم اللحظي للأصناف من المخازن
     public function load_modal_addActiveInvoice(Request $request)
     {
@@ -93,9 +88,6 @@ class SalesInvoicesController extends Controller
             ]);
         }
     }
-
-
-
     public function get_item_batches(Request $request)
     {
         $com_code = auth()->user()->com_code;
@@ -131,9 +123,6 @@ class SalesInvoicesController extends Controller
             }
         }
     }
-
-
-
     public function get_item_unit_price(Request $request)
     {
         $com_code = auth()->user()->com_code;
@@ -169,9 +158,6 @@ class SalesInvoicesController extends Controller
             }
         }
     }
-
-
-
     public function get_Add_new_item_row(Request $request)
     {
         $com_code = auth()->user()->com_code;
@@ -194,9 +180,6 @@ class SalesInvoicesController extends Controller
             return view('admin.sales_invoices.get_Add_new_item_row', ['received_data' => $received_data]);
         }
     }
-
-
-
     public function store(Request $request)
     {
         if ($request->ajax()) {
@@ -218,7 +201,7 @@ class SalesInvoicesController extends Controller
             $data_insert['sales_matrial_types'] = $request->sales_matrial_types;
             $data_insert['pill_type'] = $request->pill_type;
             $data_insert['added_by'] = auth()->user()->id;
-            // $data_insert['created_at'] = date("Y-m-d H:i:s");
+            $data_insert['created_at'] = date("Y-m-d H:i:s");
             $data_insert['date'] = date("Y-m-d");
             $data_insert['com_code'] = $com_code;
             $flag = insert(new Sales_invoices(), $data_insert, false);
@@ -227,9 +210,6 @@ class SalesInvoicesController extends Controller
             }
         }
     }
-
-
-
     public function load_invoice_update_modal(Request $request)
     {
         if ($request->ajax()) {
@@ -252,9 +232,6 @@ class SalesInvoicesController extends Controller
             $user_shift, 'delegates' => $delegates, 'customers' => $customers, 'Sales_matrial_types' => $Sales_matrial_types, 'invoice_data' => $invoice_data, 'sales_invoices_details' => $sales_invoices_details]);
         }
     }
-
-
-
     public function Add_item_to_invoice(Request $request)
     {
         try {
@@ -282,7 +259,7 @@ class SalesInvoicesController extends Controller
                                     $datainsert_items['total_price'] = $request->item_total;
                                     $datainsert_items['isparentuom'] = $request->isparentuom;
                                     $datainsert_items['added_by'] = auth()->user()->id;
-                                    // $datainsert_items['created_at'] = date("Y-m-d H:i:s");
+                                    $datainsert_items['created_at'] = date("Y-m-d H:i:s");
                                     $datainsert_items['date'] = date("Y-m-d");
                                     $datainsert_items['com_code'] = $com_code;
                                     $flag_datainsert_items = insert(new Sales_invoices_details(), $datainsert_items, true);
@@ -317,7 +294,7 @@ class SalesInvoicesController extends Controller
                                             $dataUpdateOldBatch['quantity'] = $batch_data['quantity'] - $item_quantityByParentUom;
                                         }
                                         $dataUpdateOldBatch['total_cost_price'] = $batch_data['unit_cost_price'] * $dataUpdateOldBatch['quantity'];
-                                        // $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
+                                        $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
                                         $dataUpdateOldBatch["updated_by"] = auth()->user()->id;
                                         $flag = update(new Inv_itemcard_batches(), $dataUpdateOldBatch, array("id" => $batch_data['id'], "com_code" => $com_code));
                                         if ($flag) {
@@ -358,7 +335,7 @@ class SalesInvoicesController extends Controller
                                             // كمية الصنف بالمخزن الحالي بعد الحركة الحركة
                                             $dataInsert_inv_itemcard_movements['quantity_after_move_store'] = "عدد " . " " . ($quantityAfterMoveCurrentStore * 1) . " " . $MainUomName;
                                             $dataInsert_inv_itemcard_movements["store_id"] = $request->store_id;
-                                            // $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
+                                            $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
                                             $dataInsert_inv_itemcard_movements["added_by"] = auth()->user()->id;
                                             $dataInsert_inv_itemcard_movements["date"] = date("Y-m-d");
                                             $dataInsert_inv_itemcard_movements["com_code"] = $com_code;
@@ -386,9 +363,6 @@ class SalesInvoicesController extends Controller
             echo "there is error " . $ex->getMessage();
         }
     }
-
-
-
     function reload_items_in_invoice(Request $request)
     {
         if ($request->ajax()) {
@@ -404,9 +378,6 @@ class SalesInvoicesController extends Controller
             return view("admin.sales_invoices.reload_items_in_invoice", ['sales_invoices_details' => $sales_invoices_details]);
         }
     }
-
-
-
     function recalclate_parent_invoice(Request $request)
     {
         if ($request->ajax()) {
@@ -434,7 +405,7 @@ class SalesInvoicesController extends Controller
                     $dataUpdateParent['discount_value'] = $request->discount_value;
                     $dataUpdateParent['total_cost'] = $request->total_cost;
                     $dataUpdateParent['notes'] = $request->notes;
-                    // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+                    $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
                     $dataUpdateParent['updated_by'] = auth()->user()->com_code;
                     update(new Sales_invoices(), $dataUpdateParent, array("com_code" => $com_code, "auto_serial" => $request->auto_serial));
                     echo json_encode("done");
@@ -442,9 +413,6 @@ class SalesInvoicesController extends Controller
             }
         }
     }
-
-
-
     function remove_active_row_item(Request $request)
     {
         if ($request->ajax()) {
@@ -492,7 +460,7 @@ class SalesInvoicesController extends Controller
                                     //update current Batch تحديث علي الباتش القديمة
                                     $dataUpdateOldBatch['quantity'] = $batch_data['quantity'] + $item_quantityByParentUom;
                                     $dataUpdateOldBatch['total_cost_price'] = $batch_data['unit_cost_price'] * $dataUpdateOldBatch['quantity'];
-                                    // $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
+                                    $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
                                     $dataUpdateOldBatch["updated_by"] = auth()->user()->id;
                                     $flag = update(new Inv_itemcard_batches(), $dataUpdateOldBatch, array("id" => $batch_data['id'], "com_code" => $com_code));
                                     if ($flag) {
@@ -533,7 +501,7 @@ class SalesInvoicesController extends Controller
                                         // كمية الصنف بالمخزن الحالي بعد الحركة الحركة
                                         $dataInsert_inv_itemcard_movements['quantity_after_move_store'] = "عدد " . " " . ($quantityAfterMoveCurrentStore * 1) . " " . $MainUomName;
                                         $dataInsert_inv_itemcard_movements["store_id"] = $sales_invoices_details_data['store_id'];
-                                        // $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
+                                        $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
                                         $dataInsert_inv_itemcard_movements["added_by"] = auth()->user()->id;
                                         $dataInsert_inv_itemcard_movements["date"] = date("Y-m-d");
                                         $dataInsert_inv_itemcard_movements["com_code"] = $com_code;
@@ -558,9 +526,6 @@ class SalesInvoicesController extends Controller
             }
         }
     }
-
-
-
     public function load_usershiftDiv(Request $request)
     {
         if ($request->ajax()) {
@@ -570,9 +535,6 @@ class SalesInvoicesController extends Controller
         }
         return view("admin.sales_invoices.load_usershiftDiv", ['user_shift' => $user_shift]);
     }
-
-
-
     function DoApproveInvoiceFinally(Request $request)
     {
         if ($request->ajax()) {
@@ -583,7 +545,7 @@ class SalesInvoicesController extends Controller
                     $dataUpdateParent['money_for_account'] = $invoice_data['total_cost'];
                     $dataUpdateParent['is_approved'] = 1;
                     $dataUpdateParent['approved_by'] = auth()->user()->com_code;
-                    // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+                    $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
                     $dataUpdateParent['updated_by'] = auth()->user()->com_code;
                     $dataUpdateParent['what_paid'] = $request->what_paid;
                     $dataUpdateParent['what_remain'] = $request->what_remain;
@@ -625,7 +587,7 @@ class SalesInvoicesController extends Controller
                     if ($flag) {
                         $DelegateData = get_cols_where_row(new Delegate(), array("account_number"), array("com_code" => $com_code, "delegate_code" => $invoice_data['delegate_code']));
                         if (!empty($DelegateData)) {
-                            refresh_account_blance_delegate($DelegateData['account_number'], new Account(), new Delegate(), new Treasuries_transactions(), new Sales_invoices(), false);
+                            refresh_account_blance_delegate($DelegateData['account_number'], new Account(), new Delegate(), new Treasuries_transactions(), new Sales_invoices(), new services_with_orders(), false);
                         }
                         if ($request->what_paid > 0) {
                             $user_shift = get_user_shift(new Admins_Shifts(), new Treasuries(), new Treasuries_transactions());
@@ -652,7 +614,7 @@ class SalesInvoicesController extends Controller
                             //debit دائن
                             $dataInsert_treasuries_transactions['money_for_account'] = $request->what_paid * (-1);
                             $dataInsert_treasuries_transactions['byan'] = "تحصيل نظير فاتورة مبيعات  رقم" . $request->auto_serial;
-                            // $dataInsert_treasuries_transactions['created_at'] = date("Y-m-Y H:i:s");
+                            $dataInsert_treasuries_transactions['created_at'] = date("Y-m-Y H:i:s");
                             $dataInsert_treasuries_transactions['added_by'] = auth()->user()->id;
                             $dataInsert_treasuries_transactions['com_code'] = $com_code;
                             $flag = insert(new Treasuries_transactions(), $dataInsert_treasuries_transactions);
@@ -664,7 +626,7 @@ class SalesInvoicesController extends Controller
                         }
                         if ($invoice_data['is_has_customer'] == 1) {
                             //Affect on Customer Finanical Account Balance
-                            refresh_account_blance_customer($customerData["account_number"], new Account(), new Customer(), new Treasuries_transactions(), new Sales_invoices(), new SalesReturn(), false);
+                            refresh_account_blance_customer($customerData["account_number"], new Account(), new Customer(), new Treasuries_transactions(), new Sales_invoices(), new SalesReturn(), new services_with_orders(), false);
                         }
                         echo json_encode("done");
                     }
@@ -672,9 +634,6 @@ class SalesInvoicesController extends Controller
             }
         }
     }
-
-
-
     public function delete($id)
     {
         try {
@@ -699,9 +658,6 @@ class SalesInvoicesController extends Controller
                 ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()]);
         }
     }
-
-
-
     public function load_invoice_details_modal(Request $request)
     {
         if ($request->ajax()) {
@@ -725,9 +681,6 @@ class SalesInvoicesController extends Controller
             return view("admin.sales_invoices.load_invoice_details_modal", ['delegates' => $delegates, 'customers' => $customers, 'Sales_matrial_types' => $Sales_matrial_types, 'invoice_data' => $invoice_data, 'sales_invoices_details' => $sales_invoices_details]);
         }
     }
-
-
-
     public function ajax_search(Request $request)
     {
         if ($request->ajax()) {
@@ -867,9 +820,6 @@ class SalesInvoicesController extends Controller
             return view('admin.sales_invoices.ajax_search', ['data' => $data]);
         }
     }
-
-
-
     public function do_add_new_customer(Request $request)
     {
         if ($request->ajax()) {
@@ -934,7 +884,7 @@ class SalesInvoicesController extends Controller
                 $data_insert['notes'] = $request->notes;
                 $data_insert['active'] = $request->active;
                 $data_insert['added_by'] = auth()->user()->id;
-                // $data_insert['created_at'] = date("Y-m-d H:i:s");
+                $data_insert['created_at'] = date("Y-m-d H:i:s");
                 $data_insert['date'] = date("Y-m-d");
                 $data_insert['com_code'] = $com_code;
                 $flag = insert(new Customer(), $data_insert);
@@ -971,7 +921,7 @@ class SalesInvoicesController extends Controller
                     $data_insert_account['account_type'] = 3;
                     $data_insert_account['active'] = $request->active;
                     $data_insert_account['added_by'] = auth()->user()->id;
-                    // $data_insert_account['created_at'] = date("Y-m-d H:i:s");
+                    $data_insert_account['created_at'] = date("Y-m-d H:i:s");
                     $data_insert_account['date'] = date("Y-m-d");
                     $data_insert_account['com_code'] = $com_code;
                     $data_insert_account['other_table_FK'] = $data_insert['customer_code'];
@@ -985,9 +935,6 @@ class SalesInvoicesController extends Controller
             }
         }
     }
-
-
-
     public function get_last_added_customer(Request $request)
     {
         if ($request->ajax()) {
@@ -996,9 +943,6 @@ class SalesInvoicesController extends Controller
             return view('admin.sales_invoices.get_last_added_customer', ['customers' => $customers]);
         }
     }
-
-
-
     public function searchforcustomer(Request $request)
     {
         if ($request->ajax()) {
@@ -1012,9 +956,6 @@ class SalesInvoicesController extends Controller
             return view('admin.sales_invoices.get_searchforcustomer_result', ['customers' => $customers]);
         }
     }
-
-
-
     public function searchforitems(Request $request)
     {
         if ($request->ajax()) {
@@ -1028,9 +969,6 @@ class SalesInvoicesController extends Controller
             return view('admin.sales_invoices.searchforitemsResult', ['item_cards' => $item_cards]);
         }
     }
-
-
-
     public function printsaleswina4($id, $size)
     {
         $com_code = auth()->user()->com_code;

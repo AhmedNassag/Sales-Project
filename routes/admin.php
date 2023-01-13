@@ -40,7 +40,7 @@ use App\Http\Controllers\Admin\SuppliersController;
 |
 */
 
-// define('PAGINATION_COUNT',10);
+define('PAGINATION_COUNT',10);
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'guest:admin'], function(){
     Route::get('login', [LoginController::class,'show_login_view'])->name('admin.showlogin');
@@ -307,7 +307,7 @@ Route::group([/*'namespace' => 'Admin',*/ 'prefix' => 'admin', 'middleware' => '
     Route::get('/suppliers_orders_general_return/printsaleswina4/{id}/{size}', [Suppliers_with_ordersGeneralRetuen::class, 'printsaleswina4'])->name('admin.suppliers_orders_general_return.printsaleswina4');
     /************************************************** End suppliers_orders_general_return **************************************************/
 
-    
+
     /************************************************** End itemcardBalance **************************************************/
     Route::get('/itemcardBalance/index', [ItemcardBalanceController::class, 'index'])->name('admin.itemcardBalance.index');
     Route::post('/itemcardBalance/ajax_search', [ItemcardBalanceController::class, 'ajax_search'])->name('admin.itemcardBalance.ajax_search');

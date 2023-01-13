@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\Exchange_transactionRequest;
 use App\Models\Treasuries_transactions;
 use App\Models\Admin;
 use App\Models\Admins_Shifts;
@@ -18,8 +17,10 @@ use App\Models\Customer;
 use App\Models\Sales_invoices;
 use App\Models\SalesReturn;
 use App\Models\Delegate;
-use Carbon\Carbon;
+use App\Models\services_with_orders;
 
+
+use App\Http\Requests\Exchange_transactionRequest;
 
 class ExchangeController extends Controller
 {
@@ -62,9 +63,6 @@ class ExchangeController extends Controller
         $admins = get_cols_where(new Admin(), array("id", "name"), array("com_code" => $com_code), 'id', 'ASC');
         return view('admin.exchange_transaction.index', ['data' => $data, 'checkExistsOpenShift' => $checkExistsOpenShift, 'accounts' => $accounts, 'mov_type' => $mov_type, 'treasuries' => $treasuries, 'admins' => $admins, 'accounts_search' => $accounts_search]);
     }
-
-
-
     public function store(Exchange_transactionRequest $request)
     {
         try {
@@ -98,7 +96,7 @@ class ExchangeController extends Controller
             //debit مدين
             $dataInsert['money_for_account'] = $request->money;
             $dataInsert['byan'] = $request->byan;
-            // $dataInsert['created_at'] = date("Y-m-Y H:i:s");
+            $dataInsert['created_at'] = date("Y-m-Y H:i:s");
             $dataInsert['added_by'] = auth()->user()->id;
             $dataInsert['com_code'] = $com_code;
             $flag = insert(new Treasuries_transactions(), $dataInsert);
@@ -107,13 +105,19 @@ class ExchangeController extends Controller
                 $dataUpdateTreasuries['last_isal_exhcange'] = $dataInsert['isal_number'];
                 update(new Treasuries(), $dataUpdateTreasuries, array("com_code" => $com_code, "id" => $request->treasuries_id));
                 $account_type = Account::where(["account_number" => $request->account_number])->value("account_type");
+
                 if ($account_type == 2) {
-                    refresh_account_blance_supplier($request->account_number, new Account(), new Supplier(), new Treasuries_transactions(), new Suppliers_with_orders(), false);
+                    $the_final_Balance = refresh_account_blance_supplier($request->account_number, new Account(), new Supplier(), new Treasuries_transactions(), new Suppliers_with_orders(), new services_with_orders(), false);
                 } elseif ($account_type == 3) {
-                    refresh_account_blance_customer($request->account_number, new Account(), new Customer(), new Treasuries_transactions(), new Sales_invoices(), new SalesReturn(), false);
+                    $the_final_Balance = refresh_account_blance_customer($request->account_number, new Account(), new Customer(), new Treasuries_transactions(), new Sales_invoices(), new SalesReturn(), new services_with_orders(), false);
+                } elseif ($account_type == 4) {
+                    $the_final_Balance =  refresh_account_blance_delegate($request->account_number, new Account(), new Delegate(), new Treasuries_transactions(), new Sales_invoices(), new services_with_orders(), false);
                 } else {
-                    //لاحقا
+                    $the_final_Balance = refresh_account_blance_General($request->account_number, new Account(), new Treasuries_transactions(), new services_with_orders(), false);
                 }
+
+
+
                 return redirect()->route('admin.exchange_transaction.index')->with(['success' => "لقد تم اضافة البيانات بنجاح "]);
             } else {
                 return redirect()->back()->with(['error' => " عفوا حدث خطأ م من فضلك حاول مرة اخري !"])->withInput();
@@ -122,9 +126,6 @@ class ExchangeController extends Controller
             return redirect()->back()->with(['error' => "عفوا حدث خطأما" . " " . $ex->getMessage()])->withInput();
         }
     }
-
-
-
     public function  get_account_blance(Request $request)
     {
         if ($request->ajax()) {
@@ -133,24 +134,21 @@ class ExchangeController extends Controller
             $AccountData =  Account::select("account_type")->where(["com_code" => $com_code, "account_number" => $account_number])->first();
             if (!empty($AccountData)) {
                 if ($AccountData['account_type'] == 2) {
-                    $the_final_Balance = refresh_account_blance_supplier($account_number, new Account(), new Supplier(), new Treasuries_transactions(), new Suppliers_with_orders(), true);
+                    $the_final_Balance = refresh_account_blance_supplier($account_number, new Account(), new Supplier(), new Treasuries_transactions(), new Suppliers_with_orders(), new services_with_orders(), true);
                     return view('admin.collect_transactions.get_account_blance', ['the_final_Balance' => $the_final_Balance]);
                 } elseif ($AccountData['account_type'] == 3) {
-                    $the_final_Balance = refresh_account_blance_customer($account_number, new Account(), new Customer(), new Treasuries_transactions(), new Sales_invoices(), new SalesReturn(), true);
+                    $the_final_Balance = refresh_account_blance_customer($account_number, new Account(), new Customer(), new Treasuries_transactions(), new Sales_invoices(), new SalesReturn(), new services_with_orders(), true);
                     return view('admin.collect_transactions.get_account_blance', ['the_final_Balance' => $the_final_Balance]);
                 } elseif ($AccountData['account_type'] == 4) {
-                    $the_final_Balance =  refresh_account_blance_delegate($account_number, new Account(), new Delegate(), new Treasuries_transactions(), new Sales_invoices(), true);
+                    $the_final_Balance =  refresh_account_blance_delegate($account_number, new Account(), new Delegate(), new Treasuries_transactions(), new Sales_invoices(), new services_with_orders(), true);
                     return view('admin.collect_transactions.get_account_blance', ['the_final_Balance' => $the_final_Balance]);
                 } else {
-                    $the_final_Balance = refresh_account_blance_General($account_number, new Account(), new Treasuries_transactions(), true);
+                    $the_final_Balance = refresh_account_blance_General($account_number, new Account(), new Treasuries_transactions(), new services_with_orders(), true);
                     return view('admin.collect_transactions.get_account_blance', ['the_final_Balance' => $the_final_Balance]);
                 }
             }
         }
     }
-
-
-
     public function ajax_search(Request $request)
     {
         if ($request->ajax()) {
