@@ -19,7 +19,7 @@ class CreateTreasuriesTransactionsTable extends Migration
             $table->decimal('money', 10, 2)->nullable();
             $table->integer('mov_type')->nullable();
             $table->bigInteger('the_foregin_key')->nullable();
-            // $table->id('date')->nullable();
+            $table->date('date')->nullable();
             // $table->id('last_update')->nullable();
             $table->integer('added_by')->nullable();
             $table->integer('updated_by')->nullable();

@@ -19,6 +19,8 @@ class CreateTreasuriesTable extends Migration
             $table->bigInteger('last_isal_exhcange')->nullable();
             $table->bigInteger('last_isal_collect')->nullable();
             $table->tinyInteger('is_master')->default(0)->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
             $table->tinyInteger('active')->default(1)->nullable();
             $table->integer('added_by')->nullable();
             $table->integer('updated_by')->nullable();
