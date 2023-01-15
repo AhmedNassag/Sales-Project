@@ -23,8 +23,8 @@ class CreateInvStoresInventoryTable extends Migration
             $table->integer('added_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->integer('com_code')->nullable();
-            // $table->integer('inventory_type')->nullable();
-            // $table->integer('store_id')->nullable();
+            $table->tinyInteger('inventory_type')->nullable();
+            $table->integer('store_id')->nullable();
             $table->date('date')->nullable();
             // $table->integer('cloased_by')->nullable();
             // $table->date('closed_at')->nullable();

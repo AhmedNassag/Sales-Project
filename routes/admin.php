@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\DelegatesController;
 use App\Http\Controllers\Admin\ExchangeController;
 use App\Http\Controllers\Admin\FinancialReportController;
 use App\Http\Controllers\Admin\Inv_item_card_categoriesController;
+use App\Http\Controllers\Admin\Inv_stores_inventoryController;
 use App\Http\Controllers\Admin\TreasuriesController;
 use App\Http\Controllers\Admin\SalesMatrialTypesController;
 use App\Http\Controllers\Admin\StoresController;
@@ -389,6 +390,25 @@ Route::group([/*'namespace' => 'Admin',*/ 'prefix' => 'admin', 'middleware' => '
     Route::post('/Services_orders/load_usershiftDiv', [Services_with_ordersController::class, 'load_usershiftDiv'])->name('admin.Services_orders.load_usershiftDiv');
     Route::get('/Services_orders/printsaleswina4/{id}/{size}', [Services_with_ordersController::class, 'printsaleswina4'])->name('admin.Services_orders.printsaleswina4');
     /************************************************** End Services_orders **************************************************/
+
+
+    /************************************************** Start stores_inventory **************************************************/
+    Route::get('/stores_inventory/index', [Inv_stores_inventoryController::class, 'index'])->name('admin.stores_inventory.index');
+    Route::get('/stores_inventory/create', [Inv_stores_inventoryController::class, 'create'])->name('admin.stores_inventory.create');
+    Route::post('/stores_inventory/store', [Inv_stores_inventoryController::class, 'store'])->name('admin.stores_inventory.store');
+    Route::get('/stores_inventory/edit/{id}', [Inv_stores_inventoryController::class, 'edit'])->name('admin.stores_inventory.edit');
+    Route::post('/stores_inventory/update/{id}', [Inv_stores_inventoryController::class, 'update'])->name('admin.stores_inventory.update');
+    Route::get('/stores_inventory/delete/{id}', [Inv_stores_inventoryController::class, 'delete'])->name('admin.stores_inventory.delete');
+    Route::post('/stores_inventory/ajax_search', [Inv_stores_inventoryController::class, 'ajax_search'])->name('admin.stores_inventory.ajax_search');
+    Route::get('/stores_inventory/show/{id}', [Inv_stores_inventoryController::class, 'show'])->name('admin.stores_inventory.show');
+    Route::post('/stores_inventory/add_new_details/{id}', [Inv_stores_inventoryController::class, 'add_new_details'])->name('admin.stores_inventory.add_new_details');
+    Route::post('/stores_inventory/load_edit_item_details', [Inv_stores_inventoryController::class, 'load_edit_item_details'])->name('admin.stores_inventory.load_edit_item_details');
+    Route::post('/stores_inventory/edit_item_details/{id}/{id_parent}', [Inv_stores_inventoryController::class, 'edit_item_details'])->name('admin.stores_inventory.edit_item_details');
+    Route::get('/stores_inventory/delete_details/{id}/{id_parent}', [Inv_stores_inventoryController::class, 'delete_details'])->name('admin.stores_inventory.delete_details');
+    Route::get('/stores_inventory/close_one_details/{id}/{id_parent}', [Inv_stores_inventoryController::class, 'close_one_details'])->name('admin.stores_inventory.close_one_details');
+    Route::get('/stores_inventory/do_close_parent/{id}', [Inv_stores_inventoryController::class, 'do_close_parent'])->name('admin.stores_inventory.do_close_parent');
+    Route::get('/stores_inventory/printsaleswina4/{id}/{size}', [Inv_stores_inventoryController::class, 'printsaleswina4'])->name('admin.stores_inventory.printsaleswina4');
+    /************************************************** End stores_inventory **************************************************/
 
 });
 
