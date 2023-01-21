@@ -60,7 +60,7 @@ class Inv_stores_inventoryController extends Controller
             $data_insert['store_id'] = $request->store_id;
             $data_insert['notes'] = $request->notes;
             $data_insert['added_by'] = auth()->user()->id;
-            $data_insert['created_at'] = date("Y-m-d H:i:s");
+            // $data_insert['created_at'] = date("Y-m-d H:i:s");
             $data_insert['date'] = date("Y-m-d");
             $data_insert['com_code'] = $com_code;
             insert(new Inv_stores_inventory(), $data_insert);
@@ -71,6 +71,9 @@ class Inv_stores_inventoryController extends Controller
                 ->withInput();
         }
     }
+
+
+
     public function delete($id)
     {
         try {
@@ -96,6 +99,9 @@ class Inv_stores_inventoryController extends Controller
                 ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()]);
         }
     }
+
+
+
     public function edit($id)
     {
         $com_code = auth()->user()->com_code;
@@ -114,6 +120,9 @@ class Inv_stores_inventoryController extends Controller
         }
         return view('admin.inv_stores_inventory.edit', ['data' => $data, 'stores' => $stores]);
     }
+
+
+
     public function update($id, Inv_stores_inventoryRequest $request)
     {
         try {
@@ -139,7 +148,7 @@ class Inv_stores_inventoryController extends Controller
             $data_to_update['inventory_type'] = $request->inventory_type;
             $data_to_update['notes'] = $request->notes;
             $data_to_update['updated_by'] = auth()->user()->id;
-            $data_to_update['updated_at'] = date("Y-m-d H:i:s");
+            // $data_to_update['updated_at'] = date("Y-m-d H:i:s");
             update(new Inv_stores_inventory(), $data_to_update, array("id" => $id, "com_code" => $com_code));
             return redirect()->route('admin.stores_inventory.index')->with(['success' => 'لقد تم تحديث البيانات بنجاح']);
         } catch (\Exception $ex) {
@@ -148,6 +157,9 @@ class Inv_stores_inventoryController extends Controller
                 ->withInput();
         }
     }
+
+
+
     public function show($id)
     {
         try {
@@ -189,6 +201,9 @@ class Inv_stores_inventoryController extends Controller
                 ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()]);
         }
     }
+
+
+
     public function add_new_details($id, Request $request)
     {
         if ($_POST) {
@@ -227,7 +242,7 @@ class Inv_stores_inventoryController extends Controller
                                 $data_insert['production_date'] = $batch->production_date;
                                 $data_insert['expired_date'] = $batch->expired_date;
                                 $data_insert['added_by'] = auth()->user()->id;
-                                $data_insert['created_at'] = date("Y-m-d H:i:s");
+                                // $data_insert['created_at'] = date("Y-m-d H:i:s");
                                 $data_insert['date'] = date("Y-m-d");
                                 $data_insert['com_code'] = $com_code;
                                 $flag = insert(new Inv_stores_inventory_details(), $data_insert);
@@ -241,6 +256,9 @@ class Inv_stores_inventoryController extends Controller
         }
         return redirect()->route('admin.stores_inventory.show', $id)->with(['success' => 'تم اضافة البيانات بنجاح']);
     }
+
+
+
     public function load_edit_item_details(Request $request)
     {
         if ($request->ajax()) {
@@ -254,6 +272,9 @@ class Inv_stores_inventoryController extends Controller
             }
         }
     }
+
+
+
     public function edit_item_details($id, $parent_pill_id, Request $request)
     {
         if ($_POST) {
@@ -277,13 +298,16 @@ class Inv_stores_inventoryController extends Controller
             $dataUpdateDetails['total_cost_price'] = ($request->new_quantity_edit * $dataDetails['unit_cost_price']);
             $dataUpdateDetails['notes'] = $request->notes_edit;
             $dataUpdateDetails['updated_by'] = auth()->user()->id;
-            $dataUpdateDetails['updated_at'] = date("Y-m-d H:i:s");
+            // $dataUpdateDetails['updated_at'] = date("Y-m-d H:i:s");
             update(new Inv_stores_inventory_details(), $dataUpdateDetails, array("com_code" => $com_code, "id" => $id, 'is_closed' => 0, 'inv_stores_inventory_auto_serial' => $data['auto_serial']));
             $data_to_update_parent['total_cost_batches'] = get_sum_where(new Inv_stores_inventory_details(), 'total_cost_price', array("com_code" => $com_code, 'inv_stores_inventory_auto_serial' => $data['auto_serial']));
             update(new Inv_stores_inventory(), $data_to_update_parent, array("com_code" => $com_code, "id" => $parent_pill_id, 'is_closed' => 0));
         }
         return redirect()->route('admin.stores_inventory.show', $parent_pill_id)->with(['success' => 'تم تحديث البيانات بنجاح']);
     }
+
+
+
     public function delete_details($id, $id_parent)
     {
         try {
@@ -313,6 +337,9 @@ class Inv_stores_inventoryController extends Controller
                 ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()]);
         }
     }
+
+
+
     public function close_one_details($id, $id_parent)
     {
         try {
@@ -352,7 +379,7 @@ class Inv_stores_inventoryController extends Controller
             $dataUpdateBatch['quantity'] = $Data_item_details['new_quantity'];
             $dataUpdateBatch['total_cost_price'] = $Data_item_details['total_cost_price'];
             $dataUpdateBatch['updated_by'] = auth()->user()->id;
-            $dataUpdateBatch['updated_at'] = date("Y-m-d H:i:s");
+            // $dataUpdateBatch['updated_at'] = date("Y-m-d H:i:s");
             $flag = update(new Inv_itemcard_batches(), $dataUpdateBatch, array("com_code" => $com_code, 'auto_serial' => $Data_item_details['batch_auto_serial'], 'item_code' => $Data_item_details['item_code']));
             if ($flag) {
                 $dataUpdatedetails['is_closed'] = 1;
@@ -397,7 +424,7 @@ class Inv_stores_inventoryController extends Controller
                     // كمية الصنف بالمخزن الحالي بعد الحركة الحركة
                     $dataInsert_inv_itemcard_movements['quantity_after_move_store'] = "عدد " . " " . ($quantityAfterMoveCurrentStore * 1) . " " . $MainUomName;
                     $dataInsert_inv_itemcard_movements["store_id"] = $data_parent['store_id'];
-                    $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
+                    // $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
                     $dataInsert_inv_itemcard_movements["added_by"] = auth()->user()->id;
                     $dataInsert_inv_itemcard_movements["date"] = date("Y-m-d");
                     $dataInsert_inv_itemcard_movements["com_code"] = $com_code;
@@ -420,6 +447,9 @@ class Inv_stores_inventoryController extends Controller
                 ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()]);
         }
     }
+
+
+
     public function do_close_parent($id)
     {
         try {
@@ -457,7 +487,7 @@ class Inv_stores_inventoryController extends Controller
                         $dataUpdateBatch['quantity'] = $Data_item_details['new_quantity'];
                         $dataUpdateBatch['total_cost_price'] = $Data_item_details['total_cost_price'];
                         $dataUpdateBatch['updated_by'] = auth()->user()->id;
-                        $dataUpdateBatch['updated_at'] = date("Y-m-d H:i:s");
+                        // $dataUpdateBatch['updated_at'] = date("Y-m-d H:i:s");
                         $flag = update(new Inv_itemcard_batches(), $dataUpdateBatch, array("com_code" => $com_code, 'auto_serial' => $Data_item_details['batch_auto_serial'], 'item_code' => $Data_item_details['item_code']));
                         if ($flag) {
                             $dataUpdatedetails['is_closed'] = 1;
@@ -502,7 +532,7 @@ class Inv_stores_inventoryController extends Controller
                                 // كمية الصنف بالمخزن الحالي بعد الحركة الحركة
                                 $dataInsert_inv_itemcard_movements['quantity_after_move_store'] = "عدد " . " " . ($quantityAfterMoveCurrentStore * 1) . " " . $MainUomName;
                                 $dataInsert_inv_itemcard_movements["store_id"] = $data_parent['store_id'];
-                                $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
+                                // $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
                                 $dataInsert_inv_itemcard_movements["added_by"] = auth()->user()->id;
                                 $dataInsert_inv_itemcard_movements["date"] = date("Y-m-d");
                                 $dataInsert_inv_itemcard_movements["com_code"] = $com_code;
@@ -532,6 +562,8 @@ class Inv_stores_inventoryController extends Controller
                 ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()]);
         }
     }
+
+
 
     public function ajax_search(Request $request)
     {
@@ -594,7 +626,6 @@ class Inv_stores_inventoryController extends Controller
                 $operator5 = "<=";
                 $value5 = $order_date_to;
             }
-
             if ($inventory_type_search == 'all') {
                 //دائما  true
                 $field6 = "id";
@@ -631,7 +662,6 @@ class Inv_stores_inventoryController extends Controller
                 return redirect()->route('admin.inv_stores_inventory.index')->with(['error' => 'عفوا غير قادر علي الوصول الي البيانات المطلوبة !!']);
             }
             $invoice_data['store_name'] = Store::where('id', $invoice_data['store_id'])->value('name');
-
             $invoice_data['added_by_admin'] = Admin::where('id', $invoice_data['added_by'])->value('name');
             $invoices_details = get_cols_where(new Inv_stores_inventory_details(), array("*"), array('inv_stores_inventory_auto_serial' => $invoice_data['auto_serial'], 'com_code' => $com_code), 'id', 'ASC');
             if (!empty($invoices_details)) {
@@ -644,11 +674,7 @@ class Inv_stores_inventoryController extends Controller
                     }
                 }
             }
-
-
-
             $systemData = get_cols_where_row(new Admin_panel_setting(), array("system_name", "phone", "address", "photo"), array("com_code" => $com_code));
-
             if ($size == "A4") {
                 return view('admin.inv_stores_inventory.printsaleswina4', ['data' => $invoice_data, 'systemData' => $systemData, 'invoices_details' => $invoices_details]);
             } else {

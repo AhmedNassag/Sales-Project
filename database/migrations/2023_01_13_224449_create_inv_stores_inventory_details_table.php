@@ -21,7 +21,7 @@ class CreateInvStoresInventoryDetailsTable extends Migration
             $table->bigInteger('batch_auto_serial')->nullable();
             $table->decimal('old_quantity', 10, 2)->nullable();
             $table->decimal('new_quantity', 10, 2)->nullable();
-            $table->decimal('diffrent_quantity', 10, 2)->nullable();
+            $table->decimal('diffrent_quantity', 10, 2)->default(0)->nullable();
             $table->text('notes')->nullable();
             $table->tinyInteger('is_closed')->default(0)->nullable();
             $table->integer('added_by')->nullable();
@@ -29,10 +29,10 @@ class CreateInvStoresInventoryDetailsTable extends Migration
             $table->integer('cloased_by')->nullable();
             $table->date('closed_at')->nullable();
             $table->integer('com_code')->nullable();
-            // $table->id('unit_cost_price')->nullable();
-            // $table->id('total_cost_price')->nullable();
-            // $table->id('production_date')->nullable();
-            // $table->id('expired_date')->nullable();
+            $table->decimal('unit_cost_price', 10, 2)->nullable();
+            $table->decimal('total_cost_price', 10, 2)->nullable();
+            $table->date('production_date')->nullable();
+            $table->date('expired_date')->nullable();
             $table->timestamps();
         });
     }
