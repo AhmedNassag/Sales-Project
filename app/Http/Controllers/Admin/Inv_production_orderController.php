@@ -15,7 +15,7 @@ class Inv_production_orderController extends Controller
     {
         try {
             $com_code = auth()->user()->com_code;
-            $data = get_cols_where_p(new Inv_production_order(), array("*"), array("com_code" => $com_code), 'id', 'DESC', PAGINATION_COUNT);
+            $data = get_cols_where_p(new Inv_production_order(), array("*"), array("com_code" => $com_code), 'id', 'DESC', 10);
             if (!empty($data)) {
                 foreach ($data as $info) {
                     $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
@@ -295,7 +295,7 @@ class Inv_production_orderController extends Controller
                 $value5 = $to_date_search;
             }
 
-            $data = inv_production_order::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->where('com_code', '=', $com_code)->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+            $data = inv_production_order::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->where('com_code', '=', $com_code)->orderBy('id', 'DESC')->paginate(10);
             if (!empty($data)) {
                 foreach ($data as $info) {
                     $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
