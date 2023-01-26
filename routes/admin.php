@@ -410,5 +410,19 @@ Route::group([/*'namespace' => 'Admin',*/ 'prefix' => 'admin', 'middleware' => '
     Route::get('/stores_inventory/printsaleswina4/{id}/{size}', [Inv_stores_inventoryController::class, 'printsaleswina4'])->name('admin.stores_inventory.printsaleswina4');
     /************************************************** End stores_inventory **************************************************/
 
+
+    /************************************************** Start inv_production_order **************************************************/
+    Route::get('/inv_production_order/index', [Inv_production_orderController::class, 'index'])->name('admin.inv_production_order.index');
+    Route::get('/inv_production_order/create', [Inv_production_orderController::class, 'create'])->name('admin.inv_production_order.create');
+    Route::post('/inv_production_order/store', [Inv_production_orderController::class, 'store'])->name('admin.inv_production_order.store');
+    Route::get('/inv_production_order/edit/{id}', [Inv_production_orderController::class, 'edit'])->name('admin.inv_production_order.edit');
+    Route::post('/inv_production_order/update/{id}', [Inv_production_orderController::class, 'update'])->name('admin.inv_production_order.update');
+    Route::get('/inv_production_order/delete/{id}', [Inv_production_orderController::class, 'delete'])->name('admin.inv_production_order.delete');
+    Route::post('/inv_production_order/ajax_search', [Inv_production_orderController::class, 'ajax_search'])->name('admin.inv_production_order.ajax_search');
+    Route::post('/inv_production_order/show_more_detials', [Inv_production_orderController::class, 'show_more_detials'])->name('admin.inv_production_order.show_more_detials');
+    Route::get('/inv_production_order/do_approve/{id}', [Inv_production_orderController::class, 'do_approve'])->name('admin.inv_production_order.do_approve');
+    Route::get('/inv_production_order/do_closes_archive/{id}', [Inv_production_orderController::class, 'do_closes_archive'])->name('admin.inv_production_order.do_closes_archive');
+    /************************************************** End inv_production_order **************************************************/
+
 });
 

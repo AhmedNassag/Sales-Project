@@ -264,10 +264,54 @@
                             </a>
                         </li>
                         <!-- End itemcardBalance -->
-
                     </ul>
                 </li>
                 <!-- End حركات مخزنية -->
+
+
+
+                <!-- Start حركات خطوط الإنتاج -->
+                <li class="nav-item has-treeview  {{ (request()->is('admin/inv_production_order*')  || request()->is('admin/inv_production_lines*') || request()->is('admin/inv_production_exchange*') )?'menu-open':'' }}    ">
+                    <a href="#" class="nav-link {{ (request()->is('admin/inv_production_order*')  || request()->is('admin/inv_production_lines*') || request()->is('admin/inv_production_exchange*'))?'active':'' }} ">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            حركات خطوط الإنتاج
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <!-- Start inv_production_lines -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.inv_production_lines.index') }}" class="nav-link {{ (request()->is('admin/inv_production_lines*')  )?'active':'' }}">
+                                <p>
+                                خطوط الانتاج
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End inv_production_lines -->
+
+                        <!-- Start inv_production_order -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.inv_production_order.index') }}" class="nav-link {{ (request()->is('admin/inv_production_order*')  )?'active':'' }}">
+                                <p>
+                                    أوامر التشغيل
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End inv_production_order -->
+
+                        <!-- Start inv_production_exchange-->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.inv_production_exchange.index') }}" class="nav-link {{ (request()->is('admin/inv_production_exchange*')  )?'active':'' }}">
+                                <p>
+                                    صرف خامات لخط الانتاج
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End inv_production_exchange -->
+                    </ul>
+                </li>
+                <!-- End حركات خطوط الإنتاج -->
 
 
 
@@ -403,9 +447,9 @@
                         <!-- Start FinancialReport.supplieraccountmirror -->
                         <li class="nav-item">
                             <a href="{{ route('admin.FinancialReport.supplieraccountmirror') }}" class="nav-link {{ (request()->is('admin/FinancialReport/supplieraccountmirror') ) ? 'active' : '' }}">
-                            <p>
-                                كشف حساب مورد
-                            </p>
+                                <p>
+                                    كشف حساب مورد
+                                </p>
                             </a>
                         </li>
                         <!-- End FinancialReport.supplieraccountmirror -->
