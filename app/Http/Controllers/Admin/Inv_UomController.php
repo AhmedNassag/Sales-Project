@@ -15,7 +15,7 @@ class Inv_UomController extends Controller
 {
     public function index()
     {
-        $data = Inv_uom::select()->orderby('id', 'DESC')->paginate(PAGINATION_COUNT);
+        $data = Inv_uom::select()->orderby('id', 'DESC')->paginate(10);
         if (!empty($data)) {
             foreach ($data as $info) {
                 $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
@@ -174,7 +174,7 @@ class Inv_UomController extends Controller
                 $operator2 = "=";
                 $value2 = $is_master_search;
             }
-            $data = Inv_uom::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+            $data = Inv_uom::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->orderBy('id', 'DESC')->paginate(10);
             if (!empty($data)) {
                 foreach ($data as $info) {
                     $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');

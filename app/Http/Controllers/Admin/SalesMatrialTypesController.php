@@ -12,7 +12,7 @@ class SalesMatrialTypesController extends Controller
 {
     public function index()
     {
-        $data = Sales_matrial_types::select()->orderby('id', 'DESC')->paginate(PAGINATION_COUNT);
+        $data = Sales_matrial_types::select()->orderby('id', 'DESC')->paginate(10);
         if (!empty($data)) {
             foreach ($data as $info) {
                 $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');

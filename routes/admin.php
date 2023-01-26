@@ -41,7 +41,7 @@ use App\Http\Controllers\Admin\SuppliersController;
 |
 */
 
-define('PAGINATION_COUNT',10);
+// define('PAGINATION_COUNT',10);
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'guest:admin'], function(){
     Route::get('login', [LoginController::class,'show_login_view'])->name('admin.showlogin');

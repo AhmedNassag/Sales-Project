@@ -27,7 +27,7 @@ class Suppliers_with_ordersController extends Controller
     public function index()
     {
         $com_code = auth()->user()->com_code;
-        $data = get_cols_where_p(new Suppliers_with_orders(), array("*"), array("com_code" => $com_code, 'order_type' => 1), 'id', 'DESC', PAGINATION_COUNT);
+        $data = get_cols_where_p(new Suppliers_with_orders(), array("*"), array("com_code" => $com_code, 'order_type' => 1), 'id', 'DESC', 10);
         if (!empty($data)) {
             foreach ($data as $info) {
                 $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
@@ -73,7 +73,7 @@ class Suppliers_with_ordersController extends Controller
             $data_insert['store_id'] = $request->store_id;
             $data_insert['account_number'] = $supplierData['account_number'];
             $data_insert['added_by'] = auth()->user()->id;
-            $data_insert['created_at'] = date("Y-m-d H:i:s");
+            // $data_insert['created_at'] = date("Y-m-d H:i:s");
             $data_insert['date'] = date("Y-m-d");
             $data_insert['com_code'] = $com_code;
             Suppliers_with_orders::create($data_insert);
@@ -155,7 +155,7 @@ class Suppliers_with_ordersController extends Controller
             $data_to_update['store_id'] = $request->store_id;
             $data_to_update['account_number'] = $supplierData['account_number'];
             $data_to_update['updated_by'] = auth()->user()->id;
-            $data_to_update['updated_at'] = date("Y-m-d H:i:s");
+            // $data_to_update['updated_at'] = date("Y-m-d H:i:s");
             update(new Suppliers_with_orders(), $data_to_update, array("id" => $id, "com_code" => $com_code, 'order_type' => 1));
             return redirect()->route('admin.suppliers_orders.show', $id)->with(['success' => 'لقد تم تحديث البيانات بنجاح']);
         } catch (\Exception $ex) {
@@ -204,7 +204,7 @@ class Suppliers_with_ordersController extends Controller
                     $data_insert['total_price'] = $request->total_add;
                     $data_insert['order_date'] = $suppliers_with_ordersData['order_date'];
                     $data_insert['added_by'] = auth()->user()->id;
-                    $data_insert['created_at'] = date("Y-m-d H:i:s");
+                    // $data_insert['created_at'] = date("Y-m-d H:i:s");
                     $data_insert['com_code'] = $com_code;
                     $flag = insert(new Suppliers_with_orders_details(), $data_insert);
                     if ($flag) {
@@ -214,7 +214,7 @@ class Suppliers_with_ordersController extends Controller
                         $dataUpdateParent['total_befor_discount'] = $total_detials_sum + $suppliers_with_ordersData['tax_value'];
                         $dataUpdateParent['total_cost'] = $dataUpdateParent['total_befor_discount'] - $suppliers_with_ordersData['discount_value'];
                         $dataUpdateParent['updated_by'] = auth()->user()->id;
-                        $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+                        // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
                         update(new Suppliers_with_orders(), $dataUpdateParent, array("auto_serial" => $request->autoserailparent, "com_code" => $com_code, 'order_type' => 1));
                         echo json_encode("done");
                     }
@@ -315,7 +315,7 @@ class Suppliers_with_ordersController extends Controller
                     $data_to_update['total_price'] = $request->total_add;
                     $data_to_update['order_date'] = $parent_pill_data['order_date'];
                     $data_to_update['updated_by'] = auth()->user()->id;
-                    $data_to_update['updated_at'] = date("Y-m-d H:i:s");
+                    // $data_to_update['updated_at'] = date("Y-m-d H:i:s");
                     $data_to_update['com_code'] = $com_code;
                     $flag = update(new Suppliers_with_orders_details(), $data_to_update, array("id" => $request->id, 'com_code' => $com_code, 'order_type' => 1, 'suppliers_with_orders_auto_serial' => $request->autoserailparent));
                     if ($flag) {
@@ -325,7 +325,7 @@ class Suppliers_with_ordersController extends Controller
                         $dataUpdateParent['total_befor_discount'] = $total_detials_sum + $parent_pill_data['tax_value'];
                         $dataUpdateParent['total_cost'] = $dataUpdateParent['total_befor_discount'] - $parent_pill_data['discount_value'];
                         $dataUpdateParent['updated_by'] = auth()->user()->id;
-                        $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+                        // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
                         update(new Suppliers_with_orders(), $dataUpdateParent, array("auto_serial" => $request->autoserailparent, "com_code" => $com_code, 'order_type' => 1));
                         echo json_encode("done");
                     }
@@ -384,7 +384,7 @@ class Suppliers_with_ordersController extends Controller
                     $dataUpdateParent['total_befor_discount'] = $total_detials_sum + $parent_pill_data['tax_value'];
                     $dataUpdateParent['total_cost'] = $dataUpdateParent['total_befor_discount'] - $parent_pill_data['discount_value'];
                     $dataUpdateParent['updated_by'] = auth()->user()->id;
-                    $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+                    // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
                     update(new Suppliers_with_orders(), $dataUpdateParent, array("id" => $parent_id, "com_code" => $com_code, 'order_type' => 1));
                     return redirect()->back()
                         ->with(['success' => '   تم حذف البيانات بنجاح']);
@@ -452,7 +452,7 @@ class Suppliers_with_ordersController extends Controller
         $dataUpdateParent['money_for_account'] = $request['total_cost'] * (-1);
         $dataUpdateParent['is_approved'] = 1;
         $dataUpdateParent['approved_by'] = auth()->user()->com_code;
-        $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+        // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
         $dataUpdateParent['updated_by'] = auth()->user()->com_code;
         //first check for pill type sate cash
         if ($request['pill_type'] == 1) {
@@ -516,7 +516,7 @@ class Suppliers_with_ordersController extends Controller
                 //debit مدين
                 $dataInsert_treasuries_transactions['money_for_account'] = $request['what_paid'];
                 $dataInsert_treasuries_transactions['byan'] = "صرف نظير فاتورة مشتريات  رقم" . $auto_serial;
-                $dataInsert_treasuries_transactions['created_at'] = date("Y-m-Y H:i:s");
+                // $dataInsert_treasuries_transactions['created_at'] = date("Y-m-Y H:i:s");
                 $dataInsert_treasuries_transactions['added_by'] = auth()->user()->id;
                 $dataInsert_treasuries_transactions['com_code'] = $com_code;
                 $flag = insert(new Treasuries_transactions(), $dataInsert_treasuries_transactions);
@@ -573,14 +573,14 @@ class Suppliers_with_ordersController extends Controller
                             //update current Batch تحديث علي الباتش القديمة
                             $dataUpdateOldBatch['quantity'] = $OldBatchExsists['quantity'] + $quntity;
                             $dataUpdateOldBatch['total_cost_price'] = $OldBatchExsists['unit_cost_price'] * $dataUpdateOldBatch['quantity'];
-                            $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
+                            // $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
                             $dataUpdateOldBatch["updated_by"] = auth()->user()->id;
                             update(new Inv_itemcard_batches(), $dataUpdateOldBatch, array("id" => $OldBatchExsists['id'], "com_code" => $com_code));
                         } else {
                             //insert new Batch ادخال باتش جديده
                             $dataInsertBatch["quantity"] = $quntity;
                             $dataInsertBatch["total_cost_price"] = $info->total_price;
-                            $dataInsertBatch["created_at"] = date("Y-m-d H:i:s");
+                            // $dataInsertBatch["created_at"] = date("Y-m-d H:i:s");
                             $dataInsertBatch["added_by"] = auth()->user()->id;
                             $dataInsertBatch["com_code"] = $com_code;
                             $row = get_cols_where_row_orderby(new Inv_itemcard_batches(), array("auto_serial"), array("com_code" => $com_code), 'id', 'DESC');
@@ -612,7 +612,7 @@ class Suppliers_with_ordersController extends Controller
                         // كمية الصنف بالمخزن الحالي بعد الحركة الحركة
                         $dataInsert_inv_itemcard_movements['quantity_after_move_store'] = "عدد " . " " . ($quantityAfterMoveCurrentStore * 1) . " " . $MainUomName;
                         $dataInsert_inv_itemcard_movements["store_id"] = $data['store_id'];
-                        $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
+                        // $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
                         $dataInsert_inv_itemcard_movements["added_by"] = auth()->user()->id;
                         $dataInsert_inv_itemcard_movements["date"] = date("Y-m-d");
                         $dataInsert_inv_itemcard_movements["com_code"] = $com_code;
@@ -708,7 +708,7 @@ class Suppliers_with_ordersController extends Controller
                 $operator5 = ">";
                 $value5 = 0;
             }
-            $data = Suppliers_with_orders::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->where('order_type', '=', 1)->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+            $data = Suppliers_with_orders::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->where('order_type', '=', 1)->orderBy('id', 'DESC')->paginate(10);
             if (!empty($data)) {
                 foreach ($data as $info) {
                     $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');

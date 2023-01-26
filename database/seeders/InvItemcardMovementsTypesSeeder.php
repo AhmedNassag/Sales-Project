@@ -41,7 +41,7 @@ class InvItemcardMovementsTypesSeeder extends Seeder
 
 
         $inv_itemcard_movements_categories6 = Inv_itemcard_movements_types::create([
-            'type' => 'صرف داخلى لمندوب',
+            'type' => 'جرد بالمخازن',
         ]);
 
 

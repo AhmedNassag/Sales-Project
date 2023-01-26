@@ -636,7 +636,7 @@ class Inv_stores_inventoryController extends Controller
                 $operator6 = "=";
                 $value6 = $inventory_type_search;
             }
-            $data = Inv_stores_inventory::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->where($field6, $operator6, $value6)->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+            $data = Inv_stores_inventory::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->where($field6, $operator6, $value6)->orderBy('id', 'DESC')->paginate(10);
             if (!empty($data)) {
                 foreach ($data as $info) {
                     $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');

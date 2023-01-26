@@ -13,7 +13,7 @@ class SupplierCategoriesController extends Controller
     public function index()
     {
         $com_code = auth()->user()->com_code;
-        $data = get_cols_where_p(new SupplierCategories(), array("*"), array("com_code" => $com_code), 'id', 'DESC', PAGINATION_COUNT);
+        $data = get_cols_where_p(new SupplierCategories(), array("*"), array("com_code" => $com_code), 'id', 'DESC', 10);
         if (!empty($data)) {
             foreach ($data as $info) {
                 $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');

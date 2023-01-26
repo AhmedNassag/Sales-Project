@@ -14,7 +14,7 @@ class TreasuriesController extends Controller
 {
     public function index()
     {
-        $data = Treasuries::select()->orderby('id', 'DESC')->paginate(PAGINATION_COUNT);
+        $data = Treasuries::select()->orderby('id', 'DESC')->paginate(10);
         if (!empty($data)) {
             foreach ($data as $info) {
                 $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
@@ -127,7 +127,7 @@ class TreasuriesController extends Controller
     {
         if ($request->ajax()) {
             $search_by_text = $request->search_by_text;
-            $data = Treasuries::where('name', 'LIKE', "%{$search_by_text}%")->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+            $data = Treasuries::where('name', 'LIKE', "%{$search_by_text}%")->orderBy('id', 'DESC')->paginate(10);
             return view('admin.treasuries.ajax_search', ['data' => $data]);
         }
     }

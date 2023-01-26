@@ -27,7 +27,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
     public function index()
     {
         $com_code = auth()->user()->com_code;
-        $data = get_cols_where_p(new Suppliers_with_orders(), array("*"), array("com_code" => $com_code, 'order_type' => 3), 'id', 'DESC', PAGINATION_COUNT);
+        $data = get_cols_where_p(new Suppliers_with_orders(), array("*"), array("com_code" => $com_code, 'order_type' => 3), 'id', 'DESC', 10);
         if (!empty($data)) {
             foreach ($data as $info) {
                 $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
@@ -72,7 +72,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
             $data_insert['store_id'] = $request->store_id;
             $data_insert['account_number'] = $supplierData['account_number'];
             $data_insert['added_by'] = auth()->user()->id;
-            $data_insert['created_at'] = date("Y-m-d H:i:s");
+            // $data_insert['created_at'] = date("Y-m-d H:i:s");
             $data_insert['date'] = date("Y-m-d");
             $data_insert['com_code'] = $com_code;
             insert(new Suppliers_with_orders(), $data_insert);
@@ -131,7 +131,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
             $data_to_update['pill_type'] = $request->pill_type;
             $data_to_update['account_number'] = $supplierData['account_number'];
             $data_to_update['updated_by'] = auth()->user()->id;
-            $data_to_update['updated_at'] = date("Y-m-d H:i:s");
+            // $data_to_update['updated_at'] = date("Y-m-d H:i:s");
             update(new Suppliers_with_orders(), $data_to_update, array("id" => $id, "com_code" => $com_code, 'order_type' => 3));
             return redirect()->route('admin.suppliers_orders_general_return.index')->with(['success' => 'لقد تم تحديث البيانات بنجاح']);
         } catch (\Exception $ex) {
@@ -198,7 +198,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
                                     $dataUpdateOldBatch['quantity'] = $batch_data['quantity'] + $item_quantityByParentUom;
                                 }
                                 $dataUpdateOldBatch['total_cost_price'] = $batch_data['unit_cost_price'] * $dataUpdateOldBatch['quantity'];
-                                $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
+                                // $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
                                 $dataUpdateOldBatch["updated_by"] = auth()->user()->id;
                                 $flag = update(new Inv_itemcard_batches(), $dataUpdateOldBatch, array("id" => $batch_data['id'], "com_code" => $com_code));
                                 if ($flag) {
@@ -236,7 +236,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
                                     // كمية الصنف بالمخزن الحالي بعد الحركة الحركة
                                     $dataInsert_inv_itemcard_movements['quantity_after_move_store'] = "عدد " . " " . ($quantityAfterMoveCurrentStore * 1) . " " . $MainUomName;
                                     $dataInsert_inv_itemcard_movements["store_id"] = $parent_pill_data['store_id'];
-                                    $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
+                                    // $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
                                     $dataInsert_inv_itemcard_movements["added_by"] = auth()->user()->id;
                                     $dataInsert_inv_itemcard_movements["date"] = date("Y-m-d");
                                     $dataInsert_inv_itemcard_movements["com_code"] = $com_code;
@@ -388,7 +388,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
                     $data_to_update['total_price'] = $request->total_add;
                     $data_to_update['order_date'] = $parent_pill_data['order_date'];
                     $data_to_update['updated_by'] = auth()->user()->id;
-                    $data_to_update['updated_at'] = date("Y-m-d H:i:s");
+                    // $data_to_update['updated_at'] = date("Y-m-d H:i:s");
                     $data_to_update['com_code'] = $com_code;
                     $flag = update(new Suppliers_with_orders_details(), $data_to_update, array("id" => $request->id, 'com_code' => $com_code, 'order_type' => 3, 'suppliers_with_orders_auto_serial' => $request->autoserailparent));
                     if ($flag) {
@@ -398,7 +398,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
                         $dataUpdateParent['total_befor_discount'] = $total_detials_sum + $parent_pill_data['tax_value'];
                         $dataUpdateParent['total_cost'] = $dataUpdateParent['total_befor_discount'] - $parent_pill_data['discount_value'];
                         $dataUpdateParent['updated_by'] = auth()->user()->id;
-                        $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+                        // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
                         update(new Suppliers_with_orders(), $dataUpdateParent, array("auto_serial" => $request->autoserailparent, "com_code" => $com_code, 'order_type' => 3));
                         echo json_encode("done");
                     }
@@ -460,7 +460,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
                             $dataUpdateOldBatch['quantity'] = $batch_data['quantity'] + $item_quantityByParentUom;
                         }
                         $dataUpdateOldBatch['total_cost_price'] = $batch_data['unit_cost_price'] * $dataUpdateOldBatch['quantity'];
-                        $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
+                        // $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
                         $dataUpdateOldBatch["updated_by"] = auth()->user()->id;
                         $flag = update(new Inv_itemcard_batches(), $dataUpdateOldBatch, array("id" => $batch_data['id'], "com_code" => $com_code));
                         if ($flag) {
@@ -498,7 +498,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
                             // كمية الصنف بالمخزن الحالي بعد الحركة الحركة
                             $dataInsert_inv_itemcard_movements['quantity_after_move_store'] = "عدد " . " " . ($quantityAfterMoveCurrentStore * 1) . " " . $MainUomName;
                             $dataInsert_inv_itemcard_movements["store_id"] = $parent_pill_data['store_id'];
-                            $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
+                            // $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
                             $dataInsert_inv_itemcard_movements["added_by"] = auth()->user()->id;
                             $dataInsert_inv_itemcard_movements["date"] = date("Y-m-d");
                             $dataInsert_inv_itemcard_movements["com_code"] = $com_code;
@@ -584,7 +584,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
         $dataUpdateParent['money_for_account'] = $request['total_cost'];
         $dataUpdateParent['is_approved'] = 1;
         $dataUpdateParent['approved_by'] = auth()->user()->com_code;
-        $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+        // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
         $dataUpdateParent['updated_by'] = auth()->user()->com_code;
         //first check for pill type sate cash
         if ($request['pill_type'] == 1) {
@@ -644,7 +644,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
                 //debit مدين
                 $dataInsert_treasuries_transactions['money_for_account'] = $request['what_paid'] * (-1);
                 $dataInsert_treasuries_transactions['byan'] = "تحصيل نظير فاتورة مرتجع مشتريات عام فاتورة  رقم" . $auto_serial;
-                $dataInsert_treasuries_transactions['created_at'] = date("Y-m-Y H:i:s");
+                // $dataInsert_treasuries_transactions['created_at'] = date("Y-m-Y H:i:s");
                 $dataInsert_treasuries_transactions['added_by'] = auth()->user()->id;
                 $dataInsert_treasuries_transactions['com_code'] = $com_code;
                 $flag = insert(new Treasuries_transactions(), $dataInsert_treasuries_transactions);
@@ -723,7 +723,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
                 $operator5 = ">";
                 $value5 = 0;
             }
-            $data = Suppliers_with_orders::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->where('order_type', '=', 1)->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+            $data = Suppliers_with_orders::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->where('order_type', '=', 1)->orderBy('id', 'DESC')->paginate(10);
             if (!empty($data)) {
                 foreach ($data as $info) {
                     $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
@@ -817,7 +817,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
                                     $datainsert_items['production_date'] = $batch_data['production_date'];
                                     $datainsert_items['expire_date'] = $batch_data['expired_date'];
                                     $datainsert_items['added_by'] = auth()->user()->id;
-                                    $datainsert_items['created_at'] = date("Y-m-d H:i:s");
+                                    // $datainsert_items['created_at'] = date("Y-m-d H:i:s");
                                     $datainsert_items['com_code'] = $com_code;
                                     $flag_datainsert_items = insert(new Suppliers_with_orders_details(), $datainsert_items, true);
                                     if (!empty($flag_datainsert_items)) {
@@ -852,7 +852,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
                                             $dataUpdateOldBatch['quantity'] = $batch_data['quantity'] - $item_quantityByParentUom;
                                         }
                                         $dataUpdateOldBatch['total_cost_price'] = $batch_data['unit_cost_price'] * $dataUpdateOldBatch['quantity'];
-                                        $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
+                                        // $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
                                         $dataUpdateOldBatch["updated_by"] = auth()->user()->id;
                                         $flag = update(new Inv_itemcard_batches(), $dataUpdateOldBatch, array("id" => $batch_data['id'], "com_code" => $com_code));
                                         if ($flag) {
@@ -889,7 +889,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
                                             // كمية الصنف بالمخزن الحالي بعد الحركة الحركة
                                             $dataInsert_inv_itemcard_movements['quantity_after_move_store'] = "عدد " . " " . ($quantityAfterMoveCurrentStore * 1) . " " . $MainUomName;
                                             $dataInsert_inv_itemcard_movements["store_id"] = $request->store_id;
-                                            $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
+                                            // $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
                                             $dataInsert_inv_itemcard_movements["added_by"] = auth()->user()->id;
                                             $dataInsert_inv_itemcard_movements["date"] = date("Y-m-d");
                                             $dataInsert_inv_itemcard_movements["com_code"] = $com_code;
@@ -927,7 +927,7 @@ class Suppliers_with_ordersGeneralRetuen extends Controller
             $dataUpdateParent['total_cost'] = $dataUpdateParent['total_cost_items'];
             $dataUpdateParent['total_befor_discount'] = $dataUpdateParent['total_cost_items'];
             $dataUpdateParent['money_for_account'] = $dataUpdateParent['total_cost_items'];
-            $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+            // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
             $dataUpdateParent['updated_by'] = auth()->user()->com_code;
             update(new Suppliers_with_orders(), $dataUpdateParent, array("com_code" => $com_code, "auto_serial" => $auto_serial, 'order_type' => 3));
         }

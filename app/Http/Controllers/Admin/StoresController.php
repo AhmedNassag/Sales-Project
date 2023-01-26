@@ -12,7 +12,7 @@ class StoresController extends Controller
 {
     public function index()
     {
-        $data = Store::select()->orderby('id', 'DESC')->paginate(PAGINATION_COUNT);
+        $data = Store::select()->orderby('id', 'DESC')->paginate(10);
         if (!empty($data)) {
             foreach ($data as $info) {
                 $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');

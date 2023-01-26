@@ -31,7 +31,7 @@ class SalesInvoicesController extends Controller
     public function index()
     {
         $com_code = auth()->user()->com_code;
-        $data = get_cols_where_p(new Sales_invoices(), array("*"), array("com_code" => $com_code), "id", "DESC", PAGINATION_COUNT);
+        $data = get_cols_where_p(new Sales_invoices(), array("*"), array("com_code" => $com_code), "id", "DESC", 10);
         if (!empty($data)) {
             foreach ($data as $info) {
                 $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
@@ -201,7 +201,7 @@ class SalesInvoicesController extends Controller
             $data_insert['sales_matrial_types'] = $request->sales_matrial_types;
             $data_insert['pill_type'] = $request->pill_type;
             $data_insert['added_by'] = auth()->user()->id;
-            $data_insert['created_at'] = date("Y-m-d H:i:s");
+            // $data_insert['created_at'] = date("Y-m-d H:i:s");
             $data_insert['date'] = date("Y-m-d");
             $data_insert['com_code'] = $com_code;
             $flag = insert(new Sales_invoices(), $data_insert, false);
@@ -259,7 +259,7 @@ class SalesInvoicesController extends Controller
                                     $datainsert_items['total_price'] = $request->item_total;
                                     $datainsert_items['isparentuom'] = $request->isparentuom;
                                     $datainsert_items['added_by'] = auth()->user()->id;
-                                    $datainsert_items['created_at'] = date("Y-m-d H:i:s");
+                                    // $datainsert_items['created_at'] = date("Y-m-d H:i:s");
                                     $datainsert_items['date'] = date("Y-m-d");
                                     $datainsert_items['com_code'] = $com_code;
                                     $flag_datainsert_items = insert(new Sales_invoices_details(), $datainsert_items, true);
@@ -294,7 +294,7 @@ class SalesInvoicesController extends Controller
                                             $dataUpdateOldBatch['quantity'] = $batch_data['quantity'] - $item_quantityByParentUom;
                                         }
                                         $dataUpdateOldBatch['total_cost_price'] = $batch_data['unit_cost_price'] * $dataUpdateOldBatch['quantity'];
-                                        $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
+                                        // $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
                                         $dataUpdateOldBatch["updated_by"] = auth()->user()->id;
                                         $flag = update(new Inv_itemcard_batches(), $dataUpdateOldBatch, array("id" => $batch_data['id'], "com_code" => $com_code));
                                         if ($flag) {
@@ -335,7 +335,7 @@ class SalesInvoicesController extends Controller
                                             // كمية الصنف بالمخزن الحالي بعد الحركة الحركة
                                             $dataInsert_inv_itemcard_movements['quantity_after_move_store'] = "عدد " . " " . ($quantityAfterMoveCurrentStore * 1) . " " . $MainUomName;
                                             $dataInsert_inv_itemcard_movements["store_id"] = $request->store_id;
-                                            $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
+                                            // $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
                                             $dataInsert_inv_itemcard_movements["added_by"] = auth()->user()->id;
                                             $dataInsert_inv_itemcard_movements["date"] = date("Y-m-d");
                                             $dataInsert_inv_itemcard_movements["com_code"] = $com_code;
@@ -405,7 +405,7 @@ class SalesInvoicesController extends Controller
                     $dataUpdateParent['discount_value'] = $request->discount_value;
                     $dataUpdateParent['total_cost'] = $request->total_cost;
                     $dataUpdateParent['notes'] = $request->notes;
-                    $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+                    // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
                     $dataUpdateParent['updated_by'] = auth()->user()->com_code;
                     update(new Sales_invoices(), $dataUpdateParent, array("com_code" => $com_code, "auto_serial" => $request->auto_serial));
                     echo json_encode("done");
@@ -460,7 +460,7 @@ class SalesInvoicesController extends Controller
                                     //update current Batch تحديث علي الباتش القديمة
                                     $dataUpdateOldBatch['quantity'] = $batch_data['quantity'] + $item_quantityByParentUom;
                                     $dataUpdateOldBatch['total_cost_price'] = $batch_data['unit_cost_price'] * $dataUpdateOldBatch['quantity'];
-                                    $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
+                                    // $dataUpdateOldBatch["updated_at"] = date("Y-m-d H:i:s");
                                     $dataUpdateOldBatch["updated_by"] = auth()->user()->id;
                                     $flag = update(new Inv_itemcard_batches(), $dataUpdateOldBatch, array("id" => $batch_data['id'], "com_code" => $com_code));
                                     if ($flag) {
@@ -501,7 +501,7 @@ class SalesInvoicesController extends Controller
                                         // كمية الصنف بالمخزن الحالي بعد الحركة الحركة
                                         $dataInsert_inv_itemcard_movements['quantity_after_move_store'] = "عدد " . " " . ($quantityAfterMoveCurrentStore * 1) . " " . $MainUomName;
                                         $dataInsert_inv_itemcard_movements["store_id"] = $sales_invoices_details_data['store_id'];
-                                        $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
+                                        // $dataInsert_inv_itemcard_movements["created_at"] = date("Y-m-d H:i:s");
                                         $dataInsert_inv_itemcard_movements["added_by"] = auth()->user()->id;
                                         $dataInsert_inv_itemcard_movements["date"] = date("Y-m-d");
                                         $dataInsert_inv_itemcard_movements["com_code"] = $com_code;
@@ -545,7 +545,7 @@ class SalesInvoicesController extends Controller
                     $dataUpdateParent['money_for_account'] = $invoice_data['total_cost'];
                     $dataUpdateParent['is_approved'] = 1;
                     $dataUpdateParent['approved_by'] = auth()->user()->com_code;
-                    $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+                    // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
                     $dataUpdateParent['updated_by'] = auth()->user()->com_code;
                     $dataUpdateParent['what_paid'] = $request->what_paid;
                     $dataUpdateParent['what_remain'] = $request->what_remain;
@@ -614,7 +614,7 @@ class SalesInvoicesController extends Controller
                             //debit دائن
                             $dataInsert_treasuries_transactions['money_for_account'] = $request->what_paid * (-1);
                             $dataInsert_treasuries_transactions['byan'] = "تحصيل نظير فاتورة مبيعات  رقم" . $request->auto_serial;
-                            $dataInsert_treasuries_transactions['created_at'] = date("Y-m-Y H:i:s");
+                            // $dataInsert_treasuries_transactions['created_at'] = date("Y-m-Y H:i:s");
                             $dataInsert_treasuries_transactions['added_by'] = auth()->user()->id;
                             $dataInsert_treasuries_transactions['com_code'] = $com_code;
                             $flag = insert(new Treasuries_transactions(), $dataInsert_treasuries_transactions);
@@ -805,7 +805,7 @@ class SalesInvoicesController extends Controller
             }
             $data = Sales_invoices::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->where($field6, $operator6, $value6)
                 ->where($field7, $operator7, $value7)
-                ->where($field8, $operator8, $value8)->where($field9, $operator9, $value9)->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+                ->where($field8, $operator8, $value8)->where($field9, $operator9, $value9)->orderBy('id', 'DESC')->paginate(10);
             if (!empty($data)) {
                 foreach ($data as $info) {
                     $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
@@ -884,7 +884,7 @@ class SalesInvoicesController extends Controller
                 $data_insert['notes'] = $request->notes;
                 $data_insert['active'] = $request->active;
                 $data_insert['added_by'] = auth()->user()->id;
-                $data_insert['created_at'] = date("Y-m-d H:i:s");
+                // $data_insert['created_at'] = date("Y-m-d H:i:s");
                 $data_insert['date'] = date("Y-m-d");
                 $data_insert['com_code'] = $com_code;
                 $flag = insert(new Customer(), $data_insert);
@@ -921,7 +921,7 @@ class SalesInvoicesController extends Controller
                     $data_insert_account['account_type'] = 3;
                     $data_insert_account['active'] = $request->active;
                     $data_insert_account['added_by'] = auth()->user()->id;
-                    $data_insert_account['created_at'] = date("Y-m-d H:i:s");
+                    // $data_insert_account['created_at'] = date("Y-m-d H:i:s");
                     $data_insert_account['date'] = date("Y-m-d");
                     $data_insert_account['com_code'] = $com_code;
                     $data_insert_account['other_table_FK'] = $data_insert['customer_code'];

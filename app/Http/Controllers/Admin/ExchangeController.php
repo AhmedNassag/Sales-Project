@@ -27,7 +27,7 @@ class ExchangeController extends Controller
     function index()
     {
         $com_code = auth()->user()->com_code;
-        $data = get_cols_where2_p(new Treasuries_transactions(), array("*"), array("com_code" => $com_code), "money", "<", "0", "id", "DESC", PAGINATION_COUNT);
+        $data = get_cols_where2_p(new Treasuries_transactions(), array("*"), array("com_code" => $com_code), "money", "<", "0", "id", "DESC", 10);
         if (!empty($data)) {
             foreach ($data as $info) {
                 $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
@@ -96,7 +96,7 @@ class ExchangeController extends Controller
             //debit مدين
             $dataInsert['money_for_account'] = $request->money;
             $dataInsert['byan'] = $request->byan;
-            $dataInsert['created_at'] = date("Y-m-Y H:i:s");
+            // $dataInsert['created_at'] = date("Y-m-Y H:i:s");
             $dataInsert['added_by'] = auth()->user()->id;
             $dataInsert['com_code'] = $com_code;
             $flag = insert(new Treasuries_transactions(), $dataInsert);
@@ -246,7 +246,7 @@ class ExchangeController extends Controller
                 $value7 = 0;
             }
             $data = Treasuries_transactions::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->where($field6, $operator6, $value6)
-                ->where($field7, $operator7, $value7)->where("money", "<", 0)->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+                ->where($field7, $operator7, $value7)->where("money", "<", 0)->orderBy('id', 'DESC')->paginate(10);
             if (!empty($data)) {
                 foreach ($data as $info) {
                     $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');

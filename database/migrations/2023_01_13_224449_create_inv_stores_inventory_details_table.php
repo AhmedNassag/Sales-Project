@@ -33,6 +33,7 @@ class CreateInvStoresInventoryDetailsTable extends Migration
             $table->decimal('total_cost_price', 10, 2)->nullable();
             $table->date('production_date')->nullable();
             $table->date('expired_date')->nullable();
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }

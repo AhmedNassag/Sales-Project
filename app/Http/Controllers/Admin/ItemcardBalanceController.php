@@ -17,7 +17,7 @@ class ItemcardBalanceController extends Controller
     {
         //get all itemscars ordery by quantity
         $com_code = auth()->user()->com_code;
-        $allitemscardData = get_cols_where_p(new Inv_itemCard(), array("id", "name", "item_code", "item_type", "does_has_retailunit", "retail_uom_id", "uom_id", "retail_uom_quntToParent", "All_QUENTITY"), array("com_code" => $com_code), "id", "ASC", PAGINATION_COUNT);
+        $allitemscardData = get_cols_where_p(new Inv_itemCard(), array("id", "name", "item_code", "item_type", "does_has_retailunit", "retail_uom_id", "uom_id", "retail_uom_quntToParent", "All_QUENTITY"), array("com_code" => $com_code), "id", "ASC", 10);
         if (!empty($allitemscardData)) {
             foreach ($allitemscardData as $info) {
                 $info->inv_itemcard_categories_name = get_field_value(new inv_itemcard_categorie(), 'name', array('id' => $info->inv_itemcard_categories_id));
@@ -44,7 +44,7 @@ class ItemcardBalanceController extends Controller
     }
 
 
-    
+
     public function ajax_search(Request $request)
     {
         if ($request->ajax()) {
@@ -92,17 +92,17 @@ class ItemcardBalanceController extends Controller
                 $field4 = "id";
                 $operator4 = ">";
                 $value4 = 0;
-                $allitemscardData = Inv_itemCard::select("id", "name", "item_code", "item_type", "does_has_retailunit", "retail_uom_id", "uom_id", "retail_uom_quntToParent", "All_QUENTITY")->where($field1, $operator1, $value1)->orderBy('id', 'ASC')->paginate(PAGINATION_COUNT);
+                $allitemscardData = Inv_itemCard::select("id", "name", "item_code", "item_type", "does_has_retailunit", "retail_uom_id", "uom_id", "retail_uom_quntToParent", "All_QUENTITY")->where($field1, $operator1, $value1)->orderBy('id', 'ASC')->paginate(10);
             } elseif ($BatchTypeSerach == 1) {
                 $field4 = "production_date";
                 $operator4 = "!=";
                 $value4 = null;
-                $allitemscardData = Inv_itemCard::select("id", "name", "item_code", "item_type", "does_has_retailunit", "retail_uom_id", "uom_id", "retail_uom_quntToParent", "All_QUENTITY")->where($field1, $operator1, $value1)->where('item_type', '=', 2)->orderBy('id', 'ASC')->paginate(PAGINATION_COUNT);
+                $allitemscardData = Inv_itemCard::select("id", "name", "item_code", "item_type", "does_has_retailunit", "retail_uom_id", "uom_id", "retail_uom_quntToParent", "All_QUENTITY")->where($field1, $operator1, $value1)->where('item_type', '=', 2)->orderBy('id', 'ASC')->paginate(10);
             } else {
                 $field4 = "production_date";
                 $operator4 = "=";
                 $value4 = null;
-                $allitemscardData = Inv_itemCard::select("id", "name", "item_code", "item_type", "does_has_retailunit", "retail_uom_id", "uom_id", "retail_uom_quntToParent", "All_QUENTITY")->where($field1, $operator1, $value1)->where('item_type', '!=', 2)->orderBy('id', 'ASC')->paginate(PAGINATION_COUNT);
+                $allitemscardData = Inv_itemCard::select("id", "name", "item_code", "item_type", "does_has_retailunit", "retail_uom_id", "uom_id", "retail_uom_quntToParent", "All_QUENTITY")->where($field1, $operator1, $value1)->where('item_type', '!=', 2)->orderBy('id', 'ASC')->paginate(10);
             }
             if ($BatchquantitystatusSerach == 'all') {
                 $field5 = "id";

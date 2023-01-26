@@ -27,7 +27,7 @@ class Services_with_ordersController extends Controller
     public function index()
     {
         $com_code = auth()->user()->com_code;
-        $data = get_cols_where_p(new services_with_orders(), array("*"), array("com_code" => $com_code), 'id', 'DESC', PAGINATION_COUNT);
+        $data = get_cols_where_p(new services_with_orders(), array("*"), array("com_code" => $com_code), 'id', 'DESC', 10);
         if (!empty($data)) {
             foreach ($data as $info) {
                 $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
@@ -81,7 +81,7 @@ class Services_with_ordersController extends Controller
             }
             $data_insert['pill_type'] = $request->pill_type;
             $data_insert['added_by'] = auth()->user()->id;
-            $data_insert['created_at'] = date("Y-m-d H:i:s");
+            // $data_insert['created_at'] = date("Y-m-d H:i:s");
             $data_insert['date'] = date("Y-m-d");
             $data_insert['com_code'] = $com_code;
             insert(new services_with_orders(), $data_insert);
@@ -157,7 +157,7 @@ class Services_with_ordersController extends Controller
                     $data_insert['total'] = $request->total_add;
                     $data_insert['order_date'] = $parent_pill_data['order_date'];
                     $data_insert['added_by'] = auth()->user()->id;
-                    $data_insert['created_at'] = date("Y-m-d H:i:s");
+                    // $data_insert['created_at'] = date("Y-m-d H:i:s");
                     $data_insert['date'] = date("Y-m-d");
                     $data_insert['com_code'] = $com_code;
                     $flag = insert(new services_with_orders_details(), $data_insert);
@@ -168,7 +168,7 @@ class Services_with_ordersController extends Controller
                         $dataUpdateParent['total_befor_discount'] = $total_detials_sum + $parent_pill_data['tax_value'];
                         $dataUpdateParent['total_cost'] = $dataUpdateParent['total_befor_discount'] - $parent_pill_data['discount_value'];
                         $dataUpdateParent['updated_by'] = auth()->user()->id;
-                        $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+                        // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
                         update(new services_with_orders(), $dataUpdateParent, array("com_code" => $com_code, "id" => $request->id_parent_pill));
                         echo json_encode("done");
                     }
@@ -261,7 +261,7 @@ class Services_with_ordersController extends Controller
             }
             $data_to_update['pill_type'] = $request->pill_type;
             $data_to_update['updated_by'] = auth()->user()->id;
-            $data_to_update['updated_at'] = date("Y-m-d H:i:s");
+            // $data_to_update['updated_at'] = date("Y-m-d H:i:s");
             update(new services_with_orders(), $data_to_update, array("id" => $id, "com_code" => $com_code));
             return redirect()->route('admin.Services_orders.show', $id)->with(['success' => 'لقد تم تحديث البيانات بنجاح']);
         } catch (\Exception $ex) {
@@ -333,7 +333,7 @@ class Services_with_ordersController extends Controller
                     $dataUpdateParent['total_befor_discount'] = $total_detials_sum + $parent_pill_data['tax_value'];
                     $dataUpdateParent['total_cost'] = $dataUpdateParent['total_befor_discount'] - $parent_pill_data['discount_value'];
                     $dataUpdateParent['updated_by'] = auth()->user()->id;
-                    $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+                    // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
                     update(new services_with_orders(), $dataUpdateParent, array("com_code" => $com_code, "id" => $parent_id));
 
                     return redirect()->back()
@@ -378,7 +378,7 @@ class Services_with_ordersController extends Controller
                     $data_to_update['total'] = $request->total;
                     $data_to_update['notes'] = $request->notes;
                     $data_to_update['updated_by'] = auth()->user()->id;
-                    $data_to_update['updated_at'] = date("Y-m-d H:i:s");
+                    // $data_to_update['updated_at'] = date("Y-m-d H:i:s");
                     $data_to_update['com_code'] = $com_code;
 
                     $flag = update(new services_with_orders_details(), $data_to_update, array("id" => $request->id, 'com_code' => $com_code, 'order_type' => $parent_pill_data['order_type'], 'services_with_orders_auto_serial' => $parent_pill_data['auto_serial']));
@@ -391,7 +391,7 @@ class Services_with_ordersController extends Controller
                         $dataUpdateParent['total_befor_discount'] = $total_detials_sum + $parent_pill_data['tax_value'];
                         $dataUpdateParent['total_cost'] = $dataUpdateParent['total_befor_discount'] - $parent_pill_data['discount_value'];
                         $dataUpdateParent['updated_by'] = auth()->user()->id;
-                        $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+                        // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
                         update(new services_with_orders(), $dataUpdateParent, array("com_code" => $com_code, "id" => $request->id_parent_pill));
 
                         echo json_encode("done");
@@ -462,7 +462,7 @@ class Services_with_ordersController extends Controller
 
         $dataUpdateParent['is_approved'] = 1;
         $dataUpdateParent['approved_by'] = auth()->user()->com_code;
-        $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
+        // $dataUpdateParent['updated_at'] = date("Y-m-d H:i:s");
         $dataUpdateParent['updated_by'] = auth()->user()->com_code;
         //first check for pill type sate cash
         if ($request['pill_type'] == 1) {
@@ -582,7 +582,7 @@ class Services_with_ordersController extends Controller
 
                 $dataInsert_treasuries_transactions['is_approved'] = 1;
                 $dataInsert_treasuries_transactions['the_foregin_key'] = $data["auto_serial"];
-                $dataInsert_treasuries_transactions['created_at'] = date("Y-m-Y H:i:s");
+                // $dataInsert_treasuries_transactions['created_at'] = date("Y-m-Y H:i:s");
                 $dataInsert_treasuries_transactions['added_by'] = auth()->user()->id;
                 $dataInsert_treasuries_transactions['com_code'] = $com_code;
                 $flag = insert(new Treasuries_transactions(), $dataInsert_treasuries_transactions);
@@ -690,7 +690,7 @@ class Services_with_ordersController extends Controller
                 $value6 = $order_type;
             }
 
-            $data = services_with_orders::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->where($field6, $operator6, $value6)->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+            $data = services_with_orders::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->where($field6, $operator6, $value6)->orderBy('id', 'DESC')->paginate(10);
             if (!empty($data)) {
                 foreach ($data as $info) {
                     $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');

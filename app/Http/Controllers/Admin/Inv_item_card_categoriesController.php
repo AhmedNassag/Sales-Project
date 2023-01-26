@@ -17,7 +17,7 @@ class Inv_item_card_categoriesController extends Controller
      */
     public function index()
     {
-        $data = inv_itemcard_categorie::select()->orderby('id', 'DESC')->paginate(PAGINATION_COUNT);
+        $data = inv_itemcard_categorie::select()->orderby('id', 'DESC')->paginate(10);
         if (!empty($data)) {
             foreach ($data as $info) {
                 $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
