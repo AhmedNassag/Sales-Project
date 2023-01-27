@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 class AdminPanelSettingController extends Controller
 {
+    
     public function index()
     {
         $data = Admin_panel_setting::where('com_code', auth()->user()->com_code)->first();
@@ -21,6 +22,7 @@ class AdminPanelSettingController extends Controller
                 $data['supplier_parent_account_name'] = Account::where('account_number', $data['suppliers_parent_account_number'])->value('name');
                 $data['delegates_parent_account_name'] = Account::where('account_number', $data['delegate_parent_account_number'])->value('name');
                 $data['employees_parent_account_name'] = Account::where('account_number', $data['employees_parent_account_number'])->value('name');
+                $data['production_lines_parent_account_name'] = Account::where('account_number', $data['production_lines_parent_account'])->value('name');
             }
         }
         return view('admin.admin_panel_settings.index', ['data' => $data]);
@@ -49,8 +51,9 @@ class AdminPanelSettingController extends Controller
             $admin_panel_setting->suppliers_parent_account_number = $request->suppliers_parent_account_number;
             $admin_panel_setting->delegate_parent_account_number = $request->delegate_parent_account_number;
             $admin_panel_setting->employees_parent_account_number = $request->employees_parent_account_number;
+            $admin_panel_setting->production_lines_parent_account = $request->production_lines_parent_account;
             $admin_panel_setting->updated_by = auth()->user()->id;
-            // $admin_panel_setting->updated_at = date("Y-m-d H:i:s");
+            $admin_panel_setting->updated_at = date("Y-m-d H:i:s");
             $oldphotoPath = $admin_panel_setting->photo;
             if ($request->has('photo')) {
                 $request->validate([

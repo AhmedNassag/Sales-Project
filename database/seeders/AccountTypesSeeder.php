@@ -15,57 +15,57 @@ class AccountTypesSeeder extends Seeder
     public function run()
     {
         $account_types1 = Account_types::create([
-            'name'     => 'عام',
+            'name'                   => 'رأس مال',
             'relatediternalaccounts' => 0,
-            'active'    => 1,
-        ]);
-
-        $account_types1 = Account_types::create([
-            'name'     => 'رأس مال',
-            'relatediternalaccounts' => 0,
-            'active'    => 1,
+            'active'                 => 1,
         ]);
 
         $account_types2 = Account_types::create([
-            'name'     => 'بنكى',
-            'relatediternalaccounts' => 0,
-            'active'    => 1,
+            'name'                   => 'مورد',
+            'relatediternalaccounts' => 1,
+            'active'                 => 1,
         ]);
 
         $account_types3 = Account_types::create([
-            'name'     => 'مصروفات',
-            'relatediternalaccounts' => 0,
-            'active'    => 1,
+            'name'                   => 'عميل',
+            'relatediternalaccounts' => 1,
+            'active'                 => 1,
         ]);
 
         $account_types4 = Account_types::create([
-            'name'     => 'مورد',
+            'name'                   => 'مندوب',
             'relatediternalaccounts' => 1,
-            'active'    => 1,
+            'active'                 => 1,
         ]);
 
         $account_types5 = Account_types::create([
-            'name'     => 'عميل',
+            'name'                   => 'خط إنتاج',
             'relatediternalaccounts' => 1,
-            'active'    => 1,
+            'active'                 => 1,
         ]);
 
         $account_types6 = Account_types::create([
-            'name'     => 'مندوب',
-            'relatediternalaccounts' => 1,
-            'active'    => 1,
+            'name'                   => 'بنكى',
+            'relatediternalaccounts' => 0,
+            'active'                 => 1,
         ]);
 
         $account_types7 = Account_types::create([
-            'name'     => 'موظف',
-            'relatediternalaccounts' => 1,
-            'active'    => 1,
+            'name'                   => 'مصروفات',
+            'relatediternalaccounts' => 0,
+            'active'                 => 1,
         ]);
 
         $account_types8 = Account_types::create([
-            'name'     => 'قسم داخلى',
+            'name'                   => 'قسم داخلى',
             'relatediternalaccounts' => 1,
-            'active'    => 1,
+            'active'                 => 1,
+        ]);
+
+        $account_types9 = Account_types::create([
+            'name'                   => 'عام',
+            'relatediternalaccounts' => 0,
+            'active'                 => 1,
         ]);
     }
 }

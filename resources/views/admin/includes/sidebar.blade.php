@@ -292,7 +292,7 @@
 
                         <!-- Start inv_production_order -->
                         <li class="nav-item">
-                            <a href="{{ route('admin.inv_production_order.index') }}" class="nav-link {{ (request()->is('admin/inv_production_order*')  )?'active':'' }}">
+                            <a href="{{ route('admin.inv_production_order.index') }}" class="nav-link {{ (request()->is('admin/inv_production_order*')) ? 'active' : '' }}">
                                 <p>
                                     أوامر التشغيل
                                 </p>

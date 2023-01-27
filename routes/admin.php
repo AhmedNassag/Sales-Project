@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\DelegatesController;
 use App\Http\Controllers\Admin\ExchangeController;
 use App\Http\Controllers\Admin\FinancialReportController;
 use App\Http\Controllers\Admin\Inv_item_card_categoriesController;
+use App\Http\Controllers\Admin\Inv_production_linesController;
+use App\Http\Controllers\Admin\Inv_production_orderController;
 use App\Http\Controllers\Admin\Inv_stores_inventoryController;
 use App\Http\Controllers\Admin\TreasuriesController;
 use App\Http\Controllers\Admin\SalesMatrialTypesController;
@@ -423,6 +425,43 @@ Route::group([/*'namespace' => 'Admin',*/ 'prefix' => 'admin', 'middleware' => '
     Route::get('/inv_production_order/do_approve/{id}', [Inv_production_orderController::class, 'do_approve'])->name('admin.inv_production_order.do_approve');
     Route::get('/inv_production_order/do_closes_archive/{id}', [Inv_production_orderController::class, 'do_closes_archive'])->name('admin.inv_production_order.do_closes_archive');
     /************************************************** End inv_production_order **************************************************/
+
+
+    /************************************************** Start inv_production_lines **************************************************/
+    Route::get('/inv_production_lines/index', [Inv_production_linesController::class, 'index'])->name('admin.inv_production_lines.index');
+    Route::get('/inv_production_lines/create', [Inv_production_linesController::class, 'create'])->name('admin.inv_production_lines.create');
+    Route::post('/inv_production_lines/store', [Inv_production_linesController::class, 'store'])->name('admin.inv_production_lines.store');
+    Route::get('/inv_production_lines/edit/{id}', [Inv_production_linesController::class, 'edit'])->name('admin.inv_production_lines.edit');
+    Route::post('/inv_production_lines/update/{id}', [Inv_production_linesController::class, 'update'])->name('admin.inv_production_lines.update');
+    Route::get('/inv_production_lines/delete/{id}', [Inv_production_linesController::class, 'delete'])->name('admin.inv_production_lines.delete');
+    Route::post('/inv_production_lines/ajax_search', [Inv_production_linesController::class, 'ajax_search'])->name('admin.inv_production_lines.ajax_search');
+    Route::get('/inv_production_lines/show/{id}', [Inv_production_linesController::class, 'show'])->name('admin.inv_production_lines.show');
+    /************************************************** End inv_production_lines **************************************************/
+
+
+    /************************************************** Start inv_production_exchange **************************************************/
+    Route::get('/inv_production_exchange/index', [Inv_production_exchangeController::class, 'index'])->name('admin.inv_production_exchange.index');
+    Route::get('/inv_production_exchange/create', [Inv_production_exchangeController::class, 'create'])->name('admin.inv_production_exchange.create');
+    Route::post('/inv_production_exchange/store', [Inv_production_exchangeController::class, 'store'])->name('admin.inv_production_exchange.store');
+    Route::get('/inv_production_exchange/edit/{id}', [Inv_production_exchangeController::class, 'edit'])->name('admin.inv_production_exchange.edit');
+    Route::post('/inv_production_exchange/update/{id}', [Inv_production_exchangeController::class, 'update'])->name('admin.inv_production_exchange.update');
+    Route::get('/inv_production_exchange/delete/{id}', [Inv_production_exchangeController::class, 'delete'])->name('admin.inv_production_exchange.delete');
+    Route::post('/inv_production_exchange/ajax_search', [Inv_production_exchangeController::class, 'ajax_search'])->name('admin.inv_production_exchange.ajax_search');
+    Route::get('/inv_production_exchange/show/{id}', [Inv_production_exchangeController::class, 'show'])->name('admin.inv_production_exchange.show');
+    Route::post('/inv_production_exchange/get_item_uoms', [Inv_production_exchangeController::class, 'get_item_uoms'])->name('admin.inv_production_exchange.get_item_uoms');
+    Route::post('/inv_production_exchange/load_modal_add_details', [Inv_production_exchangeController::class, 'load_modal_add_details'])->name('admin.inv_production_exchange.load_modal_add_details');
+    Route::post('/inv_production_exchange/Add_item_to_invoice', [Inv_production_exchangeController::class, 'Add_item_to_invoice'])->name('admin.inv_production_exchange.Add_item_to_invoice');
+    Route::post('/inv_production_exchange/reload_itemsdetials', [Inv_production_exchangeController::class, 'reload_itemsdetials'])->name('admin.inv_production_exchange.reload_itemsdetials');
+    Route::post('/inv_production_exchange/reload_parent_pill', [Inv_production_exchangeController::class, 'reload_parent_pill'])->name('admin.inv_production_exchange.reload_parent_pill');
+    Route::post('/inv_production_exchange/load_edit_item_details', [Inv_production_exchangeController::class, 'load_edit_item_details'])->name('admin.inv_production_exchange.load_edit_item_details');
+    Route::post('/inv_production_exchange/edit_item_details', [Inv_production_exchangeController::class, 'edit_item_details'])->name('admin.inv_production_exchange.edit_item_details');
+    Route::get('/inv_production_exchange/delete_details/{id}/{id_parent}', [Inv_production_exchangeController::class, 'delete_details'])->name('admin.inv_production_exchange.delete_details');
+    Route::post('/inv_production_exchange/do_approve/{id}', [Inv_production_exchangeController::class, 'do_approve'])->name('admin.inv_production_exchange.do_approve');
+    Route::post('/inv_production_exchange/load_modal_approve_invoice', [Inv_production_exchangeController::class, 'load_modal_approve_invoice'])->name('admin.inv_production_exchange.load_modal_approve_invoice');
+    Route::post('/inv_production_exchange/load_usershiftDiv', [Inv_production_exchangeController::class, 'load_usershiftDiv'])->name('admin.inv_production_exchange.load_usershiftDiv');
+    Route::post('/inv_production_exchange/get_item_batches', [Inv_production_exchangeController::class, 'get_item_batches'])->name('admin.inv_production_exchange.get_item_batches');
+    Route::get('/inv_production_exchange/printsaleswina4/{id}/{size}', [Inv_production_exchangeController::class, 'printsaleswina4'])->name('admin.inv_production_exchange.printsaleswina4');
+    /************************************************** End inv_production_exchange **************************************************/
 
 });
 
