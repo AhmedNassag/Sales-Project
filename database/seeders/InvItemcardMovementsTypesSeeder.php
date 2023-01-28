@@ -36,7 +36,7 @@ class InvItemcardMovementsTypesSeeder extends Seeder
 
 
         $inv_itemcard_movements_categories5 = Inv_itemcard_movements_types::create([
-            'type' => 'مرتجع مبيعات',
+            'type' => 'مرتجع مبيعات عام',
         ]);
 
 
@@ -85,8 +85,23 @@ class InvItemcardMovementsTypesSeeder extends Seeder
         ]);
 
 
-        $inv_itemcard_movements_categories14 = Inv_itemcard_movements_types::create([
+        $inv_itemcard_movements_categories15 = Inv_itemcard_movements_types::create([
             'type' => 'حذف الصنف من تفاصيل فاتورة مبيعات مفتوحة',
+        ]);
+
+
+        $inv_itemcard_movements_categories16 = Inv_itemcard_movements_types::create([
+            'type' => 'حذف الصنف من تفاصيل فاتورة مرتجع مبيعات عام مفتوحة',
+        ]);
+
+
+        $inv_itemcard_movements_categories17 = Inv_itemcard_movements_types::create([
+            'type' => 'صرف خامات لخط الإنتاج',
+        ]);
+
+
+        $inv_itemcard_movements_categories18 = Inv_itemcard_movements_types::create([
+            'type' => 'حذف صنف مضاف على فاتورة صرف خامات لخط إنتاج',
         ]);
 
     }

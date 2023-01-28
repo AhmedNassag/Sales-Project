@@ -65,16 +65,6 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <!-- Start sales_matrial_types -->
-                        <li class="nav-item">
-                            <a href="{{ route('admin.sales_matrial_types.index') }}" class="nav-link {{ request()->is('admin/sales_matrial_types*') ? 'active' : '' }}">
-                                <p>
-                                    بيانات فئات الفواتير
-                                </p>
-                            </a>
-                        </li>
-                        <!-- End sales_matrial_types -->
-
                         <!-- Start stores -->
                         <li class="nav-item">
                             <a href="{{ route('admin.stores.index') }}" class="nav-link {{ request()->is('admin/stores*') ? 'active' : '' }}">
@@ -94,6 +84,16 @@
                             </a>
                         </li>
                         <!-- End uoms -->
+
+                        <!-- Start sales_matrial_types -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.sales_matrial_types.index') }}" class="nav-link {{ request()->is('admin/sales_matrial_types*') ? 'active' : '' }}">
+                                <p>
+                                    بيانات فئات الفواتير
+                                </p>
+                            </a>
+                        </li>
+                        <!-- End sales_matrial_types -->
 
                         <!-- Start inv_itemcard_categories -->
                         <li class="nav-item">

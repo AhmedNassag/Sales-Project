@@ -1,5 +1,4 @@
 <?php
-/* لاتنسونا من صالح الدعاء وجزاكم الله كل خير  */
 
 namespace App\Http\Controllers\Admin;
 
@@ -48,6 +47,9 @@ class SalesInvoicesController extends Controller
         $Sales_matrial_types = get_cols_where(new Sales_matrial_types(), array("id", "name"), array("com_code" => $com_code, "active" => 1));
         return view("admin.sales_invoices.index", ['data' => $data, 'delegates' => $delegates, 'customers' => $customers, 'Sales_matrial_types' => $Sales_matrial_types]);
     }
+
+
+
     public function get_item_uoms(Request $request)
     {
         if ($request->ajax()) {
@@ -65,6 +67,9 @@ class SalesInvoicesController extends Controller
             return view("admin.sales_invoices.get_item_uoms", ['item_card_Data' => $item_card_Data]);
         }
     }
+
+
+
     //مرآة فاتوةر موقته للعميل لاتؤثر علي اي شيء  مجرد عرض سعر
     public function load_modal_addMirror(Request $request)
     {
@@ -76,6 +81,9 @@ class SalesInvoicesController extends Controller
             return view("admin.sales_invoices.loadModalAddInvoiceMirror", ['item_cards' => $item_cards, 'stores' => $stores, 'user_shift' => $user_shift]);
         }
     }
+
+
+
     //عرض صفحة اضافة فاتورة مبيعات فعلية ذات الخصم اللحظي للأصناف من المخازن
     public function load_modal_addActiveInvoice(Request $request)
     {
@@ -88,6 +96,9 @@ class SalesInvoicesController extends Controller
             ]);
         }
     }
+
+
+
     public function get_item_batches(Request $request)
     {
         $com_code = auth()->user()->com_code;
@@ -123,6 +134,9 @@ class SalesInvoicesController extends Controller
             }
         }
     }
+
+
+
     public function get_item_unit_price(Request $request)
     {
         $com_code = auth()->user()->com_code;
@@ -158,6 +172,9 @@ class SalesInvoicesController extends Controller
             }
         }
     }
+
+
+
     public function get_Add_new_item_row(Request $request)
     {
         $com_code = auth()->user()->com_code;
@@ -180,6 +197,9 @@ class SalesInvoicesController extends Controller
             return view('admin.sales_invoices.get_Add_new_item_row', ['received_data' => $received_data]);
         }
     }
+
+
+
     public function store(Request $request)
     {
         if ($request->ajax()) {
@@ -210,6 +230,9 @@ class SalesInvoicesController extends Controller
             }
         }
     }
+
+
+
     public function load_invoice_update_modal(Request $request)
     {
         if ($request->ajax()) {
@@ -232,6 +255,9 @@ class SalesInvoicesController extends Controller
             $user_shift, 'delegates' => $delegates, 'customers' => $customers, 'Sales_matrial_types' => $Sales_matrial_types, 'invoice_data' => $invoice_data, 'sales_invoices_details' => $sales_invoices_details]);
         }
     }
+
+
+
     public function Add_item_to_invoice(Request $request)
     {
         try {
@@ -363,6 +389,9 @@ class SalesInvoicesController extends Controller
             echo "there is error " . $ex->getMessage();
         }
     }
+
+
+
     function reload_items_in_invoice(Request $request)
     {
         if ($request->ajax()) {
@@ -378,6 +407,9 @@ class SalesInvoicesController extends Controller
             return view("admin.sales_invoices.reload_items_in_invoice", ['sales_invoices_details' => $sales_invoices_details]);
         }
     }
+
+
+
     function recalclate_parent_invoice(Request $request)
     {
         if ($request->ajax()) {
@@ -413,6 +445,9 @@ class SalesInvoicesController extends Controller
             }
         }
     }
+
+
+
     function remove_active_row_item(Request $request)
     {
         if ($request->ajax()) {
@@ -526,6 +561,9 @@ class SalesInvoicesController extends Controller
             }
         }
     }
+
+
+
     public function load_usershiftDiv(Request $request)
     {
         if ($request->ajax()) {
@@ -535,6 +573,9 @@ class SalesInvoicesController extends Controller
         }
         return view("admin.sales_invoices.load_usershiftDiv", ['user_shift' => $user_shift]);
     }
+
+
+
     function DoApproveInvoiceFinally(Request $request)
     {
         if ($request->ajax()) {
@@ -634,6 +675,9 @@ class SalesInvoicesController extends Controller
             }
         }
     }
+
+
+
     public function delete($id)
     {
         try {
@@ -658,6 +702,9 @@ class SalesInvoicesController extends Controller
                 ->with(['error' => 'عفوا حدث خطأ ما' . $ex->getMessage()]);
         }
     }
+
+
+
     public function load_invoice_details_modal(Request $request)
     {
         if ($request->ajax()) {
@@ -681,6 +728,9 @@ class SalesInvoicesController extends Controller
             return view("admin.sales_invoices.load_invoice_details_modal", ['delegates' => $delegates, 'customers' => $customers, 'Sales_matrial_types' => $Sales_matrial_types, 'invoice_data' => $invoice_data, 'sales_invoices_details' => $sales_invoices_details]);
         }
     }
+
+
+
     public function ajax_search(Request $request)
     {
         if ($request->ajax()) {
@@ -820,6 +870,9 @@ class SalesInvoicesController extends Controller
             return view('admin.sales_invoices.ajax_search', ['data' => $data]);
         }
     }
+
+
+
     public function do_add_new_customer(Request $request)
     {
         if ($request->ajax()) {
@@ -935,6 +988,9 @@ class SalesInvoicesController extends Controller
             }
         }
     }
+
+
+
     public function get_last_added_customer(Request $request)
     {
         if ($request->ajax()) {
@@ -943,6 +999,9 @@ class SalesInvoicesController extends Controller
             return view('admin.sales_invoices.get_last_added_customer', ['customers' => $customers]);
         }
     }
+
+
+
     public function searchforcustomer(Request $request)
     {
         if ($request->ajax()) {
@@ -956,6 +1015,9 @@ class SalesInvoicesController extends Controller
             return view('admin.sales_invoices.get_searchforcustomer_result', ['customers' => $customers]);
         }
     }
+
+
+
     public function searchforitems(Request $request)
     {
         if ($request->ajax()) {
@@ -969,6 +1031,9 @@ class SalesInvoicesController extends Controller
             return view('admin.sales_invoices.searchforitemsResult', ['item_cards' => $item_cards]);
         }
     }
+
+
+
     public function printsaleswina4($id, $size)
     {
         $com_code = auth()->user()->com_code;

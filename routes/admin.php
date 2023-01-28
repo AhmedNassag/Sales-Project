@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\DelegatesController;
 use App\Http\Controllers\Admin\ExchangeController;
 use App\Http\Controllers\Admin\FinancialReportController;
 use App\Http\Controllers\Admin\Inv_item_card_categoriesController;
+use App\Http\Controllers\Admin\Inv_production_exchangeController;
 use App\Http\Controllers\Admin\Inv_production_linesController;
 use App\Http\Controllers\Admin\Inv_production_orderController;
 use App\Http\Controllers\Admin\Inv_stores_inventoryController;

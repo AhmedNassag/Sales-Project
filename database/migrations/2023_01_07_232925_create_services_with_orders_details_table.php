@@ -24,6 +24,8 @@ class CreateServicesWithOrdersDetailsTable extends Migration
             $table->integer('com_code')->nullable();
             $table->date('date')->nullable();
             $table->tinyInteger('order_type')->nullable();
+            //غير مضاف فى model المشروع إلى الآن
+            $table->date('order_date')->nullable();
             $table->timestamps();
         });
     }

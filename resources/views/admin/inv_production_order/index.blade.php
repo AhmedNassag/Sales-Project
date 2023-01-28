@@ -89,7 +89,8 @@
                                                 @if ($info->is_approved == 1)
                                                     معتمد
                                                     <br>
-                                                    @php$dt = new DateTime($info->approved_at);
+                                                    @php
+                                                        $dt = new DateTime($info->approved_at);
                                                         $date = $dt->format('Y-m-d');
                                                         $time = $dt->format('h:i');
                                                         $newDateTime = date('A', strtotime($time));
@@ -110,7 +111,8 @@
                                                 @if ($info->is_closed == 1)
                                                     مغلق ومرحل
                                                     <br>
-                                                    @php$dt = new DateTime($info->closed_at);
+                                                    @php
+                                                        $dt = new DateTime($info->closed_at);
                                                         $date = $dt->format('Y-m-d');
                                                         $time = $dt->format('h:i');
                                                         $newDateTime = date('A', strtotime($time));
@@ -150,8 +152,7 @@
                                                     <a href="{{ route('admin.inv_production_order.delete', $info->id) }}"
                                                         class="btn are_you_shue btn-sm  btn-danger">حذف</a>
                                                 @endif
-                                                <button data-id="{{ $info->id }}"
-                                                    class="btn show_more_detials btn-sm  btn-info">عرض</button>
+                                                <button data-id="{{ $info->id }}" class="btn show_more_detials btn-sm  btn-info">عرض</button>
                                             </td>
                                         </tr>
                                         @php

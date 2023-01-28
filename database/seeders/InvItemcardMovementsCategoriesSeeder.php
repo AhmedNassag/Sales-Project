@@ -27,5 +27,10 @@ class InvItemcardMovementsCategoriesSeeder extends Seeder
         $inv_itemcard_movements_categories3 = Inv_itemcard_movements_categories::create([
             'name' => 'حركة على المخازن',
         ]);
+
+
+        $inv_itemcard_movements_categories4 = Inv_itemcard_movements_categories::create([
+            'name' => 'حركة على خطوط الإنتاج',
+        ]);
     }
 }
