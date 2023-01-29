@@ -30,7 +30,7 @@ class SalesInvoicesController extends Controller
     public function index()
     {
         $com_code = auth()->user()->com_code;
-        $data = get_cols_where_p(new Sales_invoices(), array("*"), array("com_code" => $com_code), "id", "DESC", PAGINATION_COUNT);
+        $data = get_cols_where_p(new Sales_invoices(), array("*"), array("com_code" => $com_code), "id", "DESC", 10);
         if (!empty($data)) {
             foreach ($data as $info) {
                 $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
@@ -966,7 +966,7 @@ class SalesInvoicesController extends Controller
             }
             $data = Sales_invoices::where($field1, $operator1, $value1)->where($field2, $operator2, $value2)->where($field3, $operator3, $value3)->where($field4, $operator4, $value4)->where($field5, $operator5, $value5)->where($field6, $operator6, $value6)
                 ->where($field7, $operator7, $value7)
-                ->where($field8, $operator8, $value8)->where($field9, $operator9, $value9)->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+                ->where($field8, $operator8, $value8)->where($field9, $operator9, $value9)->orderBy('id', 'DESC')->paginate(10);
             if (!empty($data)) {
                 foreach ($data as $info) {
                     $info->added_by_admin = Admin::where('id', $info->added_by)->value('name');
@@ -1144,7 +1144,7 @@ class SalesInvoicesController extends Controller
     }
 
 
-    
+
     public function printsaleswina4($id, $size)
     {
         $com_code = auth()->user()->com_code;
